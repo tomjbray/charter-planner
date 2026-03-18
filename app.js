@@ -153,9 +153,9 @@ function plotRoute(orig, dest) {
 
   segments.forEach(seg => {
     const line = L.polyline(seg, {
-      color: '#9a7235',
-      weight: 1.5,
-      opacity: 0.7,
+      color: '#1a3a6e',
+      weight: 2,
+      opacity: 0.8,
       dashArray: '6,4',
     }).addTo(map);
     routeLayers.push(line);
