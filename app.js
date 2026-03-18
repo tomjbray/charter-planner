@@ -153,7 +153,7 @@ function plotRoute(orig, dest) {
 
   segments.forEach(seg => {
     const line = L.polyline(seg, {
-      color: '#c8a96e',
+      color: '#9a7235',
       weight: 1.5,
       opacity: 0.7,
       dashArray: '6,4',
@@ -165,7 +165,7 @@ function plotRoute(orig, dest) {
   const origMarker = L.marker([orig.lat, orig.lon], {
     icon: L.divIcon({
       className: '',
-      html: '<div style="background:#c8a96e;color:#0b0e14;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;padding:3px 7px;border-radius:3px;white-space:nowrap;">' + orig.iata + '</div>',
+      html: '<div style="background:#9a7235;color:#ffffff;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;padding:3px 7px;border-radius:3px;white-space:nowrap;">' + orig.iata + '</div>',
       iconAnchor: [20, 10],
     })
   }).addTo(map);
@@ -175,7 +175,7 @@ function plotRoute(orig, dest) {
   const destMarker = L.marker([dest.lat, dest.lon], {
     icon: L.divIcon({
       className: '',
-      html: '<div style="background:#4a8fe8;color:#fff;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;padding:3px 7px;border-radius:3px;white-space:nowrap;">' + dest.iata + '</div>',
+      html: '<div style="background:#2a6fd4;color:#ffffff;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;padding:3px 7px;border-radius:3px;white-space:nowrap;">' + dest.iata + '</div>',
       iconAnchor: [20, 10],
     })
   }).addTo(map);
