@@ -505,6 +505,14 @@ function renderCards(results) {
           <div class="card-stat-val">${rangeUsed}</div>
           <div class="card-stat-key">Route Use</div>
         </div>
+        <div class="card-stat">
+          <div class="card-stat-val">${ac.luggage_cuft ? ac.luggage_cuft.toLocaleString() : '—'}</div>
+          <div class="card-stat-key">Luggage (cu ft)</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-stat-val">${ac.ceiling_ft ? (ac.ceiling_ft / 1000).toFixed(0) + 'k' : '—'}</div>
+          <div class="card-stat-key">Ceiling (ft)</div>
+        </div>
       </div>
       <div class="card-fit">${allPills}</div>
       <div class="card-expand-hint">Click to expand</div>
