@@ -452,6 +452,17 @@ function renderCards(results) {
     // Range display
     const rangeUsed = Math.round(rangeRatio * 100) + '% range';
 
+    // Flight time estimate
+    // Base time = distance / speed (both in nm and knots, result is hours)
+    // Add buffer: 15 min for fixed wing, 5 min for helicopters
+    const bufferMins = ac.category === 'helicopter' ? 5 : 15;
+    const flightMins = Math.round((r.distNm / ac.cruise_speed_kts) * 60) + bufferMins;
+    const flightHrs  = Math.floor(flightMins / 60);
+    const flightRem  = flightMins % 60;
+    const flightTime = flightHrs > 0
+      ? flightHrs + 'h ' + String(flightRem).padStart(2, '0') + 'm'
+      : flightRem + 'm';
+
     card.innerHTML = `
       <div class="card-score-bar" style="width:${barWidth}"></div>
       <div class="card-score">${score}</div>
@@ -479,6 +490,10 @@ function renderCards(results) {
         <div class="card-stat">
           <div class="card-stat-val">${ac.cruise_speed_kts}</div>
           <div class="card-stat-key">Speed (kts)</div>
+        </div>
+        <div class="card-stat">
+          <div class="card-stat-val">${flightTime}</div>
+          <div class="card-stat-key">Est. Flight Time</div>
         </div>
         <div class="card-stat">
           <div class="card-stat-val">${rangeUsed}</div>
