@@ -12,6 +12,7 @@ let acLoaded  = false;
 let origAirport = null;
 let destAirport = null;
 let paxCount    = 8;
+let includeSingleEngine = true;
 
 let routeLayers = [];   // Leaflet layers for the drawn route
 
@@ -280,6 +281,11 @@ function matchAircraft(orig, dest, pax) {
       if (ac.runway_required_ft > limitingRwy) {
         continue;   // skip — runway too short
       }
+    }
+
+    // ── Hard filter 4: single engine ───────────────────────
+    if (!includeSingleEngine && ac.engines === 1) {
+      continue;   // skip — user has excluded single engine aircraft
     }
 
     // ── Soft checks (add to warnings/goods, don't eliminate) ──
@@ -645,6 +651,11 @@ document.getElementById('paxUp').addEventListener('click', () => {
     document.getElementById('paxCount').textContent = paxCount;
     updateUI();
   }
+});
+
+// Single engine checkbox
+document.getElementById('singleEngineCheck').addEventListener('change', function() {
+  includeSingleEngine = this.checked;
 });
 
 // Find aircraft

@@ -654,3 +654,23 @@ header::after {
 @media (max-width: 600px) {
   .aircraft-card.expanded { grid-column: span 1; }
 }
+
+/* ── Options panel ── */
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.option-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.option-label {
+  font-size: 13px;
+  color: var(--text);
+  user-select: none;
+}
