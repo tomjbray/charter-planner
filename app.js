@@ -528,12 +528,14 @@ document.getElementById('paxDown').addEventListener('click', () => {
   if (paxCount > 1) {
     paxCount--;
     document.getElementById('paxCount').textContent = paxCount;
+    updateUI();
   }
 });
 document.getElementById('paxUp').addEventListener('click', () => {
   if (paxCount < 900) {
     paxCount++;
     document.getElementById('paxCount').textContent = paxCount;
+    updateUI();
   }
 });
 
