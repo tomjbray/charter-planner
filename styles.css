@@ -1,24 +1,24 @@
 /* ═══════════════════════════════════════════════════════════
    Charter Route Planner — Stylesheet
-   Aesthetic: Refined luxury aviation — dark, editorial, precise
+   Aesthetic: Refined luxury aviation — light, editorial, precise
    ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --bg:         #0b0e14;
-  --surface:    #111520;
-  --panel:      #161c28;
-  --border:     #222b3d;
-  --border-lt:  #2e3a52;
-  --gold:       #c8a96e;
-  --gold-lt:    #e2c990;
-  --gold-dim:   #7a6340;
-  --text:       #dde4ef;
-  --text-muted: #6b7a96;
-  --text-dim:   #3d4d66;
-  --green:      #4caf82;
-  --amber:      #e8a030;
-  --red:        #e05555;
-  --blue:       #4a8fe8;
+  --bg:         #f4f6f9;   /* cool off-white page background */
+  --surface:    #ffffff;   /* sidebar and header */
+  --panel:      #f0f2f6;   /* panel backgrounds */
+  --border:     #dce1ea;   /* standard borders */
+  --border-lt:  #c8d0dc;   /* stronger border e.g. input underline */
+  --gold:       #9a7235;   /* darker gold — readable on light bg */
+  --gold-lt:    #b8924d;   /* hover gold */
+  --gold-dim:   #c4a882;   /* subtle gold for accents */
+  --text:       #1a2032;   /* near-black main text */
+  --text-muted: #5a6880;   /* secondary text */
+  --text-dim:   #a0abbe;   /* placeholder text */
+  --green:      #2e8f60;   /* darker green — readable on light */
+  --amber:      #c47a10;   /* darker amber */
+  --red:        #c43030;   /* darker red */
+  --blue:       #2a6fd4;   /* darker blue */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -353,7 +353,7 @@ header::after {
   justify-content: center;
   gap: 12px;
   pointer-events: none;
-  background: rgba(11,14,20,0.7);
+  background: rgba(244,246,249,0.82);
   z-index: 500;
   transition: opacity 0.3s;
 }
@@ -363,9 +363,9 @@ header::after {
 
 /* ── Leaflet overrides ── */
 .leaflet-container { background: var(--bg) !important; }
-.leaflet-tile { filter: invert(1) hue-rotate(180deg) brightness(0.75) saturate(0.5); }
+.leaflet-tile { filter: brightness(0.95) saturate(0.8); }
 .leaflet-control-attribution {
-  background: rgba(11,14,20,0.85) !important;
+  background: rgba(244,246,249,0.92) !important;
   color: var(--text-muted) !important;
   font-size: 10px !important;
 }
@@ -502,15 +502,15 @@ header::after {
 }
 
 /* Category colours */
-.cat-helicopter        { background: rgba(74,143,232,0.15); color: #4a8fe8; border: 1px solid rgba(74,143,232,0.3); }
-.cat-turboprop         { background: rgba(76,175,130,0.15); color: #4caf82; border: 1px solid rgba(76,175,130,0.3); }
-.cat-light_jet         { background: rgba(200,169,110,0.15); color: #c8a96e; border: 1px solid rgba(200,169,110,0.3); }
-.cat-midsize_jet       { background: rgba(200,169,110,0.2); color: #d4b87a; border: 1px solid rgba(200,169,110,0.4); }
-.cat-super_midsize_jet { background: rgba(232,160,48,0.15); color: #e8a030; border: 1px solid rgba(232,160,48,0.3); }
-.cat-large_jet         { background: rgba(232,120,48,0.15); color: #e87830; border: 1px solid rgba(232,120,48,0.3); }
-.cat-ultra_long_range_jet { background: rgba(220,80,80,0.15); color: #e05555; border: 1px solid rgba(220,80,80,0.3); }
-.cat-airliner_narrow   { background: rgba(140,80,220,0.15); color: #a060e0; border: 1px solid rgba(140,80,220,0.3); }
-.cat-airliner_wide     { background: rgba(180,60,220,0.15); color: #c050e8; border: 1px solid rgba(180,60,220,0.3); }
+.cat-helicopter        { background: rgba(74,143,232,0.15); color: #1a5bb5; border: 1px solid rgba(74,143,232,0.3); }
+.cat-turboprop         { background: rgba(76,175,130,0.15); color: #1e7a50; border: 1px solid rgba(76,175,130,0.3); }
+.cat-light_jet         { background: rgba(200,169,110,0.15); color: #7a5a20; border: 1px solid rgba(200,169,110,0.3); }
+.cat-midsize_jet       { background: rgba(200,169,110,0.2); color: #8a6825; border: 1px solid rgba(200,169,110,0.4); }
+.cat-super_midsize_jet { background: rgba(232,160,48,0.15); color: #9a6010; border: 1px solid rgba(232,160,48,0.3); }
+.cat-large_jet         { background: rgba(232,120,48,0.15); color: #a04010; border: 1px solid rgba(232,120,48,0.3); }
+.cat-ultra_long_range_jet { background: rgba(220,80,80,0.15); color: #a02020; border: 1px solid rgba(220,80,80,0.3); }
+.cat-airliner_narrow   { background: rgba(140,80,220,0.15); color: #6030b0; border: 1px solid rgba(140,80,220,0.3); }
+.cat-airliner_wide     { background: rgba(180,60,220,0.15); color: #7020a8; border: 1px solid rgba(180,60,220,0.3); }
 
 /* Card stats grid */
 .card-stats {
