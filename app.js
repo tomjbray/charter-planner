@@ -649,16 +649,38 @@ document.getElementById('destInput').addEventListener('input', function() {
 document.getElementById('paxDown').addEventListener('click', () => {
   if (paxCount > 1) {
     paxCount--;
-    document.getElementById('paxCount').textContent = paxCount;
+    document.getElementById('paxCount').value = paxCount;
     updateUI();
   }
 });
 document.getElementById('paxUp').addEventListener('click', () => {
   if (paxCount < 900) {
     paxCount++;
-    document.getElementById('paxCount').textContent = paxCount;
+    document.getElementById('paxCount').value = paxCount;
     updateUI();
   }
+});
+
+// Allow typing directly into the passenger field
+document.getElementById('paxCount').addEventListener('input', function() {
+  const val = parseInt(this.value);
+  if (!isNaN(val) && val >= 1 && val <= 900) {
+    paxCount = val;
+    updateUI();
+  }
+});
+
+// Clamp value on blur in case user types something out of range
+document.getElementById('paxCount').addEventListener('blur', function() {
+  const val = parseInt(this.value);
+  if (isNaN(val) || val < 1) {
+    paxCount = 1;
+    this.value = 1;
+  } else if (val > 900) {
+    paxCount = 900;
+    this.value = 900;
+  }
+  updateUI();
 });
 
 // Single engine checkbox

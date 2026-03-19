@@ -674,3 +674,22 @@ header::after {
   color: var(--text);
   user-select: none;
 }
+
+/* ── Passenger input ── */
+.pax-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text);
+  width: 60px;
+  text-align: center;
+  line-height: 1;
+  display: block;
+  -moz-appearance: textfield;  /* hide spinner in Firefox */
+}
+/* Hide spinner arrows in Chrome/Safari */
+.pax-input::-webkit-inner-spin-button,
+.pax-input::-webkit-outer-spin-button { -webkit-appearance: none; }
