@@ -651,6 +651,7 @@ document.getElementById('paxDown').addEventListener('click', () => {
     paxCount--;
     document.getElementById('paxCount').value = paxCount;
     updateUI();
+    rerunIfResultsVisible();
   }
 });
 document.getElementById('paxUp').addEventListener('click', () => {
@@ -658,8 +659,23 @@ document.getElementById('paxUp').addEventListener('click', () => {
     paxCount++;
     document.getElementById('paxCount').value = paxCount;
     updateUI();
+    rerunIfResultsVisible();
   }
 });
+
+// Re-run the aircraft search automatically if results are already showing
+function rerunIfResultsVisible() {
+  const area = document.getElementById('resultsArea');
+  if (area.style.display !== 'none' && origAirport && destAirport && acLoaded) {
+    activeFilter = 'all';
+    const matchData = matchAircraft(origAirport, destAirport, paxCount);
+    if (matchData.limitingRwy) {
+      document.getElementById('summaryRwy').textContent =
+        matchData.limitingRwy.toLocaleString();
+    }
+    renderResults(matchData);
+  }
+}
 
 // Allow typing directly into the passenger field
 document.getElementById('paxCount').addEventListener('input', function() {
@@ -667,6 +683,7 @@ document.getElementById('paxCount').addEventListener('input', function() {
   if (!isNaN(val) && val >= 1 && val <= 900) {
     paxCount = val;
     updateUI();
+    rerunIfResultsVisible();
   }
 });
 
@@ -681,6 +698,7 @@ document.getElementById('paxCount').addEventListener('blur', function() {
     this.value = 900;
   }
   updateUI();
+  rerunIfResultsVisible();
 });
 
 // Single engine checkbox
