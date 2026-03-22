@@ -23,11 +23,10 @@ let routeLayers = [];   // Leaflet layers for the drawn route
 
 async function loadData() {
   try {
-    // Load all three data files in parallel
-    const [aptRes, acRes, regRes] = await Promise.all([
+    // Load airports and aircraft types first — these are needed immediately
+    const [aptRes, acRes] = await Promise.all([
       fetch('./airports.json'),
       fetch('./aircraft_types.json'),
-      fetch('./aircraft_registry.json'),
     ]);
 
     if (!aptRes.ok) throw new Error('airports.json: HTTP ' + aptRes.status);
@@ -41,26 +40,13 @@ async function loadData() {
       Object.entries(acData).filter(([k]) => k !== '_metadata')
     );
 
-    // Load registry and pre-group by type_code for fast lookup
-    if (regRes.ok) {
-      REGISTRY = await regRes.json();
-      regLoaded = true;
-      for (const [reg, entry] of Object.entries(REGISTRY)) {
-        const tc = entry.type_code;
-        if (!REGISTRY_BY_TYPE[tc]) REGISTRY_BY_TYPE[tc] = [];
-        REGISTRY_BY_TYPE[tc].push(entry);
-      }
-    }
-
     dbLoaded = true;
     acLoaded = true;
 
     const aptCount = Object.keys(AIRPORTS).length;
     const acCount  = Object.keys(AIRCRAFT).length;
-    const regCount = Object.keys(REGISTRY).length;
     document.getElementById('dbStatus').textContent =
-      aptCount.toLocaleString() + ' airports · ' + acCount + ' aircraft types' +
-      (regLoaded ? ' · ' + regCount.toLocaleString() + ' registered aircraft' : '');
+      aptCount.toLocaleString() + ' airports · ' + acCount + ' aircraft types · Loading registry…';
 
     // Re-run any lookups the user may have typed before data finished loading
     const ov = document.getElementById('origInput').value;
@@ -68,9 +54,49 @@ async function loadData() {
     if (ov.length === 3) lookupAirport(ov, document.getElementById('origInfo'), true);
     if (dv.length === 3) lookupAirport(dv, document.getElementById('destInfo'), false);
 
+    // Load registry in background — doesn't block airport lookup
+    loadRegistry(aptCount, acCount);
+
   } catch(e) {
     document.getElementById('dbStatus').textContent = '⚠ Data load failed: ' + e.message;
     console.error(e);
+  }
+}
+
+
+// ── Background registry loader ───────────────────────────────
+// Loads aircraft_registry.json after airports are ready
+// so the airport lookup boxes are not blocked
+
+async function loadRegistry(aptCount, acCount) {
+  try {
+    const res = await fetch('./aircraft_registry.json');
+    if (!res.ok) {
+      document.getElementById('dbStatus').textContent =
+        aptCount.toLocaleString() + ' airports · ' + acCount + ' aircraft types';
+      return;
+    }
+
+    REGISTRY = await res.json();
+    regLoaded = true;
+
+    // Pre-group by type_code for fast lookup
+    for (const entry of Object.values(REGISTRY)) {
+      const tc = entry.type_code;
+      if (!REGISTRY_BY_TYPE[tc]) REGISTRY_BY_TYPE[tc] = [];
+      REGISTRY_BY_TYPE[tc].push(entry);
+    }
+
+    const regCount = Object.keys(REGISTRY).length;
+    document.getElementById('dbStatus').textContent =
+      aptCount.toLocaleString() + ' airports · ' +
+      acCount + ' aircraft types · ' +
+      regCount.toLocaleString() + ' registered aircraft';
+
+  } catch(e) {
+    console.warn('Registry load failed:', e.message);
+    document.getElementById('dbStatus').textContent =
+      aptCount.toLocaleString() + ' airports · ' + acCount + ' aircraft types';
   }
 }
 
