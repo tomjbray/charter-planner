@@ -132,10 +132,10 @@ const testRule =
         entity: "BRU",
         charterType: "PASSENGER",
         customerType: "ANY",
-        customerLocation: "ANY",
+        customerLocation: "NON_EU",
         vatRegistered: "ANY",
         originTerritory: "BE",
-        destinationTerritory: "BE"
+        destinationTerritory: "NON_EU"
     });
 
 console.log(
