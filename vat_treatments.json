@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 7,
+  "data": {
+    "STANDARD": {
+      "code": "STANDARD",
+      "description": "Standard Rated"
+    },
+    "REDUCED": {
+      "code": "REDUCED",
+      "description": "Reduced Rate"
+    },
+    "ZERO": {
+      "code": "ZERO",
+      "description": "Zero Rated"
+    },
+    "EXEMPT": {
+      "code": "EXEMPT",
+      "description": "Exempt"
+    },
+    "OUTSIDE_SCOPE": {
+      "code": "OUTSIDE_SCOPE",
+      "description": "Outside Scope"
+    },
+    "REVERSE_CHARGE": {
+      "code": "REVERSE_CHARGE",
+      "description": "Reverse Charge"
+    },
+    "UNKNOWN": {
+      "code": "UNKNOWN",
+      "description": "Manual Review"
+    }
+  }
+}

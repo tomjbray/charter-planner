@@ -1,0 +1,2445 @@
+{
+  "schemaVersion": "1.0",
+  "sourceTable": "tblMADApportionment",
+  "routeCount": 174,
+  "routes": [
+    {
+      "routePair": "AGP-IBZ",
+      "origin": "AGP",
+      "destination": "IBZ",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    {
+      "routePair": "AGP-MAH",
+      "origin": "AGP",
+      "destination": "MAH",
+      "taxablePercent": 0.5165,
+      "nonTaxablePercent": 0.4835
+    },
+    {
+      "routePair": "AGP-PMI",
+      "origin": "AGP",
+      "destination": "PMI",
+      "taxablePercent": 0.6188,
+      "nonTaxablePercent": 0.3812
+    },
+    {
+      "routePair": "ALC-IBZ",
+      "origin": "ALC",
+      "destination": "IBZ",
+      "taxablePercent": 0.3451,
+      "nonTaxablePercent": 0.6549
+    },
+    {
+      "routePair": "ALC-MAH",
+      "origin": "ALC",
+      "destination": "MAH",
+      "taxablePercent": 0.1392,
+      "nonTaxablePercent": 0.8608
+    },
+    {
+      "routePair": "ALC-PMI",
+      "origin": "ALC",
+      "destination": "PMI",
+      "taxablePercent": 0.1609,
+      "nonTaxablePercent": 0.8391
+    },
+    {
+      "routePair": "BCN-IBZ",
+      "origin": "BCN",
+      "destination": "IBZ",
+      "taxablePercent": 0.3413,
+      "nonTaxablePercent": 0.6587
+    },
+    {
+      "routePair": "BCN-MAH",
+      "origin": "BCN",
+      "destination": "MAH",
+      "taxablePercent": 0.1957,
+      "nonTaxablePercent": 0.8043
+    },
+    {
+      "routePair": "BCN-PMI",
+      "origin": "BCN",
+      "destination": "PMI",
+      "taxablePercent": 0.3043,
+      "nonTaxablePercent": 0.6957
+    },
+    {
+      "routePair": "BIO-IBZ",
+      "origin": "BIO",
+      "destination": "IBZ",
+      "taxablePercent": 0.63,
+      "nonTaxablePercent": 0.37
+    },
+    {
+      "routePair": "BIO-MAH",
+      "origin": "BIO",
+      "destination": "MAH",
+      "taxablePercent": 0.5435,
+      "nonTaxablePercent": 0.4565
+    },
+    {
+      "routePair": "BIO-PMI",
+      "origin": "BIO",
+      "destination": "PMI",
+      "taxablePercent": 0.7131,
+      "nonTaxablePercent": 0.2869
+    },
+    {
+      "routePair": "BJZ-IBZ",
+      "origin": "BJZ",
+      "destination": "IBZ",
+      "taxablePercent": 0.822,
+      "nonTaxablePercent": 0.178
+    },
+    {
+      "routePair": "BJZ-MAH",
+      "origin": "BJZ",
+      "destination": "MAH",
+      "taxablePercent": 0.631,
+      "nonTaxablePercent": 0.369
+    },
+    {
+      "routePair": "BJZ-PMI",
+      "origin": "BJZ",
+      "destination": "PMI",
+      "taxablePercent": 0.7294,
+      "nonTaxablePercent": 0.2706
+    },
+    {
+      "routePair": "EAS-IBZ",
+      "origin": "EAS",
+      "destination": "IBZ",
+      "taxablePercent": 0.6821,
+      "nonTaxablePercent": 0.3179
+    },
+    {
+      "routePair": "EAS-MAH",
+      "origin": "EAS",
+      "destination": "MAH",
+      "taxablePercent": 0.5854,
+      "nonTaxablePercent": 0.4146
+    },
+    {
+      "routePair": "EAS-PMI",
+      "origin": "EAS",
+      "destination": "PMI",
+      "taxablePercent": 0.7267,
+      "nonTaxablePercent": 0.2733
+    },
+    {
+      "routePair": "GRO-IBZ",
+      "origin": "GRO",
+      "destination": "IBZ",
+      "taxablePercent": 0.1409,
+      "nonTaxablePercent": 0.8591
+    },
+    {
+      "routePair": "GRO-MAH",
+      "origin": "GRO",
+      "destination": "MAH",
+      "taxablePercent": 0.1871,
+      "nonTaxablePercent": 0.8129
+    },
+    {
+      "routePair": "GRO-PMI",
+      "origin": "GRO",
+      "destination": "PMI",
+      "taxablePercent": 0.3168,
+      "nonTaxablePercent": 0.6832
+    },
+    {
+      "routePair": "GRX-IBZ",
+      "origin": "GRX",
+      "destination": "IBZ",
+      "taxablePercent": 0.7431,
+      "nonTaxablePercent": 0.2569
+    },
+    {
+      "routePair": "GRX-MAH",
+      "origin": "GRX",
+      "destination": "MAH",
+      "taxablePercent": 0.4766,
+      "nonTaxablePercent": 0.5234
+    },
+    {
+      "routePair": "GRX-PMI",
+      "origin": "GRX",
+      "destination": "PMI",
+      "taxablePercent": 0.5895,
+      "nonTaxablePercent": 0.4105
+    },
+    {
+      "routePair": "IBZ-AGP",
+      "origin": "IBZ",
+      "destination": "AGP",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    {
+      "routePair": "IBZ-ALC",
+      "origin": "IBZ",
+      "destination": "ALC",
+      "taxablePercent": 0.3451,
+      "nonTaxablePercent": 0.6549
+    },
+    {
+      "routePair": "IBZ-BCN",
+      "origin": "IBZ",
+      "destination": "BCN",
+      "taxablePercent": 0.3413,
+      "nonTaxablePercent": 0.6587
+    },
+    {
+      "routePair": "IBZ-BIO",
+      "origin": "IBZ",
+      "destination": "BIO",
+      "taxablePercent": 0.63,
+      "nonTaxablePercent": 0.37
+    },
+    {
+      "routePair": "IBZ-BJZ",
+      "origin": "IBZ",
+      "destination": "BJZ",
+      "taxablePercent": 0.822,
+      "nonTaxablePercent": 0.178
+    },
+    {
+      "routePair": "IBZ-EAS",
+      "origin": "IBZ",
+      "destination": "EAS",
+      "taxablePercent": 0.6821,
+      "nonTaxablePercent": 0.3179
+    },
+    {
+      "routePair": "IBZ-GRO",
+      "origin": "IBZ",
+      "destination": "GRO",
+      "taxablePercent": 0.1409,
+      "nonTaxablePercent": 0.8591
+    },
+    {
+      "routePair": "IBZ-GRX",
+      "origin": "IBZ",
+      "destination": "GRX",
+      "taxablePercent": 0.7431,
+      "nonTaxablePercent": 0.2569
+    },
+    {
+      "routePair": "IBZ-LCG",
+      "origin": "IBZ",
+      "destination": "LCG",
+      "taxablePercent": 0.891,
+      "nonTaxablePercent": 0.109
+    },
+    {
+      "routePair": "IBZ-LEI",
+      "origin": "IBZ",
+      "destination": "LEI",
+      "taxablePercent": 0.7149,
+      "nonTaxablePercent": 0.2851
+    },
+    {
+      "routePair": "IBZ-LEN",
+      "origin": "IBZ",
+      "destination": "LEN",
+      "taxablePercent": 0.856,
+      "nonTaxablePercent": 0.144
+    },
+    {
+      "routePair": "IBZ-MAD",
+      "origin": "IBZ",
+      "destination": "MAD",
+      "taxablePercent": 0.681,
+      "nonTaxablePercent": 0.319
+    },
+    {
+      "routePair": "IBZ-MAH",
+      "origin": "IBZ",
+      "destination": "MAH",
+      "taxablePercent": 0.369,
+      "nonTaxablePercent": 0.631
+    },
+    {
+      "routePair": "IBZ-ODB",
+      "origin": "IBZ",
+      "destination": "ODB",
+      "taxablePercent": 0.9063,
+      "nonTaxablePercent": 0.0937
+    },
+    {
+      "routePair": "IBZ-OVD",
+      "origin": "IBZ",
+      "destination": "OVD",
+      "taxablePercent": 0.854,
+      "nonTaxablePercent": 0.146
+    },
+    {
+      "routePair": "IBZ-PMI",
+      "origin": "IBZ",
+      "destination": "PMI",
+      "taxablePercent": 0.3143,
+      "nonTaxablePercent": 0.6857
+    },
+    {
+      "routePair": "IBZ-PNA",
+      "origin": "IBZ",
+      "destination": "PNA",
+      "taxablePercent": 0.7622,
+      "nonTaxablePercent": 0.2378
+    },
+    {
+      "routePair": "IBZ-QSA",
+      "origin": "IBZ",
+      "destination": "QSA",
+      "taxablePercent": 0.3272,
+      "nonTaxablePercent": 0.6728
+    },
+    {
+      "routePair": "IBZ-REU",
+      "origin": "IBZ",
+      "destination": "REU",
+      "taxablePercent": 0.2463,
+      "nonTaxablePercent": 0.7537
+    },
+    {
+      "routePair": "IBZ-RMU",
+      "origin": "IBZ",
+      "destination": "RMU",
+      "taxablePercent": 0.5368,
+      "nonTaxablePercent": 0.4632
+    },
+    {
+      "routePair": "IBZ-SCQ",
+      "origin": "IBZ",
+      "destination": "SCQ",
+      "taxablePercent": 0.8622,
+      "nonTaxablePercent": 0.1378
+    },
+    {
+      "routePair": "IBZ-SDR",
+      "origin": "IBZ",
+      "destination": "SDR",
+      "taxablePercent": 0.8262,
+      "nonTaxablePercent": 0.1738
+    },
+    {
+      "routePair": "IBZ-SLM",
+      "origin": "IBZ",
+      "destination": "SLM",
+      "taxablePercent": 0.7733,
+      "nonTaxablePercent": 0.2267
+    },
+    {
+      "routePair": "IBZ-SVQ",
+      "origin": "IBZ",
+      "destination": "SVQ",
+      "taxablePercent": 0.8047,
+      "nonTaxablePercent": 0.1953
+    },
+    {
+      "routePair": "IBZ-VGO",
+      "origin": "IBZ",
+      "destination": "VGO",
+      "taxablePercent": 0.871,
+      "nonTaxablePercent": 0.129
+    },
+    {
+      "routePair": "IBZ-VIT",
+      "origin": "IBZ",
+      "destination": "VIT",
+      "taxablePercent": 0.6685,
+      "nonTaxablePercent": 0.3315
+    },
+    {
+      "routePair": "IBZ-VLC",
+      "origin": "IBZ",
+      "destination": "VLC",
+      "taxablePercent": 0.2577,
+      "nonTaxablePercent": 0.7423
+    },
+    {
+      "routePair": "IBZ-VLL",
+      "origin": "IBZ",
+      "destination": "VLL",
+      "taxablePercent": 0.8005,
+      "nonTaxablePercent": 0.1995
+    },
+    {
+      "routePair": "IBZ-XRY",
+      "origin": "IBZ",
+      "destination": "XRY",
+      "taxablePercent": 0.8486,
+      "nonTaxablePercent": 0.1514
+    },
+    {
+      "routePair": "IBZ-ZAZ",
+      "origin": "IBZ",
+      "destination": "ZAZ",
+      "taxablePercent": 0.4895,
+      "nonTaxablePercent": 0.5105
+    },
+    {
+      "routePair": "LCG-IBZ",
+      "origin": "LCG",
+      "destination": "IBZ",
+      "taxablePercent": 0.891,
+      "nonTaxablePercent": 0.109
+    },
+    {
+      "routePair": "LCG-MAH",
+      "origin": "LCG",
+      "destination": "MAH",
+      "taxablePercent": 0.8033,
+      "nonTaxablePercent": 0.1967
+    },
+    {
+      "routePair": "LCG-PMI",
+      "origin": "LCG",
+      "destination": "PMI",
+      "taxablePercent": 0.8537,
+      "nonTaxablePercent": 0.1463
+    },
+    {
+      "routePair": "LEI-IBZ",
+      "origin": "LEI",
+      "destination": "IBZ",
+      "taxablePercent": 0.7149,
+      "nonTaxablePercent": 0.2851
+    },
+    {
+      "routePair": "LEI-MAH",
+      "origin": "LEI",
+      "destination": "MAH",
+      "taxablePercent": 0.3472,
+      "nonTaxablePercent": 0.6528
+    },
+    {
+      "routePair": "LEI-PMI",
+      "origin": "LEI",
+      "destination": "PMI",
+      "taxablePercent": 0.4931,
+      "nonTaxablePercent": 0.5069
+    },
+    {
+      "routePair": "LEN-IBZ",
+      "origin": "LEN",
+      "destination": "IBZ",
+      "taxablePercent": 0.856,
+      "nonTaxablePercent": 0.144
+    },
+    {
+      "routePair": "LEN-MAH",
+      "origin": "LEN",
+      "destination": "MAH",
+      "taxablePercent": 0.7468,
+      "nonTaxablePercent": 0.2532
+    },
+    {
+      "routePair": "LEN-PMI",
+      "origin": "LEN",
+      "destination": "PMI",
+      "taxablePercent": 0.8095,
+      "nonTaxablePercent": 0.1905
+    },
+    {
+      "routePair": "MAD-IBZ",
+      "origin": "MAD",
+      "destination": "IBZ",
+      "taxablePercent": 0.681,
+      "nonTaxablePercent": 0.319
+    },
+    {
+      "routePair": "MAD-MAH",
+      "origin": "MAD",
+      "destination": "MAH",
+      "taxablePercent": 0.4247,
+      "nonTaxablePercent": 0.5753
+    },
+    {
+      "routePair": "MAD-PMI",
+      "origin": "MAD",
+      "destination": "PMI",
+      "taxablePercent": 0.5147,
+      "nonTaxablePercent": 0.4853
+    },
+    {
+      "routePair": "MAH-AGP",
+      "origin": "MAH",
+      "destination": "AGP",
+      "taxablePercent": 0.5165,
+      "nonTaxablePercent": 0.4835
+    },
+    {
+      "routePair": "MAH-ALC",
+      "origin": "MAH",
+      "destination": "ALC",
+      "taxablePercent": 0.1392,
+      "nonTaxablePercent": 0.8608
+    },
+    {
+      "routePair": "MAH-BCN",
+      "origin": "MAH",
+      "destination": "BCN",
+      "taxablePercent": 0.1957,
+      "nonTaxablePercent": 0.8043
+    },
+    {
+      "routePair": "MAH-BIO",
+      "origin": "MAH",
+      "destination": "BIO",
+      "taxablePercent": 0.5435,
+      "nonTaxablePercent": 0.4565
+    },
+    {
+      "routePair": "MAH-BJZ",
+      "origin": "MAH",
+      "destination": "BJZ",
+      "taxablePercent": 0.631,
+      "nonTaxablePercent": 0.369
+    },
+    {
+      "routePair": "MAH-EAS",
+      "origin": "MAH",
+      "destination": "EAS",
+      "taxablePercent": 0.5854,
+      "nonTaxablePercent": 0.4146
+    },
+    {
+      "routePair": "MAH-GRO",
+      "origin": "MAH",
+      "destination": "GRO",
+      "taxablePercent": 0.1871,
+      "nonTaxablePercent": 0.8129
+    },
+    {
+      "routePair": "MAH-GRX",
+      "origin": "MAH",
+      "destination": "GRX",
+      "taxablePercent": 0.4766,
+      "nonTaxablePercent": 0.5234
+    },
+    {
+      "routePair": "MAH-IBZ",
+      "origin": "MAH",
+      "destination": "IBZ",
+      "taxablePercent": 0.369,
+      "nonTaxablePercent": 0.631
+    },
+    {
+      "routePair": "MAH-LCG",
+      "origin": "MAH",
+      "destination": "LCG",
+      "taxablePercent": 0.8033,
+      "nonTaxablePercent": 0.1967
+    },
+    {
+      "routePair": "MAH-LEI",
+      "origin": "MAH",
+      "destination": "LEI",
+      "taxablePercent": 0.3472,
+      "nonTaxablePercent": 0.6528
+    },
+    {
+      "routePair": "MAH-LEN",
+      "origin": "MAH",
+      "destination": "LEN",
+      "taxablePercent": 0.7468,
+      "nonTaxablePercent": 0.2532
+    },
+    {
+      "routePair": "MAH-MAD",
+      "origin": "MAH",
+      "destination": "MAD",
+      "taxablePercent": 0.4247,
+      "nonTaxablePercent": 0.5753
+    },
+    {
+      "routePair": "MAH-ODB",
+      "origin": "MAH",
+      "destination": "ODB",
+      "taxablePercent": 0.7523,
+      "nonTaxablePercent": 0.2477
+    },
+    {
+      "routePair": "MAH-OVD",
+      "origin": "MAH",
+      "destination": "OVD",
+      "taxablePercent": 0.6927,
+      "nonTaxablePercent": 0.3073
+    },
+    {
+      "routePair": "MAH-PMI",
+      "origin": "MAH",
+      "destination": "PMI",
+      "taxablePercent": 0.6216,
+      "nonTaxablePercent": 0.3784
+    },
+    {
+      "routePair": "MAH-PNA",
+      "origin": "MAH",
+      "destination": "PNA",
+      "taxablePercent": 0.521,
+      "nonTaxablePercent": 0.479
+    },
+    {
+      "routePair": "MAH-QSA",
+      "origin": "MAH",
+      "destination": "QSA",
+      "taxablePercent": 0.3333,
+      "nonTaxablePercent": 0.6667
+    },
+    {
+      "routePair": "MAH-REU",
+      "origin": "MAH",
+      "destination": "REU",
+      "taxablePercent": 0.5088,
+      "nonTaxablePercent": 0.4912
+    },
+    {
+      "routePair": "MAH-RMU",
+      "origin": "MAH",
+      "destination": "RMU",
+      "taxablePercent": 0.1455,
+      "nonTaxablePercent": 0.8545
+    },
+    {
+      "routePair": "MAH-SCQ",
+      "origin": "MAH",
+      "destination": "SCQ",
+      "taxablePercent": 0.7474,
+      "nonTaxablePercent": 0.2526
+    },
+    {
+      "routePair": "MAH-SDR",
+      "origin": "MAH",
+      "destination": "SDR",
+      "taxablePercent": 0.6674,
+      "nonTaxablePercent": 0.3326
+    },
+    {
+      "routePair": "MAH-SLM",
+      "origin": "MAH",
+      "destination": "SLM",
+      "taxablePercent": 0.5297,
+      "nonTaxablePercent": 0.4703
+    },
+    {
+      "routePair": "MAH-SVQ",
+      "origin": "MAH",
+      "destination": "SVQ",
+      "taxablePercent": 0.5648,
+      "nonTaxablePercent": 0.4352
+    },
+    {
+      "routePair": "MAH-VGO",
+      "origin": "MAH",
+      "destination": "VGO",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    {
+      "routePair": "MAH-VIT",
+      "origin": "MAH",
+      "destination": "VIT",
+      "taxablePercent": 0.5851,
+      "nonTaxablePercent": 0.4149
+    },
+    {
+      "routePair": "MAH-VLC",
+      "origin": "MAH",
+      "destination": "VLC",
+      "taxablePercent": 0.1083,
+      "nonTaxablePercent": 0.8917
+    },
+    {
+      "routePair": "MAH-VLL",
+      "origin": "MAH",
+      "destination": "VLL",
+      "taxablePercent": 0.6776,
+      "nonTaxablePercent": 0.3224
+    },
+    {
+      "routePair": "MAH-XRY",
+      "origin": "MAH",
+      "destination": "XRY",
+      "taxablePercent": 0.564,
+      "nonTaxablePercent": 0.436
+    },
+    {
+      "routePair": "MAH-ZAZ",
+      "origin": "MAH",
+      "destination": "ZAZ",
+      "taxablePercent": 0.4014,
+      "nonTaxablePercent": 0.5986
+    },
+    {
+      "routePair": "ODB-IBZ",
+      "origin": "ODB",
+      "destination": "IBZ",
+      "taxablePercent": 0.9063,
+      "nonTaxablePercent": 0.0937
+    },
+    {
+      "routePair": "ODB-MAH",
+      "origin": "ODB",
+      "destination": "MAH",
+      "taxablePercent": 0.7523,
+      "nonTaxablePercent": 0.2477
+    },
+    {
+      "routePair": "ODB-PMI",
+      "origin": "ODB",
+      "destination": "PMI",
+      "taxablePercent": 0.691,
+      "nonTaxablePercent": 0.309
+    },
+    {
+      "routePair": "OVD-IBZ",
+      "origin": "OVD",
+      "destination": "IBZ",
+      "taxablePercent": 0.854,
+      "nonTaxablePercent": 0.146
+    },
+    {
+      "routePair": "OVD-MAH",
+      "origin": "OVD",
+      "destination": "MAH",
+      "taxablePercent": 0.6927,
+      "nonTaxablePercent": 0.3073
+    },
+    {
+      "routePair": "OVD-PMI",
+      "origin": "OVD",
+      "destination": "PMI",
+      "taxablePercent": 0.7943,
+      "nonTaxablePercent": 0.2057
+    },
+    {
+      "routePair": "PMI-AGP",
+      "origin": "PMI",
+      "destination": "AGP",
+      "taxablePercent": 0.6188,
+      "nonTaxablePercent": 0.3812
+    },
+    {
+      "routePair": "PMI-ALC",
+      "origin": "PMI",
+      "destination": "ALC",
+      "taxablePercent": 0.1609,
+      "nonTaxablePercent": 0.8391
+    },
+    {
+      "routePair": "PMI-BCN",
+      "origin": "PMI",
+      "destination": "BCN",
+      "taxablePercent": 0.3043,
+      "nonTaxablePercent": 0.6957
+    },
+    {
+      "routePair": "PMI-BIO",
+      "origin": "PMI",
+      "destination": "BIO",
+      "taxablePercent": 0.7131,
+      "nonTaxablePercent": 0.2869
+    },
+    {
+      "routePair": "PMI-BJZ",
+      "origin": "PMI",
+      "destination": "BJZ",
+      "taxablePercent": 0.7294,
+      "nonTaxablePercent": 0.2706
+    },
+    {
+      "routePair": "PMI-EAS",
+      "origin": "PMI",
+      "destination": "EAS",
+      "taxablePercent": 0.7267,
+      "nonTaxablePercent": 0.2733
+    },
+    {
+      "routePair": "PMI-GRO",
+      "origin": "PMI",
+      "destination": "GRO",
+      "taxablePercent": 0.3168,
+      "nonTaxablePercent": 0.6832
+    },
+    {
+      "routePair": "PMI-GRX",
+      "origin": "PMI",
+      "destination": "GRX",
+      "taxablePercent": 0.5895,
+      "nonTaxablePercent": 0.4105
+    },
+    {
+      "routePair": "PMI-IBZ",
+      "origin": "PMI",
+      "destination": "IBZ",
+      "taxablePercent": 0.3143,
+      "nonTaxablePercent": 0.6857
+    },
+    {
+      "routePair": "PMI-LCG",
+      "origin": "PMI",
+      "destination": "LCG",
+      "taxablePercent": 0.8537,
+      "nonTaxablePercent": 0.1463
+    },
+    {
+      "routePair": "PMI-LEI",
+      "origin": "PMI",
+      "destination": "LEI",
+      "taxablePercent": 0.4931,
+      "nonTaxablePercent": 0.5069
+    },
+    {
+      "routePair": "PMI-LEN",
+      "origin": "PMI",
+      "destination": "LEN",
+      "taxablePercent": 0.8095,
+      "nonTaxablePercent": 0.1905
+    },
+    {
+      "routePair": "PMI-MAD",
+      "origin": "PMI",
+      "destination": "MAD",
+      "taxablePercent": 0.5147,
+      "nonTaxablePercent": 0.4853
+    },
+    {
+      "routePair": "PMI-MAH",
+      "origin": "PMI",
+      "destination": "MAH",
+      "taxablePercent": 0.6216,
+      "nonTaxablePercent": 0.3784
+    },
+    {
+      "routePair": "PMI-ODB",
+      "origin": "PMI",
+      "destination": "ODB",
+      "taxablePercent": 0.691,
+      "nonTaxablePercent": 0.309
+    },
+    {
+      "routePair": "PMI-OVD",
+      "origin": "PMI",
+      "destination": "OVD",
+      "taxablePercent": 0.7943,
+      "nonTaxablePercent": 0.2057
+    },
+    {
+      "routePair": "PMI-PNA",
+      "origin": "PMI",
+      "destination": "PNA",
+      "taxablePercent": 0.6918,
+      "nonTaxablePercent": 0.3082
+    },
+    {
+      "routePair": "PMI-QSA",
+      "origin": "PMI",
+      "destination": "QSA",
+      "taxablePercent": 0.1405,
+      "nonTaxablePercent": 0.8595
+    },
+    {
+      "routePair": "PMI-REU",
+      "origin": "PMI",
+      "destination": "REU",
+      "taxablePercent": 0.2171,
+      "nonTaxablePercent": 0.7829
+    },
+    {
+      "routePair": "PMI-RMU",
+      "origin": "PMI",
+      "destination": "RMU",
+      "taxablePercent": 0.1379,
+      "nonTaxablePercent": 0.8621
+    },
+    {
+      "routePair": "PMI-SCQ",
+      "origin": "PMI",
+      "destination": "SCQ",
+      "taxablePercent": 0.8352,
+      "nonTaxablePercent": 0.1648
+    },
+    {
+      "routePair": "PMI-SDR",
+      "origin": "PMI",
+      "destination": "SDR",
+      "taxablePercent": 0.7243,
+      "nonTaxablePercent": 0.2757
+    },
+    {
+      "routePair": "PMI-SLM",
+      "origin": "PMI",
+      "destination": "SLM",
+      "taxablePercent": 0.6658,
+      "nonTaxablePercent": 0.3342
+    },
+    {
+      "routePair": "PMI-SVQ",
+      "origin": "PMI",
+      "destination": "SVQ",
+      "taxablePercent": 0.6718,
+      "nonTaxablePercent": 0.3282
+    },
+    {
+      "routePair": "PMI-VGO",
+      "origin": "PMI",
+      "destination": "VGO",
+      "taxablePercent": 0.8524,
+      "nonTaxablePercent": 0.1476
+    },
+    {
+      "routePair": "PMI-VIT",
+      "origin": "PMI",
+      "destination": "VIT",
+      "taxablePercent": 0.6979,
+      "nonTaxablePercent": 0.3021
+    },
+    {
+      "routePair": "PMI-VLC",
+      "origin": "PMI",
+      "destination": "VLC",
+      "taxablePercent": 0.1486,
+      "nonTaxablePercent": 0.8514
+    },
+    {
+      "routePair": "PMI-VLL",
+      "origin": "PMI",
+      "destination": "VLL",
+      "taxablePercent": 0.7667,
+      "nonTaxablePercent": 0.2333
+    },
+    {
+      "routePair": "PMI-XRY",
+      "origin": "PMI",
+      "destination": "XRY",
+      "taxablePercent": 0.6874,
+      "nonTaxablePercent": 0.3126
+    },
+    {
+      "routePair": "PMI-ZAZ",
+      "origin": "PMI",
+      "destination": "ZAZ",
+      "taxablePercent": 0.5346,
+      "nonTaxablePercent": 0.4654
+    },
+    {
+      "routePair": "PNA-IBZ",
+      "origin": "PNA",
+      "destination": "IBZ",
+      "taxablePercent": 0.7622,
+      "nonTaxablePercent": 0.2378
+    },
+    {
+      "routePair": "PNA-MAH",
+      "origin": "PNA",
+      "destination": "MAH",
+      "taxablePercent": 0.521,
+      "nonTaxablePercent": 0.479
+    },
+    {
+      "routePair": "PNA-PMI",
+      "origin": "PNA",
+      "destination": "PMI",
+      "taxablePercent": 0.6918,
+      "nonTaxablePercent": 0.3082
+    },
+    {
+      "routePair": "QSA-IBZ",
+      "origin": "QSA",
+      "destination": "IBZ",
+      "taxablePercent": 0.3272,
+      "nonTaxablePercent": 0.6728
+    },
+    {
+      "routePair": "QSA-MAH",
+      "origin": "QSA",
+      "destination": "MAH",
+      "taxablePercent": 0.3333,
+      "nonTaxablePercent": 0.6667
+    },
+    {
+      "routePair": "QSA-PMI",
+      "origin": "QSA",
+      "destination": "PMI",
+      "taxablePercent": 0.1405,
+      "nonTaxablePercent": 0.8595
+    },
+    {
+      "routePair": "REU-IBZ",
+      "origin": "REU",
+      "destination": "IBZ",
+      "taxablePercent": 0.2463,
+      "nonTaxablePercent": 0.7537
+    },
+    {
+      "routePair": "REU-MAH",
+      "origin": "REU",
+      "destination": "MAH",
+      "taxablePercent": 0.5088,
+      "nonTaxablePercent": 0.4912
+    },
+    {
+      "routePair": "REU-PMI",
+      "origin": "REU",
+      "destination": "PMI",
+      "taxablePercent": 0.2171,
+      "nonTaxablePercent": 0.7829
+    },
+    {
+      "routePair": "RMU-IBZ",
+      "origin": "RMU",
+      "destination": "IBZ",
+      "taxablePercent": 0.5368,
+      "nonTaxablePercent": 0.4632
+    },
+    {
+      "routePair": "RMU-MAH",
+      "origin": "RMU",
+      "destination": "MAH",
+      "taxablePercent": 0.1455,
+      "nonTaxablePercent": 0.8545
+    },
+    {
+      "routePair": "RMU-PMI",
+      "origin": "RMU",
+      "destination": "PMI",
+      "taxablePercent": 0.1379,
+      "nonTaxablePercent": 0.8621
+    },
+    {
+      "routePair": "SCQ-IBZ",
+      "origin": "SCQ",
+      "destination": "IBZ",
+      "taxablePercent": 0.8622,
+      "nonTaxablePercent": 0.1378
+    },
+    {
+      "routePair": "SCQ-MAH",
+      "origin": "SCQ",
+      "destination": "MAH",
+      "taxablePercent": 0.7474,
+      "nonTaxablePercent": 0.2526
+    },
+    {
+      "routePair": "SCQ-PMI",
+      "origin": "SCQ",
+      "destination": "PMI",
+      "taxablePercent": 0.8352,
+      "nonTaxablePercent": 0.1648
+    },
+    {
+      "routePair": "SDR-IBZ",
+      "origin": "SDR",
+      "destination": "IBZ",
+      "taxablePercent": 0.8262,
+      "nonTaxablePercent": 0.1738
+    },
+    {
+      "routePair": "SDR-MAH",
+      "origin": "SDR",
+      "destination": "MAH",
+      "taxablePercent": 0.6674,
+      "nonTaxablePercent": 0.3326
+    },
+    {
+      "routePair": "SDR-PMI",
+      "origin": "SDR",
+      "destination": "PMI",
+      "taxablePercent": 0.7243,
+      "nonTaxablePercent": 0.2757
+    },
+    {
+      "routePair": "SLM-IBZ",
+      "origin": "SLM",
+      "destination": "IBZ",
+      "taxablePercent": 0.7733,
+      "nonTaxablePercent": 0.2267
+    },
+    {
+      "routePair": "SLM-MAH",
+      "origin": "SLM",
+      "destination": "MAH",
+      "taxablePercent": 0.5297,
+      "nonTaxablePercent": 0.4703
+    },
+    {
+      "routePair": "SLM-PMI",
+      "origin": "SLM",
+      "destination": "PMI",
+      "taxablePercent": 0.6658,
+      "nonTaxablePercent": 0.3342
+    },
+    {
+      "routePair": "SVQ-IBZ",
+      "origin": "SVQ",
+      "destination": "IBZ",
+      "taxablePercent": 0.8047,
+      "nonTaxablePercent": 0.1953
+    },
+    {
+      "routePair": "SVQ-MAH",
+      "origin": "SVQ",
+      "destination": "MAH",
+      "taxablePercent": 0.5648,
+      "nonTaxablePercent": 0.4352
+    },
+    {
+      "routePair": "SVQ-PMI",
+      "origin": "SVQ",
+      "destination": "PMI",
+      "taxablePercent": 0.6718,
+      "nonTaxablePercent": 0.3282
+    },
+    {
+      "routePair": "VGO-IBZ",
+      "origin": "VGO",
+      "destination": "IBZ",
+      "taxablePercent": 0.871,
+      "nonTaxablePercent": 0.129
+    },
+    {
+      "routePair": "VGO-MAH",
+      "origin": "VGO",
+      "destination": "MAH",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    {
+      "routePair": "VGO-PMI",
+      "origin": "VGO",
+      "destination": "PMI",
+      "taxablePercent": 0.8524,
+      "nonTaxablePercent": 0.1476
+    },
+    {
+      "routePair": "VIT-IBZ",
+      "origin": "VIT",
+      "destination": "IBZ",
+      "taxablePercent": 0.6685,
+      "nonTaxablePercent": 0.3315
+    },
+    {
+      "routePair": "VIT-MAH",
+      "origin": "VIT",
+      "destination": "MAH",
+      "taxablePercent": 0.5851,
+      "nonTaxablePercent": 0.4149
+    },
+    {
+      "routePair": "VIT-PMI",
+      "origin": "VIT",
+      "destination": "PMI",
+      "taxablePercent": 0.6979,
+      "nonTaxablePercent": 0.3021
+    },
+    {
+      "routePair": "VLC-IBZ",
+      "origin": "VLC",
+      "destination": "IBZ",
+      "taxablePercent": 0.2577,
+      "nonTaxablePercent": 0.7423
+    },
+    {
+      "routePair": "VLC-MAH",
+      "origin": "VLC",
+      "destination": "MAH",
+      "taxablePercent": 0.1083,
+      "nonTaxablePercent": 0.8917
+    },
+    {
+      "routePair": "VLC-PMI",
+      "origin": "VLC",
+      "destination": "PMI",
+      "taxablePercent": 0.1486,
+      "nonTaxablePercent": 0.8514
+    },
+    {
+      "routePair": "VLL-IBZ",
+      "origin": "VLL",
+      "destination": "IBZ",
+      "taxablePercent": 0.8005,
+      "nonTaxablePercent": 0.1995
+    },
+    {
+      "routePair": "VLL-MAH",
+      "origin": "VLL",
+      "destination": "MAH",
+      "taxablePercent": 0.6776,
+      "nonTaxablePercent": 0.3224
+    },
+    {
+      "routePair": "VLL-PMI",
+      "origin": "VLL",
+      "destination": "PMI",
+      "taxablePercent": 0.7667,
+      "nonTaxablePercent": 0.2333
+    },
+    {
+      "routePair": "XRY-IBZ",
+      "origin": "XRY",
+      "destination": "IBZ",
+      "taxablePercent": 0.8486,
+      "nonTaxablePercent": 0.1514
+    },
+    {
+      "routePair": "XRY-MAH",
+      "origin": "XRY",
+      "destination": "MAH",
+      "taxablePercent": 0.564,
+      "nonTaxablePercent": 0.436
+    },
+    {
+      "routePair": "XRY-PMI",
+      "origin": "XRY",
+      "destination": "PMI",
+      "taxablePercent": 0.6874,
+      "nonTaxablePercent": 0.3126
+    },
+    {
+      "routePair": "ZAZ-IBZ",
+      "origin": "ZAZ",
+      "destination": "IBZ",
+      "taxablePercent": 0.4895,
+      "nonTaxablePercent": 0.5105
+    },
+    {
+      "routePair": "ZAZ-MAH",
+      "origin": "ZAZ",
+      "destination": "MAH",
+      "taxablePercent": 0.4014,
+      "nonTaxablePercent": 0.5986
+    },
+    {
+      "routePair": "ZAZ-PMI",
+      "origin": "ZAZ",
+      "destination": "PMI",
+      "taxablePercent": 0.5346,
+      "nonTaxablePercent": 0.4654
+    }
+  ],
+  "routesByPair": {
+    "IBZ-LCG": {
+      "routePair": "IBZ-LCG",
+      "origin": "IBZ",
+      "destination": "LCG",
+      "taxablePercent": 0.891,
+      "nonTaxablePercent": 0.109
+    },
+    "IBZ-ALC": {
+      "routePair": "IBZ-ALC",
+      "origin": "IBZ",
+      "destination": "ALC",
+      "taxablePercent": 0.3451,
+      "nonTaxablePercent": 0.6549
+    },
+    "IBZ-LEI": {
+      "routePair": "IBZ-LEI",
+      "origin": "IBZ",
+      "destination": "LEI",
+      "taxablePercent": 0.7149,
+      "nonTaxablePercent": 0.2851
+    },
+    "IBZ-BJZ": {
+      "routePair": "IBZ-BJZ",
+      "origin": "IBZ",
+      "destination": "BJZ",
+      "taxablePercent": 0.822,
+      "nonTaxablePercent": 0.178
+    },
+    "IBZ-BCN": {
+      "routePair": "IBZ-BCN",
+      "origin": "IBZ",
+      "destination": "BCN",
+      "taxablePercent": 0.3413,
+      "nonTaxablePercent": 0.6587
+    },
+    "IBZ-BIO": {
+      "routePair": "IBZ-BIO",
+      "origin": "IBZ",
+      "destination": "BIO",
+      "taxablePercent": 0.63,
+      "nonTaxablePercent": 0.37
+    },
+    "IBZ-ODB": {
+      "routePair": "IBZ-ODB",
+      "origin": "IBZ",
+      "destination": "ODB",
+      "taxablePercent": 0.9063,
+      "nonTaxablePercent": 0.0937
+    },
+    "IBZ-GRO": {
+      "routePair": "IBZ-GRO",
+      "origin": "IBZ",
+      "destination": "GRO",
+      "taxablePercent": 0.1409,
+      "nonTaxablePercent": 0.8591
+    },
+    "IBZ-GRX": {
+      "routePair": "IBZ-GRX",
+      "origin": "IBZ",
+      "destination": "GRX",
+      "taxablePercent": 0.7431,
+      "nonTaxablePercent": 0.2569
+    },
+    "IBZ-XRY": {
+      "routePair": "IBZ-XRY",
+      "origin": "IBZ",
+      "destination": "XRY",
+      "taxablePercent": 0.8486,
+      "nonTaxablePercent": 0.1514
+    },
+    "IBZ-LEN": {
+      "routePair": "IBZ-LEN",
+      "origin": "IBZ",
+      "destination": "LEN",
+      "taxablePercent": 0.856,
+      "nonTaxablePercent": 0.144
+    },
+    "IBZ-MAD": {
+      "routePair": "IBZ-MAD",
+      "origin": "IBZ",
+      "destination": "MAD",
+      "taxablePercent": 0.681,
+      "nonTaxablePercent": 0.319
+    },
+    "IBZ-MAH": {
+      "routePair": "IBZ-MAH",
+      "origin": "IBZ",
+      "destination": "MAH",
+      "taxablePercent": 0.369,
+      "nonTaxablePercent": 0.631
+    },
+    "IBZ-AGP": {
+      "routePair": "IBZ-AGP",
+      "origin": "IBZ",
+      "destination": "AGP",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    "IBZ-RMU": {
+      "routePair": "IBZ-RMU",
+      "origin": "IBZ",
+      "destination": "RMU",
+      "taxablePercent": 0.5368,
+      "nonTaxablePercent": 0.4632
+    },
+    "IBZ-OVD": {
+      "routePair": "IBZ-OVD",
+      "origin": "IBZ",
+      "destination": "OVD",
+      "taxablePercent": 0.854,
+      "nonTaxablePercent": 0.146
+    },
+    "IBZ-PNA": {
+      "routePair": "IBZ-PNA",
+      "origin": "IBZ",
+      "destination": "PNA",
+      "taxablePercent": 0.7622,
+      "nonTaxablePercent": 0.2378
+    },
+    "IBZ-REU": {
+      "routePair": "IBZ-REU",
+      "origin": "IBZ",
+      "destination": "REU",
+      "taxablePercent": 0.2463,
+      "nonTaxablePercent": 0.7537
+    },
+    "IBZ-QSA": {
+      "routePair": "IBZ-QSA",
+      "origin": "IBZ",
+      "destination": "QSA",
+      "taxablePercent": 0.3272,
+      "nonTaxablePercent": 0.6728
+    },
+    "IBZ-SLM": {
+      "routePair": "IBZ-SLM",
+      "origin": "IBZ",
+      "destination": "SLM",
+      "taxablePercent": 0.7733,
+      "nonTaxablePercent": 0.2267
+    },
+    "IBZ-EAS": {
+      "routePair": "IBZ-EAS",
+      "origin": "IBZ",
+      "destination": "EAS",
+      "taxablePercent": 0.6821,
+      "nonTaxablePercent": 0.3179
+    },
+    "IBZ-SDR": {
+      "routePair": "IBZ-SDR",
+      "origin": "IBZ",
+      "destination": "SDR",
+      "taxablePercent": 0.8262,
+      "nonTaxablePercent": 0.1738
+    },
+    "IBZ-SCQ": {
+      "routePair": "IBZ-SCQ",
+      "origin": "IBZ",
+      "destination": "SCQ",
+      "taxablePercent": 0.8622,
+      "nonTaxablePercent": 0.1378
+    },
+    "IBZ-SVQ": {
+      "routePair": "IBZ-SVQ",
+      "origin": "IBZ",
+      "destination": "SVQ",
+      "taxablePercent": 0.8047,
+      "nonTaxablePercent": 0.1953
+    },
+    "IBZ-VLC": {
+      "routePair": "IBZ-VLC",
+      "origin": "IBZ",
+      "destination": "VLC",
+      "taxablePercent": 0.2577,
+      "nonTaxablePercent": 0.7423
+    },
+    "IBZ-VLL": {
+      "routePair": "IBZ-VLL",
+      "origin": "IBZ",
+      "destination": "VLL",
+      "taxablePercent": 0.8005,
+      "nonTaxablePercent": 0.1995
+    },
+    "IBZ-VGO": {
+      "routePair": "IBZ-VGO",
+      "origin": "IBZ",
+      "destination": "VGO",
+      "taxablePercent": 0.871,
+      "nonTaxablePercent": 0.129
+    },
+    "IBZ-VIT": {
+      "routePair": "IBZ-VIT",
+      "origin": "IBZ",
+      "destination": "VIT",
+      "taxablePercent": 0.6685,
+      "nonTaxablePercent": 0.3315
+    },
+    "IBZ-ZAZ": {
+      "routePair": "IBZ-ZAZ",
+      "origin": "IBZ",
+      "destination": "ZAZ",
+      "taxablePercent": 0.4895,
+      "nonTaxablePercent": 0.5105
+    },
+    "MAH-LCG": {
+      "routePair": "MAH-LCG",
+      "origin": "MAH",
+      "destination": "LCG",
+      "taxablePercent": 0.8033,
+      "nonTaxablePercent": 0.1967
+    },
+    "MAH-ALC": {
+      "routePair": "MAH-ALC",
+      "origin": "MAH",
+      "destination": "ALC",
+      "taxablePercent": 0.1392,
+      "nonTaxablePercent": 0.8608
+    },
+    "MAH-LEI": {
+      "routePair": "MAH-LEI",
+      "origin": "MAH",
+      "destination": "LEI",
+      "taxablePercent": 0.3472,
+      "nonTaxablePercent": 0.6528
+    },
+    "MAH-BJZ": {
+      "routePair": "MAH-BJZ",
+      "origin": "MAH",
+      "destination": "BJZ",
+      "taxablePercent": 0.631,
+      "nonTaxablePercent": 0.369
+    },
+    "MAH-BCN": {
+      "routePair": "MAH-BCN",
+      "origin": "MAH",
+      "destination": "BCN",
+      "taxablePercent": 0.1957,
+      "nonTaxablePercent": 0.8043
+    },
+    "MAH-BIO": {
+      "routePair": "MAH-BIO",
+      "origin": "MAH",
+      "destination": "BIO",
+      "taxablePercent": 0.5435,
+      "nonTaxablePercent": 0.4565
+    },
+    "MAH-ODB": {
+      "routePair": "MAH-ODB",
+      "origin": "MAH",
+      "destination": "ODB",
+      "taxablePercent": 0.7523,
+      "nonTaxablePercent": 0.2477
+    },
+    "MAH-GRO": {
+      "routePair": "MAH-GRO",
+      "origin": "MAH",
+      "destination": "GRO",
+      "taxablePercent": 0.1871,
+      "nonTaxablePercent": 0.8129
+    },
+    "MAH-GRX": {
+      "routePair": "MAH-GRX",
+      "origin": "MAH",
+      "destination": "GRX",
+      "taxablePercent": 0.4766,
+      "nonTaxablePercent": 0.5234
+    },
+    "MAH-XRY": {
+      "routePair": "MAH-XRY",
+      "origin": "MAH",
+      "destination": "XRY",
+      "taxablePercent": 0.564,
+      "nonTaxablePercent": 0.436
+    },
+    "MAH-LEN": {
+      "routePair": "MAH-LEN",
+      "origin": "MAH",
+      "destination": "LEN",
+      "taxablePercent": 0.7468,
+      "nonTaxablePercent": 0.2532
+    },
+    "MAH-MAD": {
+      "routePair": "MAH-MAD",
+      "origin": "MAH",
+      "destination": "MAD",
+      "taxablePercent": 0.4247,
+      "nonTaxablePercent": 0.5753
+    },
+    "MAH-AGP": {
+      "routePair": "MAH-AGP",
+      "origin": "MAH",
+      "destination": "AGP",
+      "taxablePercent": 0.5165,
+      "nonTaxablePercent": 0.4835
+    },
+    "MAH-RMU": {
+      "routePair": "MAH-RMU",
+      "origin": "MAH",
+      "destination": "RMU",
+      "taxablePercent": 0.1455,
+      "nonTaxablePercent": 0.8545
+    },
+    "MAH-OVD": {
+      "routePair": "MAH-OVD",
+      "origin": "MAH",
+      "destination": "OVD",
+      "taxablePercent": 0.6927,
+      "nonTaxablePercent": 0.3073
+    },
+    "MAH-PNA": {
+      "routePair": "MAH-PNA",
+      "origin": "MAH",
+      "destination": "PNA",
+      "taxablePercent": 0.521,
+      "nonTaxablePercent": 0.479
+    },
+    "MAH-REU": {
+      "routePair": "MAH-REU",
+      "origin": "MAH",
+      "destination": "REU",
+      "taxablePercent": 0.5088,
+      "nonTaxablePercent": 0.4912
+    },
+    "MAH-QSA": {
+      "routePair": "MAH-QSA",
+      "origin": "MAH",
+      "destination": "QSA",
+      "taxablePercent": 0.3333,
+      "nonTaxablePercent": 0.6667
+    },
+    "MAH-SLM": {
+      "routePair": "MAH-SLM",
+      "origin": "MAH",
+      "destination": "SLM",
+      "taxablePercent": 0.5297,
+      "nonTaxablePercent": 0.4703
+    },
+    "MAH-EAS": {
+      "routePair": "MAH-EAS",
+      "origin": "MAH",
+      "destination": "EAS",
+      "taxablePercent": 0.5854,
+      "nonTaxablePercent": 0.4146
+    },
+    "MAH-SDR": {
+      "routePair": "MAH-SDR",
+      "origin": "MAH",
+      "destination": "SDR",
+      "taxablePercent": 0.6674,
+      "nonTaxablePercent": 0.3326
+    },
+    "MAH-SCQ": {
+      "routePair": "MAH-SCQ",
+      "origin": "MAH",
+      "destination": "SCQ",
+      "taxablePercent": 0.7474,
+      "nonTaxablePercent": 0.2526
+    },
+    "MAH-SVQ": {
+      "routePair": "MAH-SVQ",
+      "origin": "MAH",
+      "destination": "SVQ",
+      "taxablePercent": 0.5648,
+      "nonTaxablePercent": 0.4352
+    },
+    "MAH-VLC": {
+      "routePair": "MAH-VLC",
+      "origin": "MAH",
+      "destination": "VLC",
+      "taxablePercent": 0.1083,
+      "nonTaxablePercent": 0.8917
+    },
+    "MAH-VLL": {
+      "routePair": "MAH-VLL",
+      "origin": "MAH",
+      "destination": "VLL",
+      "taxablePercent": 0.6776,
+      "nonTaxablePercent": 0.3224
+    },
+    "MAH-VGO": {
+      "routePair": "MAH-VGO",
+      "origin": "MAH",
+      "destination": "VGO",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    "MAH-VIT": {
+      "routePair": "MAH-VIT",
+      "origin": "MAH",
+      "destination": "VIT",
+      "taxablePercent": 0.5851,
+      "nonTaxablePercent": 0.4149
+    },
+    "MAH-ZAZ": {
+      "routePair": "MAH-ZAZ",
+      "origin": "MAH",
+      "destination": "ZAZ",
+      "taxablePercent": 0.4014,
+      "nonTaxablePercent": 0.5986
+    },
+    "PMI-LCG": {
+      "routePair": "PMI-LCG",
+      "origin": "PMI",
+      "destination": "LCG",
+      "taxablePercent": 0.8537,
+      "nonTaxablePercent": 0.1463
+    },
+    "PMI-ALC": {
+      "routePair": "PMI-ALC",
+      "origin": "PMI",
+      "destination": "ALC",
+      "taxablePercent": 0.1609,
+      "nonTaxablePercent": 0.8391
+    },
+    "PMI-LEI": {
+      "routePair": "PMI-LEI",
+      "origin": "PMI",
+      "destination": "LEI",
+      "taxablePercent": 0.4931,
+      "nonTaxablePercent": 0.5069
+    },
+    "PMI-BJZ": {
+      "routePair": "PMI-BJZ",
+      "origin": "PMI",
+      "destination": "BJZ",
+      "taxablePercent": 0.7294,
+      "nonTaxablePercent": 0.2706
+    },
+    "PMI-BCN": {
+      "routePair": "PMI-BCN",
+      "origin": "PMI",
+      "destination": "BCN",
+      "taxablePercent": 0.3043,
+      "nonTaxablePercent": 0.6957
+    },
+    "PMI-BIO": {
+      "routePair": "PMI-BIO",
+      "origin": "PMI",
+      "destination": "BIO",
+      "taxablePercent": 0.7131,
+      "nonTaxablePercent": 0.2869
+    },
+    "PMI-ODB": {
+      "routePair": "PMI-ODB",
+      "origin": "PMI",
+      "destination": "ODB",
+      "taxablePercent": 0.691,
+      "nonTaxablePercent": 0.309
+    },
+    "PMI-GRO": {
+      "routePair": "PMI-GRO",
+      "origin": "PMI",
+      "destination": "GRO",
+      "taxablePercent": 0.3168,
+      "nonTaxablePercent": 0.6832
+    },
+    "PMI-GRX": {
+      "routePair": "PMI-GRX",
+      "origin": "PMI",
+      "destination": "GRX",
+      "taxablePercent": 0.5895,
+      "nonTaxablePercent": 0.4105
+    },
+    "PMI-IBZ": {
+      "routePair": "PMI-IBZ",
+      "origin": "PMI",
+      "destination": "IBZ",
+      "taxablePercent": 0.3143,
+      "nonTaxablePercent": 0.6857
+    },
+    "PMI-XRY": {
+      "routePair": "PMI-XRY",
+      "origin": "PMI",
+      "destination": "XRY",
+      "taxablePercent": 0.6874,
+      "nonTaxablePercent": 0.3126
+    },
+    "PMI-LEN": {
+      "routePair": "PMI-LEN",
+      "origin": "PMI",
+      "destination": "LEN",
+      "taxablePercent": 0.8095,
+      "nonTaxablePercent": 0.1905
+    },
+    "PMI-MAD": {
+      "routePair": "PMI-MAD",
+      "origin": "PMI",
+      "destination": "MAD",
+      "taxablePercent": 0.5147,
+      "nonTaxablePercent": 0.4853
+    },
+    "PMI-MAH": {
+      "routePair": "PMI-MAH",
+      "origin": "PMI",
+      "destination": "MAH",
+      "taxablePercent": 0.6216,
+      "nonTaxablePercent": 0.3784
+    },
+    "PMI-AGP": {
+      "routePair": "PMI-AGP",
+      "origin": "PMI",
+      "destination": "AGP",
+      "taxablePercent": 0.6188,
+      "nonTaxablePercent": 0.3812
+    },
+    "PMI-RMU": {
+      "routePair": "PMI-RMU",
+      "origin": "PMI",
+      "destination": "RMU",
+      "taxablePercent": 0.1379,
+      "nonTaxablePercent": 0.8621
+    },
+    "PMI-OVD": {
+      "routePair": "PMI-OVD",
+      "origin": "PMI",
+      "destination": "OVD",
+      "taxablePercent": 0.7943,
+      "nonTaxablePercent": 0.2057
+    },
+    "PMI-PNA": {
+      "routePair": "PMI-PNA",
+      "origin": "PMI",
+      "destination": "PNA",
+      "taxablePercent": 0.6918,
+      "nonTaxablePercent": 0.3082
+    },
+    "PMI-REU": {
+      "routePair": "PMI-REU",
+      "origin": "PMI",
+      "destination": "REU",
+      "taxablePercent": 0.2171,
+      "nonTaxablePercent": 0.7829
+    },
+    "PMI-QSA": {
+      "routePair": "PMI-QSA",
+      "origin": "PMI",
+      "destination": "QSA",
+      "taxablePercent": 0.1405,
+      "nonTaxablePercent": 0.8595
+    },
+    "PMI-SLM": {
+      "routePair": "PMI-SLM",
+      "origin": "PMI",
+      "destination": "SLM",
+      "taxablePercent": 0.6658,
+      "nonTaxablePercent": 0.3342
+    },
+    "PMI-EAS": {
+      "routePair": "PMI-EAS",
+      "origin": "PMI",
+      "destination": "EAS",
+      "taxablePercent": 0.7267,
+      "nonTaxablePercent": 0.2733
+    },
+    "PMI-SDR": {
+      "routePair": "PMI-SDR",
+      "origin": "PMI",
+      "destination": "SDR",
+      "taxablePercent": 0.7243,
+      "nonTaxablePercent": 0.2757
+    },
+    "PMI-SCQ": {
+      "routePair": "PMI-SCQ",
+      "origin": "PMI",
+      "destination": "SCQ",
+      "taxablePercent": 0.8352,
+      "nonTaxablePercent": 0.1648
+    },
+    "PMI-SVQ": {
+      "routePair": "PMI-SVQ",
+      "origin": "PMI",
+      "destination": "SVQ",
+      "taxablePercent": 0.6718,
+      "nonTaxablePercent": 0.3282
+    },
+    "PMI-VLC": {
+      "routePair": "PMI-VLC",
+      "origin": "PMI",
+      "destination": "VLC",
+      "taxablePercent": 0.1486,
+      "nonTaxablePercent": 0.8514
+    },
+    "PMI-VLL": {
+      "routePair": "PMI-VLL",
+      "origin": "PMI",
+      "destination": "VLL",
+      "taxablePercent": 0.7667,
+      "nonTaxablePercent": 0.2333
+    },
+    "PMI-VGO": {
+      "routePair": "PMI-VGO",
+      "origin": "PMI",
+      "destination": "VGO",
+      "taxablePercent": 0.8524,
+      "nonTaxablePercent": 0.1476
+    },
+    "PMI-VIT": {
+      "routePair": "PMI-VIT",
+      "origin": "PMI",
+      "destination": "VIT",
+      "taxablePercent": 0.6979,
+      "nonTaxablePercent": 0.3021
+    },
+    "PMI-ZAZ": {
+      "routePair": "PMI-ZAZ",
+      "origin": "PMI",
+      "destination": "ZAZ",
+      "taxablePercent": 0.5346,
+      "nonTaxablePercent": 0.4654
+    },
+    "LCG-IBZ": {
+      "routePair": "LCG-IBZ",
+      "origin": "LCG",
+      "destination": "IBZ",
+      "taxablePercent": 0.891,
+      "nonTaxablePercent": 0.109
+    },
+    "ALC-IBZ": {
+      "routePair": "ALC-IBZ",
+      "origin": "ALC",
+      "destination": "IBZ",
+      "taxablePercent": 0.3451,
+      "nonTaxablePercent": 0.6549
+    },
+    "LEI-IBZ": {
+      "routePair": "LEI-IBZ",
+      "origin": "LEI",
+      "destination": "IBZ",
+      "taxablePercent": 0.7149,
+      "nonTaxablePercent": 0.2851
+    },
+    "BJZ-IBZ": {
+      "routePair": "BJZ-IBZ",
+      "origin": "BJZ",
+      "destination": "IBZ",
+      "taxablePercent": 0.822,
+      "nonTaxablePercent": 0.178
+    },
+    "BCN-IBZ": {
+      "routePair": "BCN-IBZ",
+      "origin": "BCN",
+      "destination": "IBZ",
+      "taxablePercent": 0.3413,
+      "nonTaxablePercent": 0.6587
+    },
+    "BIO-IBZ": {
+      "routePair": "BIO-IBZ",
+      "origin": "BIO",
+      "destination": "IBZ",
+      "taxablePercent": 0.63,
+      "nonTaxablePercent": 0.37
+    },
+    "ODB-IBZ": {
+      "routePair": "ODB-IBZ",
+      "origin": "ODB",
+      "destination": "IBZ",
+      "taxablePercent": 0.9063,
+      "nonTaxablePercent": 0.0937
+    },
+    "GRO-IBZ": {
+      "routePair": "GRO-IBZ",
+      "origin": "GRO",
+      "destination": "IBZ",
+      "taxablePercent": 0.1409,
+      "nonTaxablePercent": 0.8591
+    },
+    "GRX-IBZ": {
+      "routePair": "GRX-IBZ",
+      "origin": "GRX",
+      "destination": "IBZ",
+      "taxablePercent": 0.7431,
+      "nonTaxablePercent": 0.2569
+    },
+    "XRY-IBZ": {
+      "routePair": "XRY-IBZ",
+      "origin": "XRY",
+      "destination": "IBZ",
+      "taxablePercent": 0.8486,
+      "nonTaxablePercent": 0.1514
+    },
+    "LEN-IBZ": {
+      "routePair": "LEN-IBZ",
+      "origin": "LEN",
+      "destination": "IBZ",
+      "taxablePercent": 0.856,
+      "nonTaxablePercent": 0.144
+    },
+    "MAD-IBZ": {
+      "routePair": "MAD-IBZ",
+      "origin": "MAD",
+      "destination": "IBZ",
+      "taxablePercent": 0.681,
+      "nonTaxablePercent": 0.319
+    },
+    "MAH-IBZ": {
+      "routePair": "MAH-IBZ",
+      "origin": "MAH",
+      "destination": "IBZ",
+      "taxablePercent": 0.369,
+      "nonTaxablePercent": 0.631
+    },
+    "AGP-IBZ": {
+      "routePair": "AGP-IBZ",
+      "origin": "AGP",
+      "destination": "IBZ",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    "RMU-IBZ": {
+      "routePair": "RMU-IBZ",
+      "origin": "RMU",
+      "destination": "IBZ",
+      "taxablePercent": 0.5368,
+      "nonTaxablePercent": 0.4632
+    },
+    "OVD-IBZ": {
+      "routePair": "OVD-IBZ",
+      "origin": "OVD",
+      "destination": "IBZ",
+      "taxablePercent": 0.854,
+      "nonTaxablePercent": 0.146
+    },
+    "PNA-IBZ": {
+      "routePair": "PNA-IBZ",
+      "origin": "PNA",
+      "destination": "IBZ",
+      "taxablePercent": 0.7622,
+      "nonTaxablePercent": 0.2378
+    },
+    "REU-IBZ": {
+      "routePair": "REU-IBZ",
+      "origin": "REU",
+      "destination": "IBZ",
+      "taxablePercent": 0.2463,
+      "nonTaxablePercent": 0.7537
+    },
+    "QSA-IBZ": {
+      "routePair": "QSA-IBZ",
+      "origin": "QSA",
+      "destination": "IBZ",
+      "taxablePercent": 0.3272,
+      "nonTaxablePercent": 0.6728
+    },
+    "SLM-IBZ": {
+      "routePair": "SLM-IBZ",
+      "origin": "SLM",
+      "destination": "IBZ",
+      "taxablePercent": 0.7733,
+      "nonTaxablePercent": 0.2267
+    },
+    "EAS-IBZ": {
+      "routePair": "EAS-IBZ",
+      "origin": "EAS",
+      "destination": "IBZ",
+      "taxablePercent": 0.6821,
+      "nonTaxablePercent": 0.3179
+    },
+    "SDR-IBZ": {
+      "routePair": "SDR-IBZ",
+      "origin": "SDR",
+      "destination": "IBZ",
+      "taxablePercent": 0.8262,
+      "nonTaxablePercent": 0.1738
+    },
+    "SCQ-IBZ": {
+      "routePair": "SCQ-IBZ",
+      "origin": "SCQ",
+      "destination": "IBZ",
+      "taxablePercent": 0.8622,
+      "nonTaxablePercent": 0.1378
+    },
+    "SVQ-IBZ": {
+      "routePair": "SVQ-IBZ",
+      "origin": "SVQ",
+      "destination": "IBZ",
+      "taxablePercent": 0.8047,
+      "nonTaxablePercent": 0.1953
+    },
+    "VLC-IBZ": {
+      "routePair": "VLC-IBZ",
+      "origin": "VLC",
+      "destination": "IBZ",
+      "taxablePercent": 0.2577,
+      "nonTaxablePercent": 0.7423
+    },
+    "VLL-IBZ": {
+      "routePair": "VLL-IBZ",
+      "origin": "VLL",
+      "destination": "IBZ",
+      "taxablePercent": 0.8005,
+      "nonTaxablePercent": 0.1995
+    },
+    "VGO-IBZ": {
+      "routePair": "VGO-IBZ",
+      "origin": "VGO",
+      "destination": "IBZ",
+      "taxablePercent": 0.871,
+      "nonTaxablePercent": 0.129
+    },
+    "VIT-IBZ": {
+      "routePair": "VIT-IBZ",
+      "origin": "VIT",
+      "destination": "IBZ",
+      "taxablePercent": 0.6685,
+      "nonTaxablePercent": 0.3315
+    },
+    "ZAZ-IBZ": {
+      "routePair": "ZAZ-IBZ",
+      "origin": "ZAZ",
+      "destination": "IBZ",
+      "taxablePercent": 0.4895,
+      "nonTaxablePercent": 0.5105
+    },
+    "LCG-MAH": {
+      "routePair": "LCG-MAH",
+      "origin": "LCG",
+      "destination": "MAH",
+      "taxablePercent": 0.8033,
+      "nonTaxablePercent": 0.1967
+    },
+    "ALC-MAH": {
+      "routePair": "ALC-MAH",
+      "origin": "ALC",
+      "destination": "MAH",
+      "taxablePercent": 0.1392,
+      "nonTaxablePercent": 0.8608
+    },
+    "LEI-MAH": {
+      "routePair": "LEI-MAH",
+      "origin": "LEI",
+      "destination": "MAH",
+      "taxablePercent": 0.3472,
+      "nonTaxablePercent": 0.6528
+    },
+    "BJZ-MAH": {
+      "routePair": "BJZ-MAH",
+      "origin": "BJZ",
+      "destination": "MAH",
+      "taxablePercent": 0.631,
+      "nonTaxablePercent": 0.369
+    },
+    "BCN-MAH": {
+      "routePair": "BCN-MAH",
+      "origin": "BCN",
+      "destination": "MAH",
+      "taxablePercent": 0.1957,
+      "nonTaxablePercent": 0.8043
+    },
+    "BIO-MAH": {
+      "routePair": "BIO-MAH",
+      "origin": "BIO",
+      "destination": "MAH",
+      "taxablePercent": 0.5435,
+      "nonTaxablePercent": 0.4565
+    },
+    "ODB-MAH": {
+      "routePair": "ODB-MAH",
+      "origin": "ODB",
+      "destination": "MAH",
+      "taxablePercent": 0.7523,
+      "nonTaxablePercent": 0.2477
+    },
+    "GRO-MAH": {
+      "routePair": "GRO-MAH",
+      "origin": "GRO",
+      "destination": "MAH",
+      "taxablePercent": 0.1871,
+      "nonTaxablePercent": 0.8129
+    },
+    "GRX-MAH": {
+      "routePair": "GRX-MAH",
+      "origin": "GRX",
+      "destination": "MAH",
+      "taxablePercent": 0.4766,
+      "nonTaxablePercent": 0.5234
+    },
+    "XRY-MAH": {
+      "routePair": "XRY-MAH",
+      "origin": "XRY",
+      "destination": "MAH",
+      "taxablePercent": 0.564,
+      "nonTaxablePercent": 0.436
+    },
+    "LEN-MAH": {
+      "routePair": "LEN-MAH",
+      "origin": "LEN",
+      "destination": "MAH",
+      "taxablePercent": 0.7468,
+      "nonTaxablePercent": 0.2532
+    },
+    "MAD-MAH": {
+      "routePair": "MAD-MAH",
+      "origin": "MAD",
+      "destination": "MAH",
+      "taxablePercent": 0.4247,
+      "nonTaxablePercent": 0.5753
+    },
+    "AGP-MAH": {
+      "routePair": "AGP-MAH",
+      "origin": "AGP",
+      "destination": "MAH",
+      "taxablePercent": 0.5165,
+      "nonTaxablePercent": 0.4835
+    },
+    "RMU-MAH": {
+      "routePair": "RMU-MAH",
+      "origin": "RMU",
+      "destination": "MAH",
+      "taxablePercent": 0.1455,
+      "nonTaxablePercent": 0.8545
+    },
+    "OVD-MAH": {
+      "routePair": "OVD-MAH",
+      "origin": "OVD",
+      "destination": "MAH",
+      "taxablePercent": 0.6927,
+      "nonTaxablePercent": 0.3073
+    },
+    "PNA-MAH": {
+      "routePair": "PNA-MAH",
+      "origin": "PNA",
+      "destination": "MAH",
+      "taxablePercent": 0.521,
+      "nonTaxablePercent": 0.479
+    },
+    "REU-MAH": {
+      "routePair": "REU-MAH",
+      "origin": "REU",
+      "destination": "MAH",
+      "taxablePercent": 0.5088,
+      "nonTaxablePercent": 0.4912
+    },
+    "QSA-MAH": {
+      "routePair": "QSA-MAH",
+      "origin": "QSA",
+      "destination": "MAH",
+      "taxablePercent": 0.3333,
+      "nonTaxablePercent": 0.6667
+    },
+    "SLM-MAH": {
+      "routePair": "SLM-MAH",
+      "origin": "SLM",
+      "destination": "MAH",
+      "taxablePercent": 0.5297,
+      "nonTaxablePercent": 0.4703
+    },
+    "EAS-MAH": {
+      "routePair": "EAS-MAH",
+      "origin": "EAS",
+      "destination": "MAH",
+      "taxablePercent": 0.5854,
+      "nonTaxablePercent": 0.4146
+    },
+    "SDR-MAH": {
+      "routePair": "SDR-MAH",
+      "origin": "SDR",
+      "destination": "MAH",
+      "taxablePercent": 0.6674,
+      "nonTaxablePercent": 0.3326
+    },
+    "SCQ-MAH": {
+      "routePair": "SCQ-MAH",
+      "origin": "SCQ",
+      "destination": "MAH",
+      "taxablePercent": 0.7474,
+      "nonTaxablePercent": 0.2526
+    },
+    "SVQ-MAH": {
+      "routePair": "SVQ-MAH",
+      "origin": "SVQ",
+      "destination": "MAH",
+      "taxablePercent": 0.5648,
+      "nonTaxablePercent": 0.4352
+    },
+    "VLC-MAH": {
+      "routePair": "VLC-MAH",
+      "origin": "VLC",
+      "destination": "MAH",
+      "taxablePercent": 0.1083,
+      "nonTaxablePercent": 0.8917
+    },
+    "VLL-MAH": {
+      "routePair": "VLL-MAH",
+      "origin": "VLL",
+      "destination": "MAH",
+      "taxablePercent": 0.6776,
+      "nonTaxablePercent": 0.3224
+    },
+    "VGO-MAH": {
+      "routePair": "VGO-MAH",
+      "origin": "VGO",
+      "destination": "MAH",
+      "taxablePercent": 0.7723,
+      "nonTaxablePercent": 0.2277
+    },
+    "VIT-MAH": {
+      "routePair": "VIT-MAH",
+      "origin": "VIT",
+      "destination": "MAH",
+      "taxablePercent": 0.5851,
+      "nonTaxablePercent": 0.4149
+    },
+    "ZAZ-MAH": {
+      "routePair": "ZAZ-MAH",
+      "origin": "ZAZ",
+      "destination": "MAH",
+      "taxablePercent": 0.4014,
+      "nonTaxablePercent": 0.5986
+    },
+    "LCG-PMI": {
+      "routePair": "LCG-PMI",
+      "origin": "LCG",
+      "destination": "PMI",
+      "taxablePercent": 0.8537,
+      "nonTaxablePercent": 0.1463
+    },
+    "ALC-PMI": {
+      "routePair": "ALC-PMI",
+      "origin": "ALC",
+      "destination": "PMI",
+      "taxablePercent": 0.1609,
+      "nonTaxablePercent": 0.8391
+    },
+    "LEI-PMI": {
+      "routePair": "LEI-PMI",
+      "origin": "LEI",
+      "destination": "PMI",
+      "taxablePercent": 0.4931,
+      "nonTaxablePercent": 0.5069
+    },
+    "BJZ-PMI": {
+      "routePair": "BJZ-PMI",
+      "origin": "BJZ",
+      "destination": "PMI",
+      "taxablePercent": 0.7294,
+      "nonTaxablePercent": 0.2706
+    },
+    "BCN-PMI": {
+      "routePair": "BCN-PMI",
+      "origin": "BCN",
+      "destination": "PMI",
+      "taxablePercent": 0.3043,
+      "nonTaxablePercent": 0.6957
+    },
+    "BIO-PMI": {
+      "routePair": "BIO-PMI",
+      "origin": "BIO",
+      "destination": "PMI",
+      "taxablePercent": 0.7131,
+      "nonTaxablePercent": 0.2869
+    },
+    "ODB-PMI": {
+      "routePair": "ODB-PMI",
+      "origin": "ODB",
+      "destination": "PMI",
+      "taxablePercent": 0.691,
+      "nonTaxablePercent": 0.309
+    },
+    "GRO-PMI": {
+      "routePair": "GRO-PMI",
+      "origin": "GRO",
+      "destination": "PMI",
+      "taxablePercent": 0.3168,
+      "nonTaxablePercent": 0.6832
+    },
+    "GRX-PMI": {
+      "routePair": "GRX-PMI",
+      "origin": "GRX",
+      "destination": "PMI",
+      "taxablePercent": 0.5895,
+      "nonTaxablePercent": 0.4105
+    },
+    "IBZ-PMI": {
+      "routePair": "IBZ-PMI",
+      "origin": "IBZ",
+      "destination": "PMI",
+      "taxablePercent": 0.3143,
+      "nonTaxablePercent": 0.6857
+    },
+    "XRY-PMI": {
+      "routePair": "XRY-PMI",
+      "origin": "XRY",
+      "destination": "PMI",
+      "taxablePercent": 0.6874,
+      "nonTaxablePercent": 0.3126
+    },
+    "LEN-PMI": {
+      "routePair": "LEN-PMI",
+      "origin": "LEN",
+      "destination": "PMI",
+      "taxablePercent": 0.8095,
+      "nonTaxablePercent": 0.1905
+    },
+    "MAD-PMI": {
+      "routePair": "MAD-PMI",
+      "origin": "MAD",
+      "destination": "PMI",
+      "taxablePercent": 0.5147,
+      "nonTaxablePercent": 0.4853
+    },
+    "MAH-PMI": {
+      "routePair": "MAH-PMI",
+      "origin": "MAH",
+      "destination": "PMI",
+      "taxablePercent": 0.6216,
+      "nonTaxablePercent": 0.3784
+    },
+    "AGP-PMI": {
+      "routePair": "AGP-PMI",
+      "origin": "AGP",
+      "destination": "PMI",
+      "taxablePercent": 0.6188,
+      "nonTaxablePercent": 0.3812
+    },
+    "RMU-PMI": {
+      "routePair": "RMU-PMI",
+      "origin": "RMU",
+      "destination": "PMI",
+      "taxablePercent": 0.1379,
+      "nonTaxablePercent": 0.8621
+    },
+    "OVD-PMI": {
+      "routePair": "OVD-PMI",
+      "origin": "OVD",
+      "destination": "PMI",
+      "taxablePercent": 0.7943,
+      "nonTaxablePercent": 0.2057
+    },
+    "PNA-PMI": {
+      "routePair": "PNA-PMI",
+      "origin": "PNA",
+      "destination": "PMI",
+      "taxablePercent": 0.6918,
+      "nonTaxablePercent": 0.3082
+    },
+    "REU-PMI": {
+      "routePair": "REU-PMI",
+      "origin": "REU",
+      "destination": "PMI",
+      "taxablePercent": 0.2171,
+      "nonTaxablePercent": 0.7829
+    },
+    "QSA-PMI": {
+      "routePair": "QSA-PMI",
+      "origin": "QSA",
+      "destination": "PMI",
+      "taxablePercent": 0.1405,
+      "nonTaxablePercent": 0.8595
+    },
+    "SLM-PMI": {
+      "routePair": "SLM-PMI",
+      "origin": "SLM",
+      "destination": "PMI",
+      "taxablePercent": 0.6658,
+      "nonTaxablePercent": 0.3342
+    },
+    "EAS-PMI": {
+      "routePair": "EAS-PMI",
+      "origin": "EAS",
+      "destination": "PMI",
+      "taxablePercent": 0.7267,
+      "nonTaxablePercent": 0.2733
+    },
+    "SDR-PMI": {
+      "routePair": "SDR-PMI",
+      "origin": "SDR",
+      "destination": "PMI",
+      "taxablePercent": 0.7243,
+      "nonTaxablePercent": 0.2757
+    },
+    "SCQ-PMI": {
+      "routePair": "SCQ-PMI",
+      "origin": "SCQ",
+      "destination": "PMI",
+      "taxablePercent": 0.8352,
+      "nonTaxablePercent": 0.1648
+    },
+    "SVQ-PMI": {
+      "routePair": "SVQ-PMI",
+      "origin": "SVQ",
+      "destination": "PMI",
+      "taxablePercent": 0.6718,
+      "nonTaxablePercent": 0.3282
+    },
+    "VLC-PMI": {
+      "routePair": "VLC-PMI",
+      "origin": "VLC",
+      "destination": "PMI",
+      "taxablePercent": 0.1486,
+      "nonTaxablePercent": 0.8514
+    },
+    "VLL-PMI": {
+      "routePair": "VLL-PMI",
+      "origin": "VLL",
+      "destination": "PMI",
+      "taxablePercent": 0.7667,
+      "nonTaxablePercent": 0.2333
+    },
+    "VGO-PMI": {
+      "routePair": "VGO-PMI",
+      "origin": "VGO",
+      "destination": "PMI",
+      "taxablePercent": 0.8524,
+      "nonTaxablePercent": 0.1476
+    },
+    "VIT-PMI": {
+      "routePair": "VIT-PMI",
+      "origin": "VIT",
+      "destination": "PMI",
+      "taxablePercent": 0.6979,
+      "nonTaxablePercent": 0.3021
+    },
+    "ZAZ-PMI": {
+      "routePair": "ZAZ-PMI",
+      "origin": "ZAZ",
+      "destination": "PMI",
+      "taxablePercent": 0.5346,
+      "nonTaxablePercent": 0.4654
+    }
+  }
+}

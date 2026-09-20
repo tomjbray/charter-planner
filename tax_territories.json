@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 11,
+  "data": {
+    "ES_MAINLAND": {
+      "territoryCode": "ES_MAINLAND",
+      "territoryType": "SPECIAL",
+      "country": "ES",
+      "description": "Spain Mainland",
+      "eUMember": true,
+      "area": "TRUE"
+    },
+    "ES_BALEARIC": {
+      "territoryCode": "ES_BALEARIC",
+      "territoryType": "SPECIAL",
+      "country": "ES",
+      "description": "Balearic Islands",
+      "eUMember": true,
+      "area": "TRUE"
+    },
+    "ES_CANARY": {
+      "territoryCode": "ES_CANARY",
+      "territoryType": "SPECIAL",
+      "country": "ES",
+      "description": "Canary Islands",
+      "eUMember": true,
+      "area": "FALSE"
+    },
+    "UK_MAINLAND": {
+      "territoryCode": "UK_MAINLAND",
+      "territoryType": "COUNTRY",
+      "country": "GB",
+      "description": "United Kingdom",
+      "eUMember": false,
+      "area": "TRUE"
+    },
+    "JEY": {
+      "territoryCode": "JEY",
+      "territoryType": "COUNTRY",
+      "country": "JE",
+      "description": "Jersey",
+      "eUMember": false,
+      "area": "FALSE"
+    },
+    "GGY": {
+      "territoryCode": "GGY",
+      "territoryType": "COUNTRY",
+      "country": "GG",
+      "description": "Guernsey",
+      "eUMember": false,
+      "area": "FALSE"
+    },
+    "IMN": {
+      "territoryCode": "IMN",
+      "territoryType": "COUNTRY",
+      "country": "IM",
+      "description": "Isle of Man",
+      "eUMember": false,
+      "area": "FALSE"
+    },
+    "EU": {
+      "territoryCode": "EU",
+      "territoryType": "REGION",
+      "country": "MULTI",
+      "description": "European Union",
+      "eUMember": true,
+      "area": "TRUE"
+    },
+    "NON_EU": {
+      "territoryCode": "NON_EU",
+      "territoryType": "REGION",
+      "country": "MULTI",
+      "description": "Outside European Union",
+      "eUMember": false,
+      "area": "FALSE"
+    },
+    "BE": {
+      "territoryCode": "BE",
+      "territoryType": "COUNTRY",
+      "country": "BE",
+      "description": "Belgium",
+      "eUMember": true,
+      "area": "TRUE"
+    },
+    "GB": {
+      "territoryCode": "GB",
+      "territoryType": "COUNTRY",
+      "country": "GB",
+      "description": "United Kingdom",
+      "eUMember": false,
+      "area": "TRUE"
+    }
+  }
+}

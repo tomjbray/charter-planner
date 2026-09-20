@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "sourceTable": "Table14",
+  "testCount": 3,
+  "tests": [
+    {
+      "testID": "BE-BE PASSENGER",
+      "office": "BRU",
+      "inputs": "BRU01",
+      "expectedOutput": "REDUCED"
+    },
+    {
+      "testID": "BRU02",
+      "office": "BRU",
+      "inputs": "BRU02",
+      "expectedOutput": "STANDARD"
+    },
+    {
+      "testID": "BRU03",
+      "office": "BRU",
+      "inputs": "BRU03",
+      "expectedOutput": null
+    }
+  ]
+}

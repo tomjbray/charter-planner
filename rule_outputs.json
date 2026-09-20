@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 5,
+  "data": {
+    "VAT_AMOUNT": {
+      "outputType": "VAT_AMOUNT",
+      "description": "VAT Charged"
+    },
+    "TAXABLE_AMOUNT": {
+      "outputType": "TAXABLE_AMOUNT",
+      "description": "Amount subject to VAT"
+    },
+    "NON_TAXABLE_AMOUNT": {
+      "outputType": "NON_TAXABLE_AMOUNT",
+      "description": "Outside scope amount"
+    },
+    "EXPLANATION": {
+      "outputType": "EXPLANATION",
+      "description": "Display Text"
+    },
+    "LEGAL_REFERENCE": {
+      "outputType": "LEGAL_REFERENCE",
+      "description": "Legal Citation"
+    }
+  }
+}

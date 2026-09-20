@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 6,
+  "data": {
+    "BE": {
+      "code": "BE",
+      "description": "Belgium"
+    },
+    "EU": {
+      "code": "EU",
+      "description": "European Union"
+    },
+    "NON_EU": {
+      "code": "NON_EU",
+      "description": "Outside European Union"
+    },
+    "SAME_COUNTRY": {
+      "code": "SAME_COUNTRY",
+      "description": "Same country as selling entity"
+    },
+    "OTHER": {
+      "code": "OTHER",
+      "description": "Other"
+    },
+    "ANY": {
+      "code": "ANY",
+      "description": "Any"
+    }
+  }
+}

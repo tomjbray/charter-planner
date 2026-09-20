@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 4,
+  "data": {
+    "STANDARD": {
+      "calculationMethod": "STANDARD"
+    },
+    "APPORTIONMENT": {
+      "calculationMethod": "APPORTIONMENT"
+    },
+    "AIRCRAFT_LOOKUP": {
+      "calculationMethod": "AIRCRAFT_LOOKUP"
+    },
+    "MANUAL": {
+      "calculationMethod": "MANUAL"
+    }
+  }
+}

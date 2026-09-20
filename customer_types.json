@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 6,
+  "data": {
+    "PRIVATE": {
+      "code": "PRIVATE",
+      "description": "Private Individual"
+    },
+    "BUSINESS": {
+      "code": "BUSINESS",
+      "description": "Business"
+    },
+    "GOVERNMENT": {
+      "code": "GOVERNMENT",
+      "description": "Government Body"
+    },
+    "NONPROFIT": {
+      "code": "NONPROFIT",
+      "description": "Charity / Non-Profit"
+    },
+    "UNKNOWN": {
+      "code": "UNKNOWN",
+      "description": "Manual Review"
+    },
+    "ANY": {
+      "code": "ANY",
+      "description": "TEST_XYZ"
+    }
+  }
+}

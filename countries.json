@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 20,
+  "data": {
+    "AU": {
+      "code": "AU",
+      "name": "Australia",
+      "eUMember": false
+    },
+    "BE": {
+      "code": "BE",
+      "name": "Belgium",
+      "eUMember": true
+    },
+    "BR": {
+      "code": "BR",
+      "name": "Brazil",
+      "eUMember": false
+    },
+    "CA": {
+      "code": "CA",
+      "name": "Canada",
+      "eUMember": false
+    },
+    "CN": {
+      "code": "CN",
+      "name": "China",
+      "eUMember": false
+    },
+    "DE": {
+      "code": "DE",
+      "name": "Germany",
+      "eUMember": true
+    },
+    "ES": {
+      "code": "ES",
+      "name": "Spain",
+      "eUMember": true
+    },
+    "FR": {
+      "code": "FR",
+      "name": "France",
+      "eUMember": true
+    },
+    "GB": {
+      "code": "GB",
+      "name": "United Kingdom",
+      "eUMember": false
+    },
+    "IE": {
+      "code": "IE",
+      "name": "Ireland",
+      "eUMember": true
+    },
+    "IN": {
+      "code": "IN",
+      "name": "India",
+      "eUMember": false
+    },
+    "IT": {
+      "code": "IT",
+      "name": "Italy",
+      "eUMember": true
+    },
+    "JP": {
+      "code": "JP",
+      "name": "Japan",
+      "eUMember": false
+    },
+    "MX": {
+      "code": "MX",
+      "name": "Mexico",
+      "eUMember": false
+    },
+    "NL": {
+      "code": "NL",
+      "name": "Netherlands",
+      "eUMember": true
+    },
+    "PT": {
+      "code": "PT",
+      "name": "Portugal",
+      "eUMember": true
+    },
+    "SA": {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "eUMember": false
+    },
+    "SG": {
+      "code": "SG",
+      "name": "Singapore",
+      "eUMember": false
+    },
+    "ZA": {
+      "code": "ZA",
+      "name": "South Africa",
+      "eUMember": false
+    },
+    "US": {
+      "code": "US",
+      "name": "United States",
+      "eUMember": false
+    }
+  }
+}

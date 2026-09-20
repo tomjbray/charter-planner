@@ -1,0 +1,668 @@
+{
+  "schemaVersion": "1.0",
+  "sourceTable": "tblAircraftVat",
+  "recordCount": 110,
+  "aircraft": [
+    {
+      "aircraftType": "737 MAX 8",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "A321 NEO",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "AGUSTAWESTLAND 109 G",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AGUSTAWESTLAND 109A",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AGUSTAWESTLAND 109E",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AGUSTAWESTLAND 109S",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AGUSTAWESTLAND 109SP",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AgustaWestland 119",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AGUSTAWESTLAND 139",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "AGUSTAWESTLAND 169",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "AIRBUS A320-200",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "AIRBUS A321-200",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "Airbus H125",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AIRBUS H125",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AIRBUS H130",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AIRBUS H135",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "AIRBUS H145",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "ATR 72-200/500",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "ATR 72-600",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "ATR72-600",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BEECHCRAFT KING AIR",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BELL 206B JETRANGER",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "BELL 427",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "BELL 429",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "BOEING B737 MAX-8",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOEING B737-300",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOEING B737-300 VIP",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOEING B737-500 VIP",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOEING B737-800",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOEING B747-400F",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOMBARDIER CHALLENGE",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOMBARDIER GLOBAL 60",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOMBARDIER GLOBAL EX",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOMBARDIER LEARJET 4",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BOMBARDIER LEARJET 7",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "Bombardier Learjet 75",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BRITISH AEROSPACE AV",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BRITISH AEROSPACE JE",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BRITISH AEROSPACE JE 41",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "BRITISH AEROSPACE JETSTREAM 41",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA 406 CARAVAN I",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA 550 CITATION",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA 560XL CITATIO",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA 680 CITATION",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION BRAV",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION CJ1",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "CESSNA CITATION CJ1+",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "CESSNA CITATION CJ2",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "CESSNA CITATION CJ2+",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "CESSNA CITATION CJ3",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "CESSNA CITATION CJ3+",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION EXCE",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION II",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION III",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION LATI",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION M2",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "CESSNA CITATION MUST",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "CESSNA CITATION SOVE",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION X",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION XLS",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "CESSNA CITATION XLS+",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "DASSAULT FALCON 2000",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "DASSAULT FALCON 900E",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "DIAMOND DA42 TWINSTA",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "DIAMOND DA62",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "ECLIPSE 500",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "EMBRAER 135",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER 145",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER 170",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER 190",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER LEGACY 500",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER LEGACY 600",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER LEGACY 650",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER PHENOM 100",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "EMBRAER PHENOM 300",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EMBRAER PRAETOR 600",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EUROCOPTER AS350",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "EUROCOPTER AS350B EC",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EUROCOPTER AS350B2 E",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "EUROCOPTER AS355 TWI",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "EUROCOPTER AS355N TW",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "EUROCOPTER AS365 DAU",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "EUROCOPTER EC135",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "EUROCOPTER EC155B",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "FAIRCHILD SA-227 MET",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "GULFSTREAM G-IVSP",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "GULFSTREAM G280",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "GULFSTREAM G450",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "GULFSTREAM G550",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "GULFSTREAM G600",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "GULFSTREAM G650ER",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "HAWKER 800XP",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "HONDA HONDAJET ELITE",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "LEARJET 75",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "NEXTANT 400XT",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "PIAGGO AVANTI 2",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "PILATUS PC-12",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "PILATUS PC-24",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "PIPER M600",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "PIPER PA-31 NAVAJO C",
+      "aircraftCode": null,
+      "vatClassification": "STANDARD",
+      "vatBasis": "Standard"
+    },
+    {
+      "aircraftType": "RAYTHEON HAWKER 400X",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "RAYTHEON HAWKER 750",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "RAYTHEON HAWKER 800",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "RAYTHEON HAWKER 800X",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "RAYTHEON HAWKER 850X",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "SAAB 2000",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "SAAB 340",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "SIKORSKY S-76",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "SIKORSKY S-76C++",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    },
+    {
+      "aircraftType": "SIKORSKY S-92",
+      "aircraftCode": null,
+      "vatClassification": "ZERO",
+      "vatBasis": "Sch8 Grp8 Para 4a"
+    }
+  ],
+  "aircraftByCode": {}
+}

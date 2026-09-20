@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "recordCount": 3,
+  "data": {
+    "YES": {
+      "value": "YES"
+    },
+    "NO": {
+      "value": "NO"
+    },
+    "ANY": {
+      "value": "ANY"
+    }
+  }
+}
