@@ -231,6 +231,8 @@ function runVatTest()
     Rate: testRule?.rate,
     Priority: testRule?.rulePriority
 });
+
+  return testRule;
 }
 ``
 
