@@ -139,8 +139,10 @@ const testRule =
     });
 
 console.log(
-    "VAT TEST",
-    testRule
+    "VAT TEST RESULT:",
+    testRule?.ruleId,
+    testRule?.treatment,
+    testRule?.rate
 );
   
 }
