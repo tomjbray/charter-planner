@@ -125,25 +125,16 @@ async function loadVatRules() {
     console.log(
         `Loaded ${vatRulesData.ruleCount} VAT rules`
     );
+  runVatTest();
 
-  //  temp bit
-const testRule =
-    findMatchingRule({
-        entity: "BRU",
-        charterType: "PASSENGER",
-        customerType: "ANY",
-        customerLocation: "NON_EU",
-        vatRegistered: "ANY",
-        originTerritory: "BE",
-        destinationTerritory: "NON_EU"
-    });
 
-console.log(
-    "VAT TEST RESULT:",
-    testRule?.ruleId,
-    testRule?.treatment,
-    testRule?.rate
-);
+
+console.table({
+    RuleID: testRule?.ruleId,
+    Treatment: testRule?.treatment,
+    Rate: testRule?.rate,
+    Priority: testRule?.rulePriority
+});
   
 }
 
@@ -225,7 +216,28 @@ function findMatchingRule(
 
     );
 }
+  //  test function
+function runVatTest()
+{
+    const testRule =
+        findMatchingRule({
+            entity: "BRU",
+            charterType: "PASSENGER",
+            customerType: "ANY",
+            customerLocation: "ANY",
+            vatRegistered: "ANY",
+            originTerritory: "BE",
+            destinationTerritory: "BE"
+        });
 
+    console.log(
+        "VAT TEST RESULT:",
+        testRule?.ruleId,
+        testRule?.treatment,
+        testRule?.rate
+    );
+}
+``
 
 
 // ── Airport lookup ───────────────────────────────────────────
