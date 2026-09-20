@@ -129,12 +129,7 @@ async function loadVatRules() {
 
 
 
-console.table({
-    RuleID: testRule?.ruleId,
-    Treatment: testRule?.treatment,
-    Rate: testRule?.rate,
-    Priority: testRule?.rulePriority
-});
+
   
 }
 
@@ -230,12 +225,12 @@ function runVatTest()
             destinationTerritory: "BE"
         });
 
-    console.log(
-        "VAT TEST RESULT:",
-        testRule?.ruleId,
-        testRule?.treatment,
-        testRule?.rate
-    );
+  console.table({
+    RuleID: testRule?.ruleId,
+    Treatment: testRule?.treatment,
+    Rate: testRule?.rate,
+    Priority: testRule?.rulePriority
+});
 }
 ``
 
