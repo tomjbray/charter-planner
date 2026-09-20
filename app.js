@@ -20,6 +20,8 @@ let minYear = null;   // null = no filter
 
 let routeLayers = [];   // Leaflet layers for the drawn route
 
+let vatRulesData = null;
+
 // ── Load data files ─────────────────────────────────────────
 
 async function loadData() {
@@ -59,6 +61,11 @@ async function loadData() {
 
     // Load registry in background — doesn't block airport lookup
     loadRegistry(aptCount, acCount);
+
+    // Load VAT rules
+    await loadVatRules();
+
+    
 
   } catch(e) {
     document.getElementById('dbStatus').textContent = '⚠ Data load failed: ' + e.message;
@@ -107,6 +114,117 @@ async function loadRegistry(aptCount, acCount) {
     statusEl2.classList.add('ready');
   }
 }
+
+// -- VAT files lookup
+
+async function loadVatRules() {
+    const response =
+        await fetch("vat_rules.json");
+    vatRulesData =
+        await response.json();
+    console.log(
+        `Loaded ${vatRulesData.ruleCount} VAT rules`
+    );
+
+  //  temp bit
+const testRule =
+    findMatchingRule({
+        entity: "BRU",
+        charterType: "PASSENGER",
+        customerType: "ANY",
+        customerLocation: "ANY",
+        vatRegistered: "ANY",
+        originTerritory: "BE",
+        destinationTerritory: "BE"
+    });
+
+console.log(
+    "VAT TEST",
+    testRule
+);
+  
+}
+
+function valueMatches(
+    ruleValue,
+    inputValue
+) {
+
+    if (
+        !ruleValue ||
+        ruleValue === "ANY"
+    ) {
+        return true;
+    }
+
+    return ruleValue === inputValue;
+}
+
+function findMatchingRule(
+    transaction
+) {
+
+    if (
+        !vatRulesData ||
+        !vatRulesData.rules
+    ) {
+        return null;
+    }
+
+    return vatRulesData.rules.find(
+        rule =>
+
+            valueMatches(
+                rule.entity,
+                transaction.entity
+            )
+
+            &&
+
+            valueMatches(
+                rule.charterType,
+                transaction.charterType
+            )
+
+            &&
+
+            valueMatches(
+                rule.customerType,
+                transaction.customerType
+            )
+
+            &&
+
+            valueMatches(
+                rule.customerLocation,
+                transaction.customerLocation
+            )
+
+            &&
+
+            valueMatches(
+                rule.vatRegistered,
+                transaction.vatRegistered
+            )
+
+            &&
+
+            valueMatches(
+                rule.originTerritory,
+                transaction.originTerritory
+            )
+
+            &&
+
+            valueMatches(
+                rule.destinationTerritory,
+                transaction.destinationTerritory
+            )
+
+    );
+}
+
+
 
 // ── Airport lookup ───────────────────────────────────────────
 
