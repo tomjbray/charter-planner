@@ -270,6 +270,8 @@ console.table({
             destinationTerritory: sector.destination.country
         });
 
+  displayVatRule(testRule);
+
   console.table({
     RuleID: testRule?.ruleId,
     Treatment: testRule?.treatment,
