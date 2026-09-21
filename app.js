@@ -215,8 +215,9 @@ function findMatchingRule(
 
 function displayVatRule(rule) {
 
-    console.log(
-    document.getElementById("vatRuleId")
+console.log(
+    "displayVatRule called",
+    rule
 );
 
 
