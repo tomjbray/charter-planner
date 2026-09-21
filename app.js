@@ -242,8 +242,6 @@ function runVatTest()
 
 function buildItinerary() {
 
-  console.log("buildItinerary called");  //this line is temporary
-
     if (!origAirport || !destAirport) {
         itinerary = [];
         return itinerary;
@@ -1075,13 +1073,7 @@ function updateUI() {
     document.getElementById('summaryRwy').textContent  = '—';  // updated after matching
 
     plotRoute(origAirport, destAirport);
-  }
-console.log(
-    "updateUI",
-    origAirport,
-    destAirport
-);
-  
+  } 
 }
 
 // ── Event listeners ──────────────────────────────────────────
