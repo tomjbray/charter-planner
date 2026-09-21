@@ -257,10 +257,13 @@ function buildItinerary() {
         }
     ];
 
-    console.log(
-        "Current itinerary",
-        itinerary
-    );
+console.table(
+    itinerary.map(s => ({
+        Sector: s.sectorNumber,
+        Origin: s.origin.iata,
+        Destination: s.destination.iata
+    }))
+);
 
     return itinerary;
 }
@@ -1073,6 +1076,12 @@ function updateUI() {
 
     plotRoute(origAirport, destAirport);
   }
+console.log(
+    "updateUI",
+    origAirport,
+    destAirport
+);
+  
 }
 
 // ── Event listeners ──────────────────────────────────────────
