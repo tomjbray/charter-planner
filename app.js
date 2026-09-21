@@ -242,6 +242,8 @@ function runVatTest()
 
 function buildItinerary() {
 
+  console.log("buildItinerary called");  //this line is temporary
+
     if (!origAirport || !destAirport) {
         itinerary = [];
         return itinerary;
