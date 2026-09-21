@@ -306,6 +306,33 @@ header::after {
   color: var(--text-muted);
 }
 
+/* ── VAT ── */
+
+.vat-panel {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.vat-panel h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.vat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.vat-row:last-child {
+    border-bottom: none;
+}
+
+
 /* ── Route summary ── */
 .route-summary { margin-top: 2px; }
 .summary-grid {
