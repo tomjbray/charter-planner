@@ -233,6 +233,11 @@ function displayVatRule(rule) {
 
     document.getElementById("vatPriority").textContent =
         rule?.rulePriority || "-";
+
+console.log(
+    "VAT PANEL VALUE",
+    document.getElementById("vatRuleId").textContent
+  );
 }
 
   //  test function
