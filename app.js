@@ -14,6 +14,7 @@ let regLoaded = false;
 
 let origAirport = null;
 let destAirport = null;
+let itinerary = [];
 let paxCount    = 8;
 let includeSingleEngine = true;
 let minYear = null;   // null = no filter
@@ -236,6 +237,31 @@ function runVatTest()
 }
 ``
 
+
+// ── Build Itinerary ────
+
+function buildItinerary() {
+
+    if (!origAirport || !destAirport) {
+        itinerary = [];
+        return itinerary;
+    }
+
+    itinerary = [
+        {
+            sectorNumber: 1,
+            origin: origAirport,
+            destination: destAirport
+        }
+    ];
+
+    console.log(
+        "Current itinerary",
+        itinerary
+    );
+
+    return itinerary;
+}
 
 // ── Airport lookup ───────────────────────────────────────────
 
@@ -1029,6 +1055,9 @@ function updateUI() {
   document.getElementById('trackBtn').disabled = !ready;
 
   if (ready) {
+
+    buildItinerary();
+    
     const distNm = haversineNm(origAirport.lat, origAirport.lon, destAirport.lat, destAirport.lon);
     const distKm = distNm * 1.852;
 
