@@ -233,6 +233,11 @@ function displayVatRule(rule) {
   //  test function
 function runVatTest()
 {
+if (!itinerary.length)
+  return;
+  
+const sector = itinerary[0];
+  
     const testRule =
         findMatchingRule({
             entity: "BRU",
