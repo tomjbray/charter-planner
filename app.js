@@ -212,6 +212,24 @@ function findMatchingRule(
 
     );
 }
+
+function displayVatRule(rule) {
+
+    document.getElementById("vatRuleId").textContent =
+        rule?.ruleId || "-";
+
+    document.getElementById("vatTreatment").textContent =
+        rule?.treatment || "-";
+
+    document.getElementById("vatRate").textContent =
+        rule
+            ? (rule.rate * 100).toFixed(2) + "%"
+            : "-";
+
+    document.getElementById("vatPriority").textContent =
+        rule?.rulePriority || "-";
+}
+
   //  test function
 function runVatTest()
 {
@@ -222,8 +240,8 @@ function runVatTest()
             customerType: "ANY",
             customerLocation: "ANY",
             vatRegistered: "ANY",
-            originTerritory: "BE",
-            destinationTerritory: "BE"
+            originTerritory: sector.origin.country,
+            destinationTerritory: sector.destination.country
         });
 
   console.table({
@@ -262,7 +280,8 @@ console.table(
         Destination: s.destination.iata
     }))
 );
-
+   runVatTest();
+  
     return itinerary;
 }
 
