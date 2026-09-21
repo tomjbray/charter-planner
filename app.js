@@ -215,6 +215,11 @@ function findMatchingRule(
 
 function displayVatRule(rule) {
 
+    console.log(
+    document.getElementById("vatRuleId")
+);
+
+
     document.getElementById("vatRuleId").textContent =
         rule?.ruleId || "-";
 
