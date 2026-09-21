@@ -237,6 +237,16 @@ if (!itinerary.length)
   return;
   
 const sector = itinerary[0];
+
+console.table({
+    Entity: "BRU",
+    CharterType: "PASSENGER",
+    CustomerType: "ANY",
+    CustomerLocation: "ANY",
+    VATRegistered: "ANY",
+    OriginTerritory: sector.origin.country,
+    DestinationTerritory: sector.destination.country
+});
   
     const testRule =
         findMatchingRule({
