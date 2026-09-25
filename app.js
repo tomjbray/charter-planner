@@ -64,6 +64,9 @@ async function loadData() {
     // Load registry in background — doesn't block airport lookup
     loadRegistry(aptCount, acCount);
 
+    // Load territories first
+    await loadTaxTerritories();
+    
     // Load VAT rules
     await loadVatRules();
 
@@ -88,7 +91,6 @@ async function loadTaxTerritories() {
     );
 }
 
-await loadTaxTerritories();
 
 function getTaxTerritory(
     countryCode
@@ -298,8 +300,30 @@ console.table({
     CustomerType: "ANY",
     CustomerLocation: "ANY",
     VATRegistered: "ANY",
-    OriginTerritory: sector.origin.country,
-    DestinationTerritory: sector.destination.country
+    originTerritory:
+    getTaxTerritory(
+        sector.origin.country
+    ),
+
+destinationTerritory:
+    getTaxTerritory(
+        sector.destination.country
+    )
+});
+  console.table({
+    Entity: "BRU",
+    CharterType: "PASSENGER",
+    CustomerType: "ANY",
+    CustomerLocation: "ANY",
+    VATRegistered: "ANY",
+    OriginTerritory:
+        getTaxTerritory(
+            sector.origin.country
+        ),
+    DestinationTerritory:
+        getTaxTerritory(
+            sector.destination.country
+        )
 });
   
     const testRule =
@@ -1285,16 +1309,4 @@ document.getElementById('trackBtn').addEventListener('click', () => {
 // ── Start ────────────────────────────────────────────────────
 loadData();
 
-console.log(
-    "Origin tax territory",
-    getTaxTerritory(
-        sector.origin.country
-    )
-);
 
-console.log(
-    "Destination tax territory",
-    getTaxTerritory(
-        sector.destination.country
-    )
-);
