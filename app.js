@@ -23,6 +23,7 @@ let routeLayers = [];   // Leaflet layers for the drawn route
 
 let vatRulesData = null;
 let taxTerritoriesData = null;
+let countriesData = null;
 
 // ── Load data files ─────────────────────────────────────────
 
@@ -64,11 +65,10 @@ async function loadData() {
     // Load registry in background — doesn't block airport lookup
     loadRegistry(aptCount, acCount);
 
-    // Load territories first
-    await loadTaxTerritories();
-    
-    // Load VAT rules
-    await loadVatRules();
+    // Load data file
+ await loadCountries();
+await loadTaxTerritories();
+await loadVatRules();
 
     
 
@@ -76,6 +76,19 @@ async function loadData() {
     document.getElementById('dbStatus').textContent = '⚠ Data load failed: ' + e.message;
     console.error(e);
   }
+}
+
+async function loadCountries() {
+
+    const response =
+        await fetch("countries.json");
+
+    countriesData =
+        await response.json();
+
+    console.log(
+        `Loaded ${countriesData.recordCount} countries`
+    );
 }
 
 async function loadTaxTerritories() {
@@ -91,6 +104,32 @@ async function loadTaxTerritories() {
     );
 }
 
+function getVatRegion(countryCode)
+{
+    if (
+        !countriesData ||
+        !countriesData.data
+    ) {
+        return countryCode;
+    }
+
+    const country =
+        countriesData.data[countryCode];
+
+    if (!country) {
+        return countryCode;
+    }
+
+    if (countryCode === "BE") {
+        return "BE";
+    }
+
+    if (country.euMember === true) {
+        return "EU";
+    }
+
+    return "NON_EU";
+}
 
 function getTaxTerritory(
     countryCode
@@ -301,12 +340,12 @@ console.table({
     CustomerLocation: "ANY",
     VATRegistered: "ANY",
     originTerritory:
-    getTaxTerritory(
+    getVatRegion(
         sector.origin.country
     ),
 
 destinationTerritory:
-    getTaxTerritory(
+    getVatRegion(
         sector.destination.country
     )
 });
