@@ -22,6 +22,7 @@ let minYear = null;   // null = no filter
 let routeLayers = [];   // Leaflet layers for the drawn route
 
 let vatRulesData = null;
+let taxTerritoriesData = null;
 
 // ── Load data files ─────────────────────────────────────────
 
@@ -74,6 +75,48 @@ async function loadData() {
   }
 }
 
+async function loadTaxTerritories() {
+
+    const response =
+        await fetch("tax_territories.json");
+
+    taxTerritoriesData =
+        await response.json();
+
+    console.log(
+        `Loaded ${taxTerritoriesData.recordCount} tax territories`
+    );
+}
+
+await loadTaxTerritories();
+
+function getTaxTerritory(
+    countryCode
+) {
+
+    if (
+        !taxTerritoriesData ||
+        !taxTerritoriesData.data
+    ) {
+        return countryCode;
+    }
+
+    const territories =
+        Object.entries(
+            taxTerritoriesData.data
+        );
+
+    for (const [territoryCode, territory] of territories) {
+
+        if (
+            territory.country === countryCode
+        ) {
+            return territoryCode;
+        }
+    }
+
+    return countryCode;
+}
 
 // ── Background registry loader ───────────────────────────────
 // Loads aircraft_registry.json after airports are ready
@@ -1241,3 +1284,17 @@ document.getElementById('trackBtn').addEventListener('click', () => {
 
 // ── Start ────────────────────────────────────────────────────
 loadData();
+
+console.log(
+    "Origin tax territory",
+    getTaxTerritory(
+        sector.origin.country
+    )
+);
+
+console.log(
+    "Destination tax territory",
+    getTaxTerritory(
+        sector.destination.country
+    )
+);
