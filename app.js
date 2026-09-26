@@ -40,6 +40,7 @@ let routeLayers = [];
 let trackingLayers = [];
 
 // VAT reference data
+let selectedEntity = "BRU";
 let vatRulesData = null;
 let taxTerritoriesData = null;
 let countriesData = null;
@@ -177,7 +178,10 @@ async function loadRegistry(aptCount, acCount) {
 // getTaxTerritory() is reserved for specific territory distinctions such as
 // ES_MAINLAND, ES_BALEARIC and ES_CANARY when airport-level mappings are added.
 
-function getVatRegion(countryCode) {
+function getVatRegion(
+          countryCode,
+          sellingCountry
+         ) {
   if (!countryCode) return null;
 
   const country = countriesData?.data?.[countryCode];
