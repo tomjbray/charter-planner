@@ -523,6 +523,8 @@ function runVatTest() {
     
   };
 
+  console.table(transaction);
+  
   const matchedRule = findMatchingRule(transaction);
   displayVatRule(matchedRule);
 
