@@ -60,9 +60,14 @@
     <section class='panel'>
       <div id="vatInputsPanel" class="vat-panel">
         <h3>VAT Inputs</h3>
-           <div class="field">
-              <label>Selling Entity</label>
-              <select id="sellingEntitySelect"></select>
+           <div class="vat-input-block">
+              <label
+                  class="vat-input-label"
+                  for="sellingEntitySelect">
+                Selling Entity
+              </label>
+              <select id="sellingEntitySelect"
+                class="Selling Entity"></select>
             </div>
 
             <div class="vat-row">
@@ -74,14 +79,26 @@
                 </select>
             </div>
 
-            <div class="vat-row">
-              <span>Customer Type</span>
+            <div class="vat-input-block">
 
-                <select id="customerTypeSelect">
-                    <option value="PRIVATE">Private</option>
-                    <option value="BUSINESS">Business</option>
-                </select>
-            </div>
+    <label
+        class="vat-input-label"
+        for="customerTypeSelect">
+
+        Customer Type
+
+    </label>
+
+    <select
+        id="customerTypeSelect"
+        class="vat-select">
+
+        <option value="PRIVATE">Private</option>
+        <option value="BUSINESS">Business</option>
+
+    </select>
+
+</div>
 
             <div class="vat-row">
                 <span>Customer Location</span>
