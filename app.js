@@ -213,13 +213,7 @@ function getRuleRegion(
 
   // Domestic country must always map to itself
   if (countryCode === homeCountry) {
-    console.log(
-        "VAT REGION RESULT",
-        selectedEntity,
-        homeCountry
-    );
-
-    return homeCountry;
+        return homeCountry;
 }
 
 
@@ -233,17 +227,8 @@ const euFlag =
 const isEuMember =
     euFlag === true ||
     String(euFlag).toUpperCase() === 'TRUE';
-
-
-//2nd temp bit
-  console.log(
-    "VAT REGION RESULT",
-    countryCode,
-    isEuMember ? "EU" : "NON_EU"
-);
-  //end of 2nd temp bit
-  
-  return isEuMember ? 'EU' : 'NON_EU';
+ 
+      return isEuMember ? 'EU' : 'NON_EU';
 
 
 }
@@ -263,14 +248,7 @@ function getTaxTerritory(countryCode) {
 }
 
 function getEntityCountry(entityCode) {
-//temp debugger
-  console.log(
-    "Entity lookup",
-    entityCode,
-    sellingEntitiesData?.data?.[entityCode]
-);
-  // end debugger
-  
+ 
     const entity =
         sellingEntitiesData?.data?.[entityCode];
 
@@ -406,20 +384,7 @@ function runVatTest() {
   const matchedRule = findMatchingRule(transaction);
   displayVatRule(matchedRule);
 
-  console.table({
-    Entity: transaction.entity,
-    CharterType: transaction.charterType,
-    CustomerType: transaction.customerType,
-    CustomerLocation: transaction.customerLocation,
-    VATRegistered: transaction.vatRegistered,
-    OriginTerritory: transaction.originTerritory,
-    DestinationTerritory: transaction.destinationTerritory,
-    RuleID: matchedRule?.ruleId,
-    Treatment: matchedRule?.treatment,
-    Rate: matchedRule?.rate,
-    Priority: matchedRule?.rulePriority,
-  });
-
+  
   return matchedRule;
 }
 
