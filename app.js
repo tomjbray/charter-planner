@@ -518,7 +518,7 @@ function runVatTest() {
     customerLocation: selectedCustomerLocation,
     vatRegistered: 
         selectedCustomerType === "BUSINESS"
-          ? "YES"v
+          ? "YES"
           : "NO",
     originTerritory:
       getRuleRegion(
