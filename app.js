@@ -98,7 +98,7 @@ async function loadData() {
     initialiseCharterTypeSelector();
     initialiseCustomerTypeSelector();
     initialiseCustomerLocationSelector();
-    initialiseVatRegisteredSelector();
+   // initialiseVatRegisteredSelector();
 
     // Re-run airport lookups if the user typed while data was loading.
     const originValue = document.getElementById('origInput').value;
@@ -352,10 +352,7 @@ function findMatchingRule(
                 )
         );
 
-    console.log(
-        "RULE MATCHES",
-        matches
-    );
+    
 
     return matches[0] || null;
 }
@@ -476,27 +473,27 @@ function initialiseCustomerLocationSelector() {
     );
 }
 
-function initialiseVatRegisteredSelector() {
-
-    const selector =
-        document.getElementById(
-            "vatRegisteredSelect"
-        );
-
-    selector.value =
-        selectedVatRegistered;
-
-    selector.addEventListener(
-        "change",
-        event => {
-
-            selectedVatRegistered =
-                event.target.value;
-
-            runVatTest();
-        }
-    );
-}
+//function initialiseVatRegisteredSelector() {
+//
+//    const selector =
+//        document.getElementById(
+//            "vatRegisteredSelect"
+//        );
+//
+//    selector.value =
+//        selectedVatRegistered;
+//
+//    selector.addEventListener(
+//        "change",
+//        event => {
+//
+//            selectedVatRegistered =
+//                event.target.value;
+//
+//            runVatTest();
+//        }
+//    );
+//}
 
 function runVatTest() {
   if (!itinerary.length || !vatRulesData) return null;
@@ -504,11 +501,7 @@ function runVatTest() {
   const sector = itinerary[0];
   
   const homeCountry = getEntityCountry(selectedEntity);
-  console.log(
-    "Home Country",
-    selectedEntity,
-    homeCountry
-);
+  
 
     
   const transaction = {
@@ -533,7 +526,6 @@ function runVatTest() {
     
   };
 
-  console.table(transaction);
   
   const matchedRule = findMatchingRule(transaction);
   displayVatRule(matchedRule);
