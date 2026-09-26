@@ -190,11 +190,8 @@ function getRuleRegion(
   // This avoids silently treating unknown data as non-EU.
   if (!country) return countryCode;
 
-  //Domestic country must always map to itself
-  if (countryCode === homeCountry) return homeCountry;
-
-    //temp bit
-if (countryCode === homeCountry) {
+  // Domestic country must always map to itself
+  if (countryCode === homeCountry) {
     console.log(
         "VAT REGION RESULT",
         countryCode,
@@ -203,6 +200,14 @@ if (countryCode === homeCountry) {
 
     return homeCountry;
 }
+//    console.log(
+//        "VAT REGION RESULT",
+//        countryCode,
+//        homeCountry
+//    );
+//
+//    return homeCountry;
+//}
 
   //end of temp bit
 
@@ -243,6 +248,17 @@ function getTaxTerritory(countryCode) {
   if (matchingTerritories.length !== 1) return countryCode;
 
   return matchingTerritories[0][0];
+}
+
+function getEntityCountry(entityCode) {
+
+    const entity =
+        sellingEntitiesData?.data?.[entityCode];
+
+    if (!entity)
+        return null;
+
+    return entity.country;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -340,6 +356,9 @@ function runVatTest() {
   if (!itinerary.length || !vatRulesData) return null;
 
   const sector = itinerary[0];
+  
+  const homeCountry = getEntityCountry(selectedEntity);
+  
   const transaction = {
     entity: 'BRU',
     charterType: 'PASSENGER',
