@@ -60,7 +60,8 @@
     <section class='panel'>
       <div id="vatInputsPanel" class="vat-panel">
         <h3>VAT Inputs</h3>
-           <div class="vat-input-block">
+           
+        <div class="vat-input-block">
               <label
                   class="vat-input-label"
                   for="sellingEntitySelect">
@@ -70,10 +71,14 @@
                 class="Selling Entity"></select>
             </div>
 
-            <div class="vat-row">
-              <span>Charter Type</span>
-
-                <select id="charterTypeSelect">
+            <div class="vat-input-block">
+              <label
+                class="vat-input-label"
+                for "charterTypeSelect"
+                Charter Type
+              </label>
+                <select id="charterTypeSelect"
+                  class="vat-select">
                   <option value="PASSENGER">Passenger</option>
                   <option value="CARGO">Cargo</option>
                 </select>
@@ -89,6 +94,7 @@
 
     </label>
 
+    
     <select
         id="customerTypeSelect"
         class="vat-select">
