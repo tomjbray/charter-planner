@@ -198,9 +198,13 @@ function getVatRegion(countryCode) {
   if (countryCode === 'BE') return 'BE';
 
   // Support both proper JSON booleans and text values from older exports.
-  const isEuMember =
-    country.euMember === true ||
-    String(country.euMember).toUpperCase() === 'TRUE';
+const euFlag =
+    country.eUMember ?? country.euMember;
+
+const isEuMember =
+    euFlag === true ||
+    String(euFlag).toUpperCase() === 'TRUE';
+
 
 //2nd temp bit
   console.log(
