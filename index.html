@@ -56,55 +56,60 @@
       </div>
     </section>
 
+    <!--VAT input panel -->
+    <section class='panel'>
+      <div id="vatPanel" class="vat-panel">
+        <h3>VAT Criteria Input</h3>
+           <div class="field">
+              <label>Selling Entity</label>
+              <select id="sellingEntitySelect"></select>
+            </div>
 
+            <div class="vat-row">
+              <span>Charter Type</span>
 
+                <select id="charterTypeSelect">
+                  <option value="PASSENGER">Passenger</option>
+                  <option value="CARGO">Cargo</option>
+                </select>
+            </div>
+
+            <div class="vat-row">
+              <span>Customer Type</span>
+
+                <select id="customerTypeSelect">
+                    <option value="PRIVATE">Private</option>
+                    <option value="BUSINESS">Business</option>
+                </select>
+            </div>
+
+            <div class="vat-row">
+                <span>Customer Location</span>
+
+                  <select id="customerLocationSelect">
+                    <option value="BE">Belgium</option>
+                    <option value="EU">European Union</option>
+                    <option value="NON_EU">Outside EU</option>
+                  </select>
+            </div>
+
+            <div class="vat-row">
+                <span>VAT Registered</span>
+
+                  <select id="vatRegisteredSelect">
+                      <option value="YES">Yes</option>
+                      <option value="NO">No</option>
+                  </select>
+            </div>
+      </div>
+    </section>
     
     <!--VAT panel -->
     <section class='panel'>
       <div id="vatPanel" class="vat-panel">
         <h3>VAT Rule Match</h3>
 
-        <div class="field">
-            <label>Selling Entity</label>
-            <select id="sellingEntitySelect"></select>
-        </div>
-
-        <div class="vat-row">
-          <span>Charter Type</span>
-
-            <select id="charterTypeSelect">
-              <option value="PASSENGER">Passenger</option>
-              <option value="CARGO">Cargo</option>
-            </select>
-        </div>
-
-        <div class="vat-row">
-          <span>Customer Type</span>
-
-            <select id="customerTypeSelect">
-                <option value="PRIVATE">Private</option>
-                <option value="BUSINESS">Business</option>
-            </select>
-        </div>
-
-    <div class="vat-row">
-        <span>Customer Location</span>
-
-          <select id="customerLocationSelect">
-            <option value="BE">Belgium</option>
-            <option value="EU">European Union</option>
-            <option value="NON_EU">Outside EU</option>
-          </select>
-    </div>
-
-    <div class="vat-row">
-        <span>VAT Registered</span>
-
-          <select id="vatRegisteredSelect">
-              <option value="YES">Yes</option>
-              <option value="NO">No</option>
-          </select>
-    </div>
+       
         
         <div class="vat-row">
             <span>Rule ID</span>
