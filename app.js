@@ -44,7 +44,7 @@ let selectedEntity = "BRU";
 let selectedCharterType = "PASSENGER";
 let selectedCustomerType = "PRIVATE";
 let selectedCustomerLocation = "BE";
-let selectedVatRegistered = "YES";
+let selectedVatRegistered = "NO";
 let sellingEntitiesData = null;
 let vatRulesData = null;
 let taxTerritoriesData = null;
@@ -96,6 +96,9 @@ async function loadData() {
 
     populateSellingEntityDropdown();
     initialiseCharterTypeSelector();
+    initialiseCustomerTypeSelector();
+    initialiseCustomerLocationSelector();
+    initialiseVatRegisteredSelector();
 
     // Re-run airport lookups if the user typed while data was loading.
     const originValue = document.getElementById('origInput').value;
@@ -415,6 +418,72 @@ function initialiseCharterTypeSelector() {
         event => {
 
             selectedCharterType =
+                event.target.value;
+
+            runVatTest();
+        }
+    );
+}
+
+function initialiseCustomerTypeSelector() {
+
+    const selector =
+        document.getElementById(
+            "customerTypeSelect"
+        );
+
+    selector.value =
+        selectedCustomerType;
+
+    selector.addEventListener(
+        "change",
+        event => {
+
+            selectedCustomerType =
+                event.target.value;
+
+            runVatTest();
+        }
+    );
+}
+
+function initialiseCustomerLocationSelector() {
+
+    const selector =
+        document.getElementById(
+            "customerLocationSelect"
+        );
+
+    selector.value =
+        selectedCustomerLocation;
+
+    selector.addEventListener(
+        "change",
+        event => {
+
+            selectedCustomerLocation =
+                event.target.value;
+
+            runVatTest();
+        }
+    );
+}
+
+function initialiseVatRegisteredSelector() {
+
+    const selector =
+        document.getElementById(
+            "vatRegisteredSelect"
+        );
+
+    selector.value =
+        selectedVatRegistered;
+
+    selector.addEventListener(
+        "change",
+        event => {
+
+            selectedVatRegistered =
                 event.target.value;
 
             runVatTest();
