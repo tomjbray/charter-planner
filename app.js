@@ -87,6 +87,7 @@ async function loadData() {
       loadCountries(),
       loadTaxTerritories(),
       loadVatRules(),
+      loadSellingEntities()
     ]);
 
     // Re-run airport lookups if the user typed while data was loading.
@@ -116,6 +117,25 @@ async function loadCountries() {
 
   countriesData = await response.json();
   console.log(`Loaded ${countriesData.recordCount} countries`);
+}
+
+async function loadSellingEntities() {
+    const response =
+        await fetch('./selling_entities.json');
+
+    if (!response.ok) {
+        throw new Error(
+            'selling_entities.json: HTTP ' +
+            response.status
+        );
+    }
+
+    sellingEntitiesData =
+        await response.json();
+
+    console.log(
+        `Loaded ${sellingEntitiesData.recordCount} selling entities`
+    );
 }
 
 async function loadTaxTerritories() {
@@ -252,7 +272,14 @@ function getTaxTerritory(countryCode) {
 }
 
 function getEntityCountry(entityCode) {
-
+//temp debugger
+  console.log(
+    "Entity lookup",
+    entityCode,
+    sellingEntitiesData?.data?.[entityCode]
+);
+  // end debugger
+  
     const entity =
         sellingEntitiesData?.data?.[entityCode];
 
@@ -359,7 +386,8 @@ function runVatTest() {
   const sector = itinerary[0];
   
   const homeCountry = getEntityCountry(selectedEntity);
-  
+  //const homeCountry = "BE";
+    
   const transaction = {
     entity: 'BRU',
     charterType: 'PASSENGER',
