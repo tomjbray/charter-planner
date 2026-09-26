@@ -221,16 +221,7 @@ function getRuleRegion(
 
     return homeCountry;
 }
-//    console.log(
-//        "VAT REGION RESULT",
-//        countryCode,
-//        homeCountry
-//    );
-//
-//    return homeCountry;
-//}
 
-  //end of temp bit
 
   // Belgium must remain distinct because the BRU rule matrix uses BE explicitly.
   //if (countryCode === 'BE') return 'BE';
@@ -386,10 +377,15 @@ function runVatTest() {
   const sector = itinerary[0];
   
   const homeCountry = getEntityCountry(selectedEntity);
-  //const homeCountry = "BE";
+  console.log(
+    "Home Country",
+    selectedEntity,
+    homeCountry
+);
+
     
   const transaction = {
-    entity: 'BRU',
+    entity: selectedEntity,
     charterType: 'PASSENGER',
     customerType: 'ANY',
     customerLocation: 'ANY',
