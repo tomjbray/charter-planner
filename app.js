@@ -41,7 +41,7 @@ let trackingLayers = [];
 
 // VAT reference data
 let selectedEntity = "BRU";
-let sellingEntitiesDatas = null;
+let sellingEntitiesData = null;
 let vatRulesData = null;
 let taxTerritoriesData = null;
 let countriesData = null;
