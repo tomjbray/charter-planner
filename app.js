@@ -186,6 +186,14 @@ function getVatRegion(countryCode) {
   // This avoids silently treating unknown data as non-EU.
   if (!country) return countryCode;
 
+    //temp bit
+  console.log(
+    "Country data",
+    countryCode,
+    country
+);
+  //end of temp bit
+
   // Belgium must remain distinct because the BRU rule matrix uses BE explicitly.
   if (countryCode === 'BE') return 'BE';
 
@@ -196,13 +204,7 @@ function getVatRegion(countryCode) {
 
   return isEuMember ? 'EU' : 'NON_EU';
 
-  //temp bit
-  console.log(
-    "Country data",
-    countryCode,
-    country
-);
-  //end of temp bit
+
 }
 
 function getTaxTerritory(countryCode) {
