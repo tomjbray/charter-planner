@@ -1,167 +1,136 @@
 // ═══════════════════════════════════════════════════════════
 //  Charter Route Planner — app.js
-//  Loads airports + aircraft data, plots routes, ranks aircraft
+//
+//  Main responsibilities:
+//  1. Load airport, aircraft, registry and VAT reference data.
+//  2. Build the itinerary used by both route planning and VAT.
+//  3. Plot routes and calculate distance.
+//  4. Rank suitable aircraft and show supporting information.
+//  5. Match each itinerary sector to the appropriate VAT rule.
 // ═══════════════════════════════════════════════════════════
 
-// ── State ───────────────────────────────────────────────────
-let AIRPORTS  = {};
-let AIRCRAFT  = {};
-let REGISTRY  = {};          // aircraft_registry.json — keyed by N-number
-let REGISTRY_BY_TYPE = {};   // pre-grouped by type_code for fast lookup
-let dbLoaded  = false;
-let acLoaded  = false;
+// ═══════════════════════════════════════════════════════════
+//  1. APPLICATION STATE
+// ═══════════════════════════════════════════════════════════
+
+// Core reference data
+let AIRPORTS = {};
+let AIRCRAFT = {};
+let REGISTRY = {};
+let REGISTRY_BY_TYPE = {};
+
+// Data-loading flags
+let dbLoaded = false;
+let acLoaded = false;
 let regLoaded = false;
 
+// Current route and itinerary
 let origAirport = null;
 let destAirport = null;
 let itinerary = [];
-let paxCount    = 8;
+
+// Aircraft search inputs
+let paxCount = 8;
 let includeSingleEngine = true;
-let minYear = null;   // null = no filter
+let minYear = null;
+let activeFilter = 'all';
 
-let routeLayers = [];   // Leaflet layers for the drawn route
+// Map and tracking layers
+let routeLayers = [];
+let trackingLayers = [];
 
+// VAT reference data
 let vatRulesData = null;
 let taxTerritoriesData = null;
 let countriesData = null;
 
-// ── Load data files ─────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  2. DATA LOADING
+// ═══════════════════════════════════════════════════════════
 
 async function loadData() {
-  document.getElementById('dbStatus').classList.add('loading');
+  const statusEl = document.getElementById('dbStatus');
+  statusEl.classList.add('loading');
+
   try {
-    // Load airports and aircraft types first — these are needed immediately
+    // Core planner data is needed immediately for airport and aircraft searches.
     const [aptRes, acRes] = await Promise.all([
       fetch('./airports.json'),
       fetch('./aircraft_types.json'),
     ]);
 
     if (!aptRes.ok) throw new Error('airports.json: HTTP ' + aptRes.status);
-    if (!acRes.ok)  throw new Error('aircraft_types.json: HTTP ' + acRes.status);
+    if (!acRes.ok) throw new Error('aircraft_types.json: HTTP ' + acRes.status);
 
     AIRPORTS = await aptRes.json();
     const acData = await acRes.json();
 
-    // Remove the _metadata entry — it's not an aircraft
+    // Remove the metadata entry because it is not an aircraft type.
     AIRCRAFT = Object.fromEntries(
-      Object.entries(acData).filter(([k]) => k !== '_metadata')
+      Object.entries(acData).filter(([key]) => key !== '_metadata')
     );
 
     dbLoaded = true;
     acLoaded = true;
 
     const aptCount = Object.keys(AIRPORTS).length;
-    const acCount  = Object.keys(AIRCRAFT).length;
-    document.getElementById('dbStatus').textContent =
-      aptCount.toLocaleString() + ' airports · ' + acCount + ' aircraft types · Loading registry…';
-    document.getElementById('dbStatus').classList.add('loading');
+    const acCount = Object.keys(AIRCRAFT).length;
 
-    // Re-run any lookups the user may have typed before data finished loading
-    const ov = document.getElementById('origInput').value;
-    const dv = document.getElementById('destInput').value;
-    if (ov.length === 3) lookupAirport(ov, document.getElementById('origInfo'), true);
-    if (dv.length === 3) lookupAirport(dv, document.getElementById('destInfo'), false);
+    statusEl.textContent =
+      aptCount.toLocaleString() + ' airports · ' +
+      acCount + ' aircraft types · Loading registry…';
 
-    // Load registry in background — doesn't block airport lookup
+    // Load VAT reference data before any route can be evaluated for VAT.
+    await Promise.all([
+      loadCountries(),
+      loadTaxTerritories(),
+      loadVatRules(),
+    ]);
+
+    // Re-run airport lookups if the user typed while data was loading.
+    const originValue = document.getElementById('origInput').value;
+    const destinationValue = document.getElementById('destInput').value;
+
+    if (originValue.length === 3) {
+      lookupAirport(originValue, document.getElementById('origInfo'), true);
+    }
+
+    if (destinationValue.length === 3) {
+      lookupAirport(destinationValue, document.getElementById('destInfo'), false);
+    }
+
+    // Registry loading is non-blocking because it is not needed for route entry.
     loadRegistry(aptCount, acCount);
 
-    // Load data file
- await loadCountries();
-await loadTaxTerritories();
-await loadVatRules();
-
-    
-
-  } catch(e) {
-    document.getElementById('dbStatus').textContent = '⚠ Data load failed: ' + e.message;
-    console.error(e);
+  } catch (error) {
+    statusEl.textContent = '⚠ Data load failed: ' + error.message;
+    console.error(error);
   }
 }
 
 async function loadCountries() {
+  const response = await fetch('./countries.json');
+  if (!response.ok) throw new Error('countries.json: HTTP ' + response.status);
 
-    const response =
-        await fetch("countries.json");
-
-    countriesData =
-        await response.json();
-
-    console.log(
-        `Loaded ${countriesData.recordCount} countries`
-    );
+  countriesData = await response.json();
+  console.log(`Loaded ${countriesData.recordCount} countries`);
 }
 
 async function loadTaxTerritories() {
+  const response = await fetch('./tax_territories.json');
+  if (!response.ok) throw new Error('tax_territories.json: HTTP ' + response.status);
 
-    const response =
-        await fetch("tax_territories.json");
-
-    taxTerritoriesData =
-        await response.json();
-
-    console.log(
-        `Loaded ${taxTerritoriesData.recordCount} tax territories`
-    );
+  taxTerritoriesData = await response.json();
+  console.log(`Loaded ${taxTerritoriesData.recordCount} tax territories`);
 }
 
-function getVatRegion(countryCode)
-{
-    if (
-        !countriesData ||
-        !countriesData.data
-    ) {
-        return countryCode;
-    }
+async function loadVatRules() {
+  const response = await fetch('./vat_rules.json');
+  if (!response.ok) throw new Error('vat_rules.json: HTTP ' + response.status);
 
-    const country =
-        countriesData.data[countryCode];
-
-    if (!country) {
-        return countryCode;
-    }
-
-    if (countryCode === "BE") {
-        return "BE";
-    }
-
-    if (country.euMember === true) {
-        return "EU";
-    }
-
-    return "NON_EU";
+  vatRulesData = await response.json();
+  console.log(`Loaded ${vatRulesData.ruleCount} VAT rules`);
 }
-
-function getTaxTerritory(
-    countryCode
-) {
-
-    if (
-        !taxTerritoriesData ||
-        !taxTerritoriesData.data
-    ) {
-        return countryCode;
-    }
-
-    const territories =
-        Object.entries(
-            taxTerritoriesData.data
-        );
-
-    for (const [territoryCode, territory] of territories) {
-
-        if (
-            territory.country === countryCode
-        ) {
-            return territoryCode;
-        }
-    }
-
-    return countryCode;
-}
-
-// ── Background registry loader ───────────────────────────────
-// Loads aircraft_registry.json after airports are ready
-// so the airport lookup boxes are not blocked
 
 async function loadRegistry(aptCount, acCount) {
   try {
@@ -200,23 +169,51 @@ async function loadRegistry(aptCount, acCount) {
   }
 }
 
-// -- VAT files lookup
+// ═══════════════════════════════════════════════════════════
+//  3. VAT REGION AND TERRITORY CLASSIFICATION
+// ═══════════════════════════════════════════════════════════
 
-async function loadVatRules() {
-    const response =
-        await fetch("vat_rules.json");
-    vatRulesData =
-        await response.json();
-    console.log(
-        `Loaded ${vatRulesData.ruleCount} VAT rules`
-    );
-  runVatTest();
+// getVatRegion() provides the broad region used by the current BRU matrix.
+// getTaxTerritory() is reserved for specific territory distinctions such as
+// ES_MAINLAND, ES_BALEARIC and ES_CANARY when airport-level mappings are added.
 
+function getVatRegion(countryCode) {
+  if (!countryCode) return null;
 
+  const country = countriesData?.data?.[countryCode];
 
+  // If a country is not yet in the reference file, preserve its country code.
+  // This avoids silently treating unknown data as non-EU.
+  if (!country) return countryCode;
 
-  
+  // Belgium must remain distinct because the BRU rule matrix uses BE explicitly.
+  if (countryCode === 'BE') return 'BE';
+
+  // Support both proper JSON booleans and text values from older exports.
+  const isEuMember =
+    country.euMember === true ||
+    String(country.euMember).toUpperCase() === 'TRUE';
+
+  return isEuMember ? 'EU' : 'NON_EU';
 }
+
+function getTaxTerritory(countryCode) {
+  if (!countryCode || !taxTerritoriesData?.data) return countryCode;
+
+  const matchingTerritories = Object.entries(taxTerritoriesData.data)
+    .filter(([, territory]) => territory.country === countryCode);
+
+  // A country can have several tax territories, such as mainland Spain,
+  // the Balearic Islands and the Canary Islands. Country alone is therefore
+  // insufficient to choose safely when more than one territory exists.
+  if (matchingTerritories.length !== 1) return countryCode;
+
+  return matchingTerritories[0][0];
+}
+
+// ═══════════════════════════════════════════════════════════
+//  4. VAT RULE MATCHING AND DISPLAY
+// ═══════════════════════════════════════════════════════════
 
 function valueMatches(
     ruleValue,
@@ -298,128 +295,83 @@ function findMatchingRule(
 }
 
 function displayVatRule(rule) {
-
-console.log(
-    "displayVatRule called",
-    rule
-);
-
-
-    document.getElementById("vatRuleId").textContent =
-        rule?.ruleId || "-";
-
-    document.getElementById("vatTreatment").textContent =
-        rule?.treatment || "-";
-
-    document.getElementById("vatRate").textContent =
-        rule
-            ? (rule.rate * 100).toFixed(2) + "%"
-            : "-";
-
-    document.getElementById("vatPriority").textContent =
-        rule?.rulePriority || "-";
-
-console.log(
-    "VAT PANEL VALUE",
-    document.getElementById("vatRuleId").textContent
-  );
+  document.getElementById('vatRuleId').textContent = rule?.ruleId || '-';
+  document.getElementById('vatTreatment').textContent = rule?.treatment || '-';
+  document.getElementById('vatRate').textContent =
+    rule ? (rule.rate * 100).toFixed(2) + '%' : '-';
+  document.getElementById('vatPriority').textContent = rule?.rulePriority ?? '-';
 }
 
-  //  test function
-function runVatTest()
-{
-if (!itinerary.length)
-  return;
-  
-const sector = itinerary[0];
+function runVatTest() {
+  if (!itinerary.length || !vatRulesData) return null;
 
-console.table({
-    Entity: "BRU",
-    CharterType: "PASSENGER",
-    CustomerType: "ANY",
-    CustomerLocation: "ANY",
-    VATRegistered: "ANY",
-    originTerritory:
-    getVatRegion(
-        sector.origin.country
-    ),
+  const sector = itinerary[0];
+  const transaction = {
+    entity: 'BRU',
+    charterType: 'PASSENGER',
+    customerType: 'ANY',
+    customerLocation: 'ANY',
+    vatRegistered: 'ANY',
+    originTerritory: getVatRegion(sector.origin.country),
+    destinationTerritory: getVatRegion(sector.destination.country),
+  };
 
-destinationTerritory:
-    getVatRegion(
-        sector.destination.country
-    )
-});
-  console.table({
-    Entity: "BRU",
-    CharterType: "PASSENGER",
-    CustomerType: "ANY",
-    CustomerLocation: "ANY",
-    VATRegistered: "ANY",
-    OriginTerritory:
-        getTaxTerritory(
-            sector.origin.country
-        ),
-    DestinationTerritory:
-        getTaxTerritory(
-            sector.destination.country
-        )
-});
-  
-    const testRule =
-        findMatchingRule({
-            entity: "BRU",
-            charterType: "PASSENGER",
-            customerType: "ANY",
-            customerLocation: "ANY",
-            vatRegistered: "ANY",
-            originTerritory: sector.origin.country,
-            destinationTerritory: sector.destination.country
-        });
-
-  displayVatRule(testRule);
+  const matchedRule = findMatchingRule(transaction);
+  displayVatRule(matchedRule);
 
   console.table({
-    RuleID: testRule?.ruleId,
-    Treatment: testRule?.treatment,
-    Rate: testRule?.rate,
-    Priority: testRule?.rulePriority
-});
+    Entity: transaction.entity,
+    CharterType: transaction.charterType,
+    CustomerType: transaction.customerType,
+    CustomerLocation: transaction.customerLocation,
+    VATRegistered: transaction.vatRegistered,
+    OriginTerritory: transaction.originTerritory,
+    DestinationTerritory: transaction.destinationTerritory,
+    RuleID: matchedRule?.ruleId,
+    Treatment: matchedRule?.treatment,
+    Rate: matchedRule?.rate,
+    Priority: matchedRule?.rulePriority,
+  });
 
-  return testRule;
+  return matchedRule;
 }
-``
 
-
-// ── Build Itinerary ────
+// ═══════════════════════════════════════════════════════════
+//  5. ITINERARY
+// ═══════════════════════════════════════════════════════════
 
 function buildItinerary() {
-
-    if (!origAirport || !destAirport) {
-        itinerary = [];
-        return itinerary;
-    }
-
-    itinerary = [
-        {
-            sectorNumber: 1,
-            origin: origAirport,
-            destination: destAirport
-        }
-    ];
-
-console.table(
-    itinerary.map(s => ({
-        Sector: s.sectorNumber,
-        Origin: s.origin.iata,
-        Destination: s.destination.iata
-    }))
-);
-   runVatTest();
-  
+  if (!origAirport || !destAirport) {
+    itinerary = [];
+    displayVatRule(null);
     return itinerary;
+  }
+
+  // The current UI supplies one sector. Future additional sectors will be
+  // appended to this array without changing the VAT engine's sector model.
+  itinerary = [
+    {
+      sectorNumber: 1,
+      origin: origAirport,
+      destination: destAirport,
+    },
+  ];
+
+  console.table(
+    itinerary.map(sector => ({
+      Sector: sector.sectorNumber,
+      Origin: sector.origin.iata,
+      Destination: sector.destination.iata,
+    }))
+  );
+
+  runVatTest();
+  return itinerary;
 }
 
-// ── Airport lookup ───────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  6. AIRPORT LOOKUP
+// ═══════════════════════════════════════════════════════════
 
 function getAirport(iata) {
   const d = AIRPORTS[iata.toUpperCase().trim()];
@@ -481,7 +433,9 @@ function lookupAirport(iata, infoEl, isOrigin) {
   updateUI();
 }
 
-// ── Map setup ────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  7. MAP SETUP AND ROUTE DRAWING
+// ═══════════════════════════════════════════════════════════
 
 const map = L.map('map', {
   center: [30, 10],
@@ -584,7 +538,9 @@ function splitAtAntimeridian(points) {
   return segments;
 }
 
-// ── Distance calculation ─────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  8. DISTANCE CALCULATION
+// ═══════════════════════════════════════════════════════════
 
 function haversineNm(lat1, lon1, lat2, lon2) {
   const R = 3440.065;   // Earth radius in nautical miles
@@ -596,7 +552,9 @@ function haversineNm(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.asin(Math.sqrt(a));
 }
 
-// ── Aircraft matching ────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  9. AIRCRAFT MATCHING AND SCORING
+// ═══════════════════════════════════════════════════════════
 
 function getLongestRunway(airport) {
   // If new format has runway data, use it
@@ -733,9 +691,9 @@ function matchAircraft(orig, dest, pax) {
   return { results, distNm, distKm, limitingRwy };
 }
 
-// ── Render aircraft cards ────────────────────────────────────
-
-let activeFilter = 'all';
+// ═══════════════════════════════════════════════════════════
+//  10. AIRCRAFT RESULTS UI
+// ═══════════════════════════════════════════════════════════
 
 function categoryLabel(cat) {
   const labels = {
@@ -966,9 +924,9 @@ function renderCards(results) {
   });
 }
 
-// ── Wikipedia image fetcher ───────────────────────────────────
-// Extracts the page title from the Wikipedia URL and calls the
-// Wikipedia REST API to get the page summary, thumbnail and description.
+// ═══════════════════════════════════════════════════════════
+//  11. WIKIPEDIA AIRCRAFT INFORMATION
+// ═══════════════════════════════════════════════════════════
 
 async function fetchWikiImage(wikiUrl, card) {
   const imgWrap   = card.querySelector('.card-img-wrap');
@@ -1023,9 +981,9 @@ async function fetchWikiImage(wikiUrl, card) {
   }
 }
 
-
-// ── Registry list populator ──────────────────────────────────
-// Shows top 5 registered aircraft for this type, with a count of remaining
+// ═══════════════════════════════════════════════════════════
+//  12. AIRCRAFT REGISTRY DISPLAY
+// ═══════════════════════════════════════════════════════════
 
 function populateRegistry(typeCode, card) {
   const section  = card.querySelector('.card-registry-section');
@@ -1077,12 +1035,9 @@ function populateRegistry(typeCode, card) {
   listEl.innerHTML = rows + moreHtml;
 }
 
-
-// ── Live tracking ────────────────────────────────────────────
-// Queries OpenSky for aircraft near origin/destination airports
-// Shows last known ground positions on the map
-
-let trackingLayers = [];   // Leaflet layers for tracking dots
+// ═══════════════════════════════════════════════════════════
+//  13. LIVE AIRCRAFT TRACKING
+// ═══════════════════════════════════════════════════════════
 
 function clearTracking() {
   trackingLayers.forEach(l => map.removeLayer(l));
@@ -1203,7 +1158,9 @@ async function showGroundTracking() {
   console.log(`Tracking: ${unique.length} matching aircraft on ground nearby`);
 }
 
-// ── UI state ─────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  14. GENERAL UI HELPERS
+// ═══════════════════════════════════════════════════════════
 
 function updateUI() {
   const ready = origAirport && destAirport;
@@ -1229,7 +1186,22 @@ function updateUI() {
   } 
 }
 
-// ── Event listeners ──────────────────────────────────────────
+function rerunIfResultsVisible() {
+  const area = document.getElementById('resultsArea');
+  if (area.style.display !== 'none' && origAirport && destAirport && acLoaded) {
+    activeFilter = 'all';
+    const matchData = matchAircraft(origAirport, destAirport, paxCount);
+    if (matchData.limitingRwy) {
+      document.getElementById('summaryRwy').textContent =
+        matchData.limitingRwy.toLocaleString();
+    }
+    renderResults(matchData);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  15. EVENT HANDLERS
+// ═══════════════════════════════════════════════════════════
 
 document.getElementById('origInput').addEventListener('input', function() {
   lookupAirport(this.value, document.getElementById('origInfo'), true);
@@ -1257,18 +1229,6 @@ document.getElementById('paxUp').addEventListener('click', () => {
 });
 
 // Re-run the aircraft search automatically if results are already showing
-function rerunIfResultsVisible() {
-  const area = document.getElementById('resultsArea');
-  if (area.style.display !== 'none' && origAirport && destAirport && acLoaded) {
-    activeFilter = 'all';
-    const matchData = matchAircraft(origAirport, destAirport, paxCount);
-    if (matchData.limitingRwy) {
-      document.getElementById('summaryRwy').textContent =
-        matchData.limitingRwy.toLocaleString();
-    }
-    renderResults(matchData);
-  }
-}
 
 // Allow typing directly into the passenger field
 document.getElementById('paxCount').addEventListener('input', function() {
@@ -1345,7 +1305,9 @@ document.getElementById('trackBtn').addEventListener('click', () => {
   });
 });
 
-// ── Start ────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  16. APPLICATION STARTUP
+// ═══════════════════════════════════════════════════════════
+
+// Start loading data after all functions and event handlers are defined.
 loadData();
-
-
