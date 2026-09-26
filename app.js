@@ -300,57 +300,64 @@ function findMatchingRule(
         return null;
     }
 
-    return vatRulesData.rules.find(
-        rule =>
+    const matches =
+        vatRulesData.rules.filter(
+            rule =>
 
-            valueMatches(
-                rule.entity,
-                transaction.entity
-            )
+                valueMatches(
+                    rule.entity,
+                    transaction.entity
+                )
 
-            &&
+                &&
 
-            valueMatches(
-                rule.charterType,
-                transaction.charterType
-            )
+                valueMatches(
+                    rule.charterType,
+                    transaction.charterType
+                )
 
-            &&
+                &&
 
-            valueMatches(
-                rule.customerType,
-                transaction.customerType
-            )
+                valueMatches(
+                    rule.customerType,
+                    transaction.customerType
+                )
 
-            &&
+                &&
 
-            valueMatches(
-                rule.customerLocation,
-                transaction.customerLocation
-            )
+                valueMatches(
+                    rule.customerLocation,
+                    transaction.customerLocation
+                )
 
-            &&
+                &&
 
-            valueMatches(
-                rule.vatRegistered,
-                transaction.vatRegistered
-            )
+                valueMatches(
+                    rule.vatRegistered,
+                    transaction.vatRegistered
+                )
 
-            &&
+                &&
 
-            valueMatches(
-                rule.originTerritory,
-                transaction.originTerritory
-            )
+                valueMatches(
+                    rule.originTerritory,
+                    transaction.originTerritory
+                )
 
-            &&
+                &&
 
-            valueMatches(
-                rule.destinationTerritory,
-                transaction.destinationTerritory
-            )
+                valueMatches(
+                    rule.destinationTerritory,
+                    transaction.destinationTerritory
+                )
+        );
 
+    console.log(
+        "RULE MATCHES",
+        matches
     );
+
+    return matches[0] || null;
 }
 
 function displayVatRule(rule) {
