@@ -202,6 +202,14 @@ function getVatRegion(countryCode) {
     country.euMember === true ||
     String(country.euMember).toUpperCase() === 'TRUE';
 
+//2nd temp bit
+  console.log(
+    "VAT REGION RESULT",
+    countryCode,
+    isEuMember ? "EU" : "NON_EU"
+);
+  //end of 2nd temp bit
+  
   return isEuMember ? 'EU' : 'NON_EU';
 
 
