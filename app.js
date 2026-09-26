@@ -90,6 +90,8 @@ async function loadData() {
       loadSellingEntities()
     ]);
 
+    populateSellingEntityDropdown();
+
     // Re-run airport lookups if the user typed while data was loading.
     const originValue = document.getElementById('origInput').value;
     const destinationValue = document.getElementById('destInput').value;
@@ -198,6 +200,8 @@ async function loadRegistry(aptCount, acCount) {
 // getRuleRegion() provides the broad region used by the current BRU matrix.
 // getTaxTerritory() is reserved for specific territory distinctions such as
 // ES_MAINLAND, ES_BALEARIC and ES_CANARY when airport-level mappings are added.
+
+
 
 function getRuleRegion(
           countryCode,
@@ -347,6 +351,48 @@ function displayVatRule(rule) {
   document.getElementById('vatRate').textContent =
     rule ? (rule.rate * 100).toFixed(2) + '%' : '-';
   document.getElementById('vatPriority').textContent = rule?.rulePriority ?? '-';
+}
+
+function populateSellingEntityDropdown() {
+
+    const select =
+        document.getElementById(
+            "sellingEntitySelect"
+        );
+
+    select.innerHTML = "";
+
+    Object.keys(
+        sellingEntitiesData.data
+    )
+    .sort()
+    .forEach(entityCode => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = entityCode;
+        option.textContent = entityCode;
+
+        if (
+            entityCode === selectedEntity
+        ) {
+            option.selected = true;
+        }
+
+        select.appendChild(option);
+    });
+
+    select.addEventListener(
+        "change",
+        event => {
+
+            selectedEntity =
+                event.target.value;
+
+            runVatTest();
+        }
+    );
 }
 
 function runVatTest() {
