@@ -92,6 +92,7 @@ async function loadData() {
     ]);
 
     populateSellingEntityDropdown();
+    initialiseCharterTypeSelector();
 
     // Re-run airport lookups if the user typed while data was loading.
     const originValue = document.getElementById('origInput').value;
@@ -396,6 +397,28 @@ function populateSellingEntityDropdown() {
     );
 }
 
+function initialiseCharterTypeSelector() {
+
+    const selector =
+        document.getElementById(
+            "charterTypeSelect"
+        );
+
+    selector.value =
+        selectedCharterType;
+
+    selector.addEventListener(
+        "change",
+        event => {
+
+            selectedCharterType =
+                event.target.value;
+
+            runVatTest();
+        }
+    );
+}
+
 function runVatTest() {
   if (!itinerary.length || !vatRulesData) return null;
 
@@ -411,7 +434,7 @@ function runVatTest() {
     
   const transaction = {
     entity: selectedEntity,
-    charterType: 'PASSENGER',
+    charterType: selectedCharterType,
     customerType: 'ANY',
     customerLocation: 'ANY',
     vatRegistered: 'ANY',
