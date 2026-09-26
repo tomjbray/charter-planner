@@ -215,7 +215,7 @@ function getRuleRegion(
   if (countryCode === homeCountry) {
     console.log(
         "VAT REGION RESULT",
-        countryCode,
+        selectedEntity,
         homeCountry
     );
 
