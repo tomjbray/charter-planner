@@ -174,13 +174,13 @@ async function loadRegistry(aptCount, acCount) {
 //  3. VAT REGION AND TERRITORY CLASSIFICATION
 // ═══════════════════════════════════════════════════════════
 
-// getVatRegion() provides the broad region used by the current BRU matrix.
+// getRuleRegion() provides the broad region used by the current BRU matrix.
 // getTaxTerritory() is reserved for specific territory distinctions such as
 // ES_MAINLAND, ES_BALEARIC and ES_CANARY when airport-level mappings are added.
 
-function getVatRegion(
+function getRuleRegion(
           countryCode,
-          sellingCountry
+          homeCountry
          ) {
   if (!countryCode) return null;
 
@@ -190,16 +190,24 @@ function getVatRegion(
   // This avoids silently treating unknown data as non-EU.
   if (!country) return countryCode;
 
+  //Domestic country must always map to itself
+  if (countryCode === homeCountry) return homeCountry;
+
     //temp bit
-  console.log(
-    "Country data",
-    countryCode,
-    country
-);
+if (countryCode === homeCountry) {
+    console.log(
+        "VAT REGION RESULT",
+        countryCode,
+        homeCountry
+    );
+
+    return homeCountry;
+}
+
   //end of temp bit
 
   // Belgium must remain distinct because the BRU rule matrix uses BE explicitly.
-  if (countryCode === 'BE') return 'BE';
+  //if (countryCode === 'BE') return 'BE';
 
   // Support both proper JSON booleans and text values from older exports.
 const euFlag =
@@ -338,8 +346,17 @@ function runVatTest() {
     customerType: 'ANY',
     customerLocation: 'ANY',
     vatRegistered: 'ANY',
-    originTerritory: getVatRegion(sector.origin.country),
-    destinationTerritory: getVatRegion(sector.destination.country),
+    originTerritory:
+      getRuleRegion(
+        sector.origin.country,
+        homeCountry
+      ),
+    destinationTerritory:
+      getRuleRegion(
+        sector.destination.country,
+        homeCountry
+    ),
+    
   };
 
   const matchedRule = findMatchingRule(transaction);
