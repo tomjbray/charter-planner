@@ -195,6 +195,14 @@ function getVatRegion(countryCode) {
     String(country.euMember).toUpperCase() === 'TRUE';
 
   return isEuMember ? 'EU' : 'NON_EU';
+
+  //temp bit
+  console.log(
+    "Country data",
+    countryCode,
+    country
+);
+  //end of temp bit
 }
 
 function getTaxTerritory(countryCode) {
