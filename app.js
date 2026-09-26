@@ -44,7 +44,7 @@ let selectedEntity = "BRU";
 let selectedCharterType = "PASSENGER";
 let selectedCustomerType = "PRIVATE";
 let selectedCustomerLocation = "BE";
-let selectedVatRegistered = "NO";
+//let selectedVatRegistered = "NO";
 let sellingEntitiesData = null;
 let vatRulesData = null;
 let taxTerritoriesData = null;
@@ -516,7 +516,10 @@ function runVatTest() {
     charterType: selectedCharterType,
     customerType: selectedCustomerType,
     customerLocation: selectedCustomerLocation,
-    vatRegistered: selectedVatRegistered,
+    vatRegistered: 
+        selectedCustomerType === "BUSINESS"
+          ? "YES"v
+          : "NO",
     originTerritory:
       getRuleRegion(
         sector.origin.country,
