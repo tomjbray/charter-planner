@@ -364,6 +364,9 @@ function displayVatRule(rule) {
   document.getElementById('vatRate').textContent =
     rule ? (rule.rate * 100).toFixed(2) + '%' : '-';
   document.getElementById('vatPriority').textContent = rule?.rulePriority ?? '-';
+  document.getElementById('vatExplanation').textContent = rule?.ruleExplanation || "-";
+  document.getElementById('vatLegalReference').textContent = rule?.legalReference || "-";
+
 }
 
 function populateSellingEntityDropdown() {
