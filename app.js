@@ -98,7 +98,7 @@ async function loadData() {
     populateCustomerCountryDropdown();
     initialiseCharterTypeSelector();
     initialiseCustomerTypeSelector();
-   // initialiseVatRegisteredSelector();
+    initialiseVatRegisteredSelector();
 
     // Re-run airport lookups if the user typed while data was loading.
     const originValue = document.getElementById('origInput').value;
@@ -511,12 +511,10 @@ if (selectedCustomerType === "PRIVATE") {
 
 } else {
 
-    vatSelect.disabled = false;
+    selectedVatRegistered = "YES";
 
-    if (!selectedVatRegistered) {
-        selectedVatRegistered = "YES";
-        vatSelect.value = "YES";
-    }
+    vatSelect.value = "YES";
+    vatSelect.disabled = false;
 }
           
             runVatTest();
@@ -565,10 +563,8 @@ function runVatTest() {
         selectedCustomerCountry,
         homeCountry
       ),
-    vatRegistered: 
-        selectedCustomerType === "BUSINESS"
-          ? "YES"
-          : "NO",
+    vatRegistered:
+      selectedVatRegistered,
     originTerritory:
       getRuleRegion(
         sector.origin.country,
