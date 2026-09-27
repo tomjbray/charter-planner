@@ -43,7 +43,7 @@ let trackingLayers = [];
 let selectedEntity = "BRU";
 let selectedCharterType = "PASSENGER";
 let selectedCustomerType = "PRIVATE";
-let selectedCustomerLocation = "BE";
+let selectedCustomerCountry = "BE";
 //let selectedVatRegistered = "NO";
 let sellingEntitiesData = null;
 let vatRulesData = null;
@@ -95,6 +95,7 @@ async function loadData() {
     ]);
 
     populateSellingEntityDropdown();
+    populateCustomerCountryDropdown();
     initialiseCharterTypeSelector();
     initialiseCustomerTypeSelector();
     initialiseCustomerLocationSelector();
@@ -407,6 +408,54 @@ function populateSellingEntityDropdown() {
     );
 }
 
+function populateCustomerCountryDropdown() {
+
+    const select =
+        document.getElementById(
+            "customerCountrySelect"
+        );
+
+    select.innerHTML = "";
+
+    Object.entries(
+        countriesData.data
+    )
+    .sort(
+        (a, b) =>
+            a[1].name.localeCompare(
+                b[1].name
+            )
+    )
+    .forEach(([code, country]) => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = code;
+        option.textContent =
+            country.name;
+
+        if (
+            code === selectedCustomerCountry
+        ) {
+            option.selected = true;
+        }
+
+        select.appendChild(option);
+    });
+
+    select.addEventListener(
+        "change",
+        event => {
+
+            selectedCustomerCountry =
+                event.target.value;
+
+            runVatTest();
+        }
+    );
+}
+
 function initialiseCharterTypeSelector() {
 
     const selector =
@@ -508,7 +557,11 @@ function runVatTest() {
     entity: selectedEntity,
     charterType: selectedCharterType,
     customerType: selectedCustomerType,
-    customerLocation: selectedCustomerLocation,
+    customerLocation:
+      getRuleRegion(
+        selectedCustomerCountry,
+        homeCountry
+      ),
     vatRegistered: 
         selectedCustomerType === "BUSINESS"
           ? "YES"
