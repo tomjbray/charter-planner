@@ -100,6 +100,26 @@ async function loadData() {
     initialiseCustomerTypeSelector();
     initialiseVatRegisteredSelector();
 
+    const vatSelect =
+    document.getElementById(
+        "vatRegisteredSelect"
+    );
+
+    if (selectedCustomerType === "PRIVATE") {
+
+        selectedVatRegistered = "NO";
+
+        vatSelect.value = "NO";
+        vatSelect.disabled = true;
+
+    } else {
+
+        selectedVatRegistered = "YES";
+
+        vatSelect.value = "YES";
+        vatSelect.disabled = false;
+    }
+
     // Re-run airport lookups if the user typed while data was loading.
     const originValue = document.getElementById('origInput').value;
     const destinationValue = document.getElementById('destInput').value;
