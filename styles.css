@@ -944,4 +944,8 @@ header::after {
     color: #1a3a6e;
     font-weight: 600;
 }
-`
+
+.no-match {
+    color: #b42318;
+    font-weight: 700;
+}
