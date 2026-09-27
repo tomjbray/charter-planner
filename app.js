@@ -410,14 +410,50 @@ function displayDerivedInputs(
 
 
 function displayVatRule(rule) {
-  document.getElementById('vatRuleId').textContent = rule?.ruleId || '-';
-  document.getElementById('vatTreatment').textContent = rule?.treatment || '-';
-  document.getElementById('vatRate').textContent =
-    rule ? (rule.rate * 100).toFixed(2) + '%' : '-';
-  document.getElementById('vatPriority').textContent = rule?.rulePriority ?? '-';
-  document.getElementById('vatExplanation').textContent = rule?.ruleExplanation || "-";
-  document.getElementById('vatLegalReference').textContent = rule?.legalReference || "-";
 
+  if (!rule) {
+
+const ruleId =
+    document.getElementById('vatRuleId');
+
+ruleId.textContent = 'NO MATCH';
+ruleId.classList.add('no-match');
+
+    document.getElementById('vatTreatment').textContent =
+        'Review Required';
+
+    document.getElementById('vatRate').textContent =
+        '-';
+
+    document.getElementById('vatPriority').textContent =
+        '-';
+
+    document.getElementById('vatExplanation').textContent =
+        'No VAT rule matches the selected combination of selling entity, customer details and route.';
+
+    document.getElementById('vatLegalReference').textContent =
+        'Review VAT matrix';
+
+    return;
+  }
+
+  document.getElementById('vatRuleId').textContent =
+      rule.ruleId;
+
+  document.getElementById('vatTreatment').textContent =
+      rule.treatment;
+
+  document.getElementById('vatRate').textContent =
+      (rule.rate * 100).toFixed(2) + '%';
+
+  document.getElementById('vatPriority').textContent =
+      rule.rulePriority;
+
+  document.getElementById('vatExplanation').textContent =
+      rule.ruleExplanation || '-';
+
+  document.getElementById('vatLegalReference').textContent =
+      rule.legalReference || '-';
 }
 
 function populateSellingEntityDropdown() {
