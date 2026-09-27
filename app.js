@@ -44,7 +44,7 @@ let selectedEntity = "BRU";
 let selectedCharterType = "PASSENGER";
 let selectedCustomerType = "PRIVATE";
 let selectedCustomerCountry = "BE";
-//let selectedVatRegistered = "NO";
+let selectedVatRegistered = "NO";
 let sellingEntitiesData = null;
 let vatRulesData = null;
 let taxTerritoriesData = null;
@@ -98,7 +98,6 @@ async function loadData() {
     populateCustomerCountryDropdown();
     initialiseCharterTypeSelector();
     initialiseCustomerTypeSelector();
-    initialiseCustomerLocationSelector();
    // initialiseVatRegisteredSelector();
 
     // Re-run airport lookups if the user typed while data was loading.
@@ -498,54 +497,55 @@ function initialiseCustomerTypeSelector() {
             selectedCustomerType =
                 event.target.value;
 
+const vatSelect =
+    document.getElementById(
+        "vatRegisteredSelect"
+    );
+
+if (selectedCustomerType === "PRIVATE") {
+
+    selectedVatRegistered = "NO";
+
+    vatSelect.value = "NO";
+    vatSelect.disabled = true;
+
+} else {
+
+    vatSelect.disabled = false;
+
+    if (!selectedVatRegistered) {
+        selectedVatRegistered = "YES";
+        vatSelect.value = "YES";
+    }
+}
+          
             runVatTest();
         }
     );
 }
 
-function initialiseCustomerLocationSelector() {
+
+function initialiseVatRegisteredSelector() {
 
     const selector =
         document.getElementById(
-            "customerLocationSelect"
+            "vatRegisteredSelect"
         );
 
     selector.value =
-        selectedCustomerLocation;
+        selectedVatRegistered;
 
     selector.addEventListener(
         "change",
         event => {
 
-            selectedCustomerLocation =
+            selectedVatRegistered =
                 event.target.value;
 
             runVatTest();
         }
     );
 }
-
-//function initialiseVatRegisteredSelector() {
-//
-//    const selector =
-//        document.getElementById(
-//            "vatRegisteredSelect"
-//        );
-//
-//    selector.value =
-//        selectedVatRegistered;
-//
-//    selector.addEventListener(
-//        "change",
-//        event => {
-//
-//            selectedVatRegistered =
-//                event.target.value;
-//
-//            runVatTest();
-//        }
-//    );
-//}
 
 function runVatTest() {
   if (!itinerary.length || !vatRulesData) return null;
