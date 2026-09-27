@@ -377,6 +377,38 @@ function findMatchingRule(
     return matches[0] || null;
 }
 
+function displayDerivedInputs(
+    transaction,
+    homeCountry
+) {
+
+    document.getElementById(
+        "derivedHomeCountry"
+    ).textContent =
+        homeCountry || "-";
+
+    document.getElementById(
+        "derivedCustomerRegion"
+    ).textContent =
+        transaction.customerLocation || "-";
+
+    document.getElementById(
+        "derivedOriginTerritory"
+    ).textContent =
+        transaction.originTerritory || "-";
+
+    document.getElementById(
+        "derivedDestinationTerritory"
+    ).textContent =
+        transaction.destinationTerritory || "-";
+
+    document.getElementById(
+        "derivedVatRegistered"
+    ).textContent =
+        transaction.vatRegistered || "-";
+}
+
+
 function displayVatRule(rule) {
   document.getElementById('vatRuleId').textContent = rule?.ruleId || '-';
   document.getElementById('vatTreatment').textContent = rule?.treatment || '-';
@@ -598,6 +630,10 @@ function runVatTest() {
     
   };
 
+  displayDerivedInputs(
+    transaction,
+    homeCountry
+);
   
   const matchedRule = findMatchingRule(transaction);
   displayVatRule(matchedRule);
