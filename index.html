@@ -143,6 +143,78 @@
       </div>
     </section>
     
+
+
+    <!-- Passengers -->
+    <section class="panel">
+      <div class="panel-label">Passengers</div>
+      <div class="pax-row">
+        <button class="pax-btn" id="paxDown">−</button>
+        <div class="pax-display">
+          <input class="pax-input" id="paxCount" type="number" value="8" min="1" max="900">
+          <span class="pax-label">passengers</span>
+        </div>
+        <button class="pax-btn" id="paxUp">+</button>
+      </div>
+    </section>
+
+    <!-- Options -->
+    <section class="panel">
+      <div class="panel-label">Options</div>
+      <label class="option-row" for="singleEngineCheck">
+        <input type="checkbox" id="singleEngineCheck" checked>
+        <span class="option-label">Include single engine aircraft</span>
+      </label>
+      <div class="option-row option-year-row">
+        <span class="option-label">Min year of manufacture</span>
+        <input type="number" id="minYearInput" class="option-year-input"
+               placeholder="Any" min="1980" max="2025" autocomplete="off">
+      </div>
+    </section>
+
+    <!-- Route summary -->
+    <section class="panel route-summary" id="routeSummary" style="display:none">
+      <div class="panel-label">Route Summary</div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-val" id="summaryDist">—</div>
+          <div class="summary-key">Distance (nm)</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-val" id="summaryKm">—</div>
+          <div class="summary-key">Distance (km)</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-val" id="summaryPax">—</div>
+          <div class="summary-key">Passengers</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-val" id="summaryRwy">—</div>
+          <div class="summary-key">Min Runway (ft)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Track button -->
+    <button class="track-btn" id="trackBtn" disabled>Show Aircraft Nearby</button>
+
+    <!-- Find aircraft button -->
+    <button class="find-btn" id="findBtn" disabled>Find Suitable Aircraft</button>
+
+  </aside>
+
+  <!-- ── Main area ── -->
+  <main class="main-area">
+
+    <!-- Map -->
+    <div class="map-wrap">
+      <div id="map"></div>
+      <div class="map-empty" id="mapEmpty">
+        <div class="map-empty-icon">✦</div>
+        <div class="map-empty-text">Enter origin and destination to plot route</div>
+      </div>
+    </div>
+
     <!--VAT results panel -->
     <section class='panel'>
       <div id="vatResultsPanel" class="vat-panel">
@@ -253,77 +325,7 @@
   </div>
 
 </section>
-
-    <!-- Passengers -->
-    <section class="panel">
-      <div class="panel-label">Passengers</div>
-      <div class="pax-row">
-        <button class="pax-btn" id="paxDown">−</button>
-        <div class="pax-display">
-          <input class="pax-input" id="paxCount" type="number" value="8" min="1" max="900">
-          <span class="pax-label">passengers</span>
-        </div>
-        <button class="pax-btn" id="paxUp">+</button>
-      </div>
-    </section>
-
-    <!-- Options -->
-    <section class="panel">
-      <div class="panel-label">Options</div>
-      <label class="option-row" for="singleEngineCheck">
-        <input type="checkbox" id="singleEngineCheck" checked>
-        <span class="option-label">Include single engine aircraft</span>
-      </label>
-      <div class="option-row option-year-row">
-        <span class="option-label">Min year of manufacture</span>
-        <input type="number" id="minYearInput" class="option-year-input"
-               placeholder="Any" min="1980" max="2025" autocomplete="off">
-      </div>
-    </section>
-
-    <!-- Route summary -->
-    <section class="panel route-summary" id="routeSummary" style="display:none">
-      <div class="panel-label">Route Summary</div>
-      <div class="summary-grid">
-        <div class="summary-item">
-          <div class="summary-val" id="summaryDist">—</div>
-          <div class="summary-key">Distance (nm)</div>
-        </div>
-        <div class="summary-item">
-          <div class="summary-val" id="summaryKm">—</div>
-          <div class="summary-key">Distance (km)</div>
-        </div>
-        <div class="summary-item">
-          <div class="summary-val" id="summaryPax">—</div>
-          <div class="summary-key">Passengers</div>
-        </div>
-        <div class="summary-item">
-          <div class="summary-val" id="summaryRwy">—</div>
-          <div class="summary-key">Min Runway (ft)</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Track button -->
-    <button class="track-btn" id="trackBtn" disabled>Show Aircraft Nearby</button>
-
-    <!-- Find aircraft button -->
-    <button class="find-btn" id="findBtn" disabled>Find Suitable Aircraft</button>
-
-  </aside>
-
-  <!-- ── Main area ── -->
-  <main class="main-area">
-
-    <!-- Map -->
-    <div class="map-wrap">
-      <div id="map"></div>
-      <div class="map-empty" id="mapEmpty">
-        <div class="map-empty-icon">✦</div>
-        <div class="map-empty-text">Enter origin and destination to plot route</div>
-      </div>
-    </div>
-
+    
     <!-- Aircraft results -->
     <div class="results-area" id="resultsArea" style="display:none">
       <div class="results-header">
