@@ -949,3 +949,15 @@ header::after {
     color: #b42318;
     font-weight: 700;
 }
+
+.vat-results-panel {
+    margin-top: 16px;
+}
+
+#vatResultsPanel {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+}
