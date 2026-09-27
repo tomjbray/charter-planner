@@ -74,7 +74,7 @@
             <div class="vat-input-block">
               <label
                 class="vat-input-label"
-                for "charterTypeSelect">
+                for="charterTypeSelect">
                 Charter Type
               </label>
                 <select id="charterTypeSelect"
@@ -86,32 +86,53 @@
 
             <div class="vat-input-block">
 
-    <label
-        class="vat-input-label"
-        for="customerTypeSelect">
+              <label
+                class="vat-input-label"
+                for="customerTypeSelect">
 
-        Customer Type
+                Customer Type
 
-    </label>
+              </label>
 
     
-    <select
-        id="customerTypeSelect"
-        class="vat-select">
+              <select
+                id="customerTypeSelect"
+                class="vat-select">
 
-        <option value="PRIVATE">Private</option>
-        <option value="BUSINESS">Business</option>
+                <option value="PRIVATE">Private</option>
+                <option value="BUSINESS">Business</option>
 
-    </select>
+              </select>
 
-</div>
+            </div>
+
+            <div class="vat-input-block">
+
+              <label
+                class="vat-input-label"
+                for="vatRegisteredSelect">
+
+                VAT Registered
+
+              </label>
+
+            <select
+              id="vatRegisteredSelect"
+              class="vat-select">
+
+              <option value="YES">Yes</option>
+              <option value="NO">No</option>
+
+            </select>
+
+          </div>        
 
             <div class="vat-input-block">
                 <label
                   class="vat-input-label"
                   for="customerLocationSelect">
                    
-                    Customer Location
+                    Customer Country
                 </label>
 
                 <select id="customerCountrySelect"
@@ -161,7 +182,7 @@
 
         <div class="vat-result-row">
           <span class="vat-result-label">Legal Reference</span>
-          <strong id="legalReference"
+          <strong id="vatLegalReference"
             class="vat-result-value"> </strong>   
         </div>
 
