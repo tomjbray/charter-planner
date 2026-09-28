@@ -149,8 +149,33 @@
                     Customer Country
                 </label>
 
-                <select id="customerCountrySelect"
-                  class="vat-select"></select>
+                <div class="vat-input-block">
+
+            <label
+                class="vat-input-label"
+                for="customerCountryInput">
+
+                Customer Country
+
+            </label>
+
+            <input
+                id="customerCountryInput"
+                class="vat-select country-typeahead"
+                type="text"
+                list="customerCountryList"
+                autocomplete="off"
+                placeholder="Start typing a country">
+
+            <datalist id="customerCountryList">
+            </datalist>
+
+            <div
+                id="customerCountryStatus"
+                class="country-typeahead-status">
+            </div>
+
+        </div>
             </div>
 
             
