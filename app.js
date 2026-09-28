@@ -99,6 +99,7 @@ async function loadData() {
     initialiseCharterTypeSelector();
     initialiseCustomerTypeSelector();
     initialiseVatRegisteredSelector();
+    syncVatRegisteredState();
 
     const vatSelect =
     document.getElementById(
@@ -585,10 +586,8 @@ function initialiseCustomerTypeSelector() {
             selectedCustomerType =
                 event.target.value;
 
-const vatSelect =
-    document.getElementById(
-        "vatRegisteredSelect"
-    );
+      syncVatRegisteredState();
+
 
 if (selectedCustomerType === "PRIVATE") {
 
@@ -631,6 +630,36 @@ function initialiseVatRegisteredSelector() {
             runVatTest();
         }
     );
+}
+
+function syncVatRegisteredState() {
+
+    const vatSelect =
+        document.getElementById(
+            "vatRegisteredSelect"
+        );
+
+    if (selectedCustomerType === "PRIVATE") {
+
+        selectedVatRegistered = "NO";
+
+        vatSelect.value = "NO";
+        vatSelect.disabled = true;
+
+    } else {
+
+        if (
+            selectedVatRegistered !== "YES" &&
+            selectedVatRegistered !== "NO"
+        ) {
+            selectedVatRegistered = "YES";
+        }
+
+        vatSelect.value =
+            selectedVatRegistered;
+
+        vatSelect.disabled = false;
+    }
 }
 
 function runVatTest() {
