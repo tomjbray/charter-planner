@@ -1298,6 +1298,87 @@ function buildVatTransaction(sector) {
     };
 }
 
+function renderVatSummary(
+    results
+) {
+
+    const totalNetValue =
+        results.reduce(
+            (sum, result) =>
+                sum +
+                result.allocatedNetValue,
+            0
+        );
+
+    const totalTaxableValue =
+        results.reduce(
+            (sum, result) =>
+                sum +
+                result.taxableValue,
+            0
+        );
+
+    const totalVatValue =
+        results.reduce(
+            (sum, result) =>
+                sum +
+                result.vatAmount,
+            0
+        );
+
+    const totalGrossValue =
+        results.reduce(
+            (sum, result) =>
+                sum +
+                result.grossValue,
+            0
+        );
+
+    document.getElementById(
+        "summaryNetValue"
+    ).textContent =
+        totalNetValue.toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+    document.getElementById(
+        "summaryTaxableValue"
+    ).textContent =
+        totalTaxableValue.toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+    document.getElementById(
+        "summaryVatValue"
+    ).textContent =
+        totalVatValue.toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+    document.getElementById(
+        "summaryGrossValue"
+    ).textContent =
+        totalGrossValue.toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+}
+
 function runVatTests() {
     if (itinerary.length === 0 || !vatRulesData) {
         clearVatSectorResults();
@@ -1399,6 +1480,7 @@ function runVatTests() {
         };
     });
 
+    renderVatSummary(results);
     renderVatSectorResults(results);
     return results;
 }
