@@ -1,10 +1,110 @@
 {
   "schemaVersion": "1.0",
-  "recordCount": 20,
+  "recordCount": 249,
   "data": {
+    "AF": {
+      "code": "AF",
+      "name": "Afghanistan",
+      "eUMember": false
+    },
+    "AX": {
+      "code": "AX",
+      "name": "Åland Islands",
+      "eUMember": false
+    },
+    "AL": {
+      "code": "AL",
+      "name": "Albania",
+      "eUMember": false
+    },
+    "DZ": {
+      "code": "DZ",
+      "name": "Algeria",
+      "eUMember": false
+    },
+    "AS": {
+      "code": "AS",
+      "name": "American Samoa",
+      "eUMember": false
+    },
+    "AD": {
+      "code": "AD",
+      "name": "Andorra",
+      "eUMember": false
+    },
+    "AO": {
+      "code": "AO",
+      "name": "Angola",
+      "eUMember": false
+    },
+    "AI": {
+      "code": "AI",
+      "name": "Anguilla",
+      "eUMember": false
+    },
+    "AQ": {
+      "code": "AQ",
+      "name": "Antarctica",
+      "eUMember": false
+    },
+    "AG": {
+      "code": "AG",
+      "name": "Antigua and Barbuda",
+      "eUMember": false
+    },
+    "AR": {
+      "code": "AR",
+      "name": "Argentina",
+      "eUMember": false
+    },
+    "AM": {
+      "code": "AM",
+      "name": "Armenia",
+      "eUMember": false
+    },
+    "AW": {
+      "code": "AW",
+      "name": "Aruba",
+      "eUMember": false
+    },
     "AU": {
       "code": "AU",
       "name": "Australia",
+      "eUMember": false
+    },
+    "AT": {
+      "code": "AT",
+      "name": "Austria",
+      "eUMember": true
+    },
+    "AZ": {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "eUMember": false
+    },
+    "BS": {
+      "code": "BS",
+      "name": "Bahamas (the)",
+      "eUMember": false
+    },
+    "BH": {
+      "code": "BH",
+      "name": "Bahrain",
+      "eUMember": false
+    },
+    "BD": {
+      "code": "BD",
+      "name": "Bangladesh",
+      "eUMember": false
+    },
+    "BB": {
+      "code": "BB",
+      "name": "Barbados",
+      "eUMember": false
+    },
+    "BY": {
+      "code": "BY",
+      "name": "Belarus",
       "eUMember": false
     },
     "BE": {
@@ -12,9 +112,94 @@
       "name": "Belgium",
       "eUMember": true
     },
+    "BZ": {
+      "code": "BZ",
+      "name": "Belize",
+      "eUMember": false
+    },
+    "BJ": {
+      "code": "BJ",
+      "name": "Benin",
+      "eUMember": false
+    },
+    "BM": {
+      "code": "BM",
+      "name": "Bermuda",
+      "eUMember": false
+    },
+    "BT": {
+      "code": "BT",
+      "name": "Bhutan",
+      "eUMember": false
+    },
+    "BO": {
+      "code": "BO",
+      "name": "Bolivia (Plurinational State of)",
+      "eUMember": false
+    },
+    "BQ": {
+      "code": "BQ",
+      "name": "Bonaire",
+      "eUMember": false
+    },
+    "BA": {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "eUMember": false
+    },
+    "BW": {
+      "code": "BW",
+      "name": "Botswana",
+      "eUMember": false
+    },
+    "BV": {
+      "code": "BV",
+      "name": "Bouvet Island",
+      "eUMember": false
+    },
     "BR": {
       "code": "BR",
       "name": "Brazil",
+      "eUMember": false
+    },
+    "IO": {
+      "code": "IO",
+      "name": "British Indian Ocean Territory (the)",
+      "eUMember": false
+    },
+    "BN": {
+      "code": "BN",
+      "name": "Brunei Darussalam",
+      "eUMember": false
+    },
+    "BG": {
+      "code": "BG",
+      "name": "Bulgaria",
+      "eUMember": true
+    },
+    "BF": {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "eUMember": false
+    },
+    "BI": {
+      "code": "BI",
+      "name": "Burundi",
+      "eUMember": false
+    },
+    "CV": {
+      "code": "CV",
+      "name": "Cabo Verde",
+      "eUMember": false
+    },
+    "KH": {
+      "code": "KH",
+      "name": "Cambodia",
+      "eUMember": false
+    },
+    "CM": {
+      "code": "CM",
+      "name": "Cameroon",
       "eUMember": false
     },
     "CA": {
@@ -22,19 +207,179 @@
       "name": "Canada",
       "eUMember": false
     },
+    "KY": {
+      "code": "KY",
+      "name": "Cayman Islands (the)",
+      "eUMember": false
+    },
+    "CF": {
+      "code": "CF",
+      "name": "Central African Republic (the)",
+      "eUMember": false
+    },
+    "TD": {
+      "code": "TD",
+      "name": "Chad",
+      "eUMember": false
+    },
+    "CL": {
+      "code": "CL",
+      "name": "Chile",
+      "eUMember": false
+    },
     "CN": {
       "code": "CN",
       "name": "China",
       "eUMember": false
     },
-    "DE": {
-      "code": "DE",
-      "name": "Germany",
+    "CX": {
+      "code": "CX",
+      "name": "Christmas Island",
+      "eUMember": false
+    },
+    "CC": {
+      "code": "CC",
+      "name": "Cocos (Keeling) Islands (the)",
+      "eUMember": false
+    },
+    "CO": {
+      "code": "CO",
+      "name": "Colombia",
+      "eUMember": false
+    },
+    "KM": {
+      "code": "KM",
+      "name": "Comoros (the)",
+      "eUMember": false
+    },
+    "CD": {
+      "code": "CD",
+      "name": "Congo (the Democratic Republic of the)",
+      "eUMember": false
+    },
+    "CG": {
+      "code": "CG",
+      "name": "Congo (the)",
+      "eUMember": false
+    },
+    "CK": {
+      "code": "CK",
+      "name": "Cook Islands (the)",
+      "eUMember": false
+    },
+    "CR": {
+      "code": "CR",
+      "name": "Costa Rica",
+      "eUMember": false
+    },
+    "CI": {
+      "code": "CI",
+      "name": "Côte d'Ivoire",
+      "eUMember": false
+    },
+    "HR": {
+      "code": "HR",
+      "name": "Croatia",
       "eUMember": true
     },
-    "ES": {
-      "code": "ES",
-      "name": "Spain",
+    "CU": {
+      "code": "CU",
+      "name": "Cuba",
+      "eUMember": false
+    },
+    "CW": {
+      "code": "CW",
+      "name": "Curaçao",
+      "eUMember": false
+    },
+    "CY": {
+      "code": "CY",
+      "name": "Cyprus",
+      "eUMember": true
+    },
+    "CZ": {
+      "code": "CZ",
+      "name": "Czechia",
+      "eUMember": true
+    },
+    "DK": {
+      "code": "DK",
+      "name": "Denmark",
+      "eUMember": true
+    },
+    "DJ": {
+      "code": "DJ",
+      "name": "Djibouti",
+      "eUMember": false
+    },
+    "DM": {
+      "code": "DM",
+      "name": "Dominica",
+      "eUMember": false
+    },
+    "DO": {
+      "code": "DO",
+      "name": "Dominican Republic (the)",
+      "eUMember": false
+    },
+    "EC": {
+      "code": "EC",
+      "name": "Ecuador",
+      "eUMember": false
+    },
+    "EG": {
+      "code": "EG",
+      "name": "Egypt",
+      "eUMember": false
+    },
+    "SV": {
+      "code": "SV",
+      "name": "El Salvador",
+      "eUMember": false
+    },
+    "GQ": {
+      "code": "GQ",
+      "name": "Equatorial Guinea",
+      "eUMember": false
+    },
+    "ER": {
+      "code": "ER",
+      "name": "Eritrea",
+      "eUMember": false
+    },
+    "EE": {
+      "code": "EE",
+      "name": "Estonia",
+      "eUMember": true
+    },
+    "SZ": {
+      "code": "SZ",
+      "name": "Eswatini",
+      "eUMember": false
+    },
+    "ET": {
+      "code": "ET",
+      "name": "Ethiopia",
+      "eUMember": false
+    },
+    "FK": {
+      "code": "FK",
+      "name": "Falkland Islands (the)",
+      "eUMember": false
+    },
+    "FO": {
+      "code": "FO",
+      "name": "Faroe Islands (the)",
+      "eUMember": false
+    },
+    "FJ": {
+      "code": "FJ",
+      "name": "Fiji",
+      "eUMember": false
+    },
+    "FI": {
+      "code": "FI",
+      "name": "Finland",
       "eUMember": true
     },
     "FR": {
@@ -42,9 +387,154 @@
       "name": "France",
       "eUMember": true
     },
-    "GB": {
-      "code": "GB",
-      "name": "United Kingdom",
+    "GF": {
+      "code": "GF",
+      "name": "French Guiana",
+      "eUMember": false
+    },
+    "PF": {
+      "code": "PF",
+      "name": "French Polynesia",
+      "eUMember": false
+    },
+    "TF": {
+      "code": "TF",
+      "name": "French Southern Territories (the)",
+      "eUMember": false
+    },
+    "GA": {
+      "code": "GA",
+      "name": "Gabon",
+      "eUMember": false
+    },
+    "GM": {
+      "code": "GM",
+      "name": "Gambia (the)",
+      "eUMember": false
+    },
+    "GE": {
+      "code": "GE",
+      "name": "Georgia",
+      "eUMember": false
+    },
+    "DE": {
+      "code": "DE",
+      "name": "Germany",
+      "eUMember": true
+    },
+    "GH": {
+      "code": "GH",
+      "name": "Ghana",
+      "eUMember": false
+    },
+    "GI": {
+      "code": "GI",
+      "name": "Gibraltar",
+      "eUMember": false
+    },
+    "GR": {
+      "code": "GR",
+      "name": "Greece",
+      "eUMember": true
+    },
+    "GL": {
+      "code": "GL",
+      "name": "Greenland",
+      "eUMember": false
+    },
+    "GD": {
+      "code": "GD",
+      "name": "Grenada",
+      "eUMember": false
+    },
+    "GP": {
+      "code": "GP",
+      "name": "Guadeloupe",
+      "eUMember": false
+    },
+    "GU": {
+      "code": "GU",
+      "name": "Guam",
+      "eUMember": false
+    },
+    "GT": {
+      "code": "GT",
+      "name": "Guatemala",
+      "eUMember": false
+    },
+    "GG": {
+      "code": "GG",
+      "name": "Guernsey",
+      "eUMember": false
+    },
+    "GN": {
+      "code": "GN",
+      "name": "Guinea",
+      "eUMember": false
+    },
+    "GW": {
+      "code": "GW",
+      "name": "Guinea-Bissau",
+      "eUMember": false
+    },
+    "GY": {
+      "code": "GY",
+      "name": "Guyana",
+      "eUMember": false
+    },
+    "HT": {
+      "code": "HT",
+      "name": "Haiti",
+      "eUMember": false
+    },
+    "HM": {
+      "code": "HM",
+      "name": "Heard Island and McDonald Islands",
+      "eUMember": false
+    },
+    "VA": {
+      "code": "VA",
+      "name": "Holy See (the)",
+      "eUMember": false
+    },
+    "HN": {
+      "code": "HN",
+      "name": "Honduras",
+      "eUMember": false
+    },
+    "HK": {
+      "code": "HK",
+      "name": "Hong Kong",
+      "eUMember": false
+    },
+    "HU": {
+      "code": "HU",
+      "name": "Hungary",
+      "eUMember": true
+    },
+    "IS": {
+      "code": "IS",
+      "name": "Iceland",
+      "eUMember": false
+    },
+    "IN": {
+      "code": "IN",
+      "name": "India",
+      "eUMember": false
+    },
+    "ID": {
+      "code": "ID",
+      "name": "Indonesia",
+      "eUMember": false
+    },
+    "IR": {
+      "code": "IR",
+      "name": "Iran (Islamic Republic of)",
+      "eUMember": false
+    },
+    "IQ": {
+      "code": "IQ",
+      "name": "Iraq",
       "eUMember": false
     },
     "IE": {
@@ -52,9 +542,14 @@
       "name": "Ireland",
       "eUMember": true
     },
-    "IN": {
-      "code": "IN",
-      "name": "India",
+    "IM": {
+      "code": "IM",
+      "name": "Isle of Man",
+      "eUMember": false
+    },
+    "IL": {
+      "code": "IL",
+      "name": "Israel",
       "eUMember": false
     },
     "IT": {
@@ -62,9 +557,164 @@
       "name": "Italy",
       "eUMember": true
     },
+    "JM": {
+      "code": "JM",
+      "name": "Jamaica",
+      "eUMember": false
+    },
     "JP": {
       "code": "JP",
       "name": "Japan",
+      "eUMember": false
+    },
+    "JE": {
+      "code": "JE",
+      "name": "Jersey",
+      "eUMember": false
+    },
+    "JO": {
+      "code": "JO",
+      "name": "Jordan",
+      "eUMember": false
+    },
+    "KZ": {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "eUMember": false
+    },
+    "KE": {
+      "code": "KE",
+      "name": "Kenya",
+      "eUMember": false
+    },
+    "KI": {
+      "code": "KI",
+      "name": "Kiribati",
+      "eUMember": false
+    },
+    "KP": {
+      "code": "KP",
+      "name": "Korea (the Democratic People's Republic of)",
+      "eUMember": false
+    },
+    "KR": {
+      "code": "KR",
+      "name": "Korea (the Republic of)",
+      "eUMember": false
+    },
+    "KW": {
+      "code": "KW",
+      "name": "Kuwait",
+      "eUMember": false
+    },
+    "KG": {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "eUMember": false
+    },
+    "LA": {
+      "code": "LA",
+      "name": "Lao People's Democratic Republic (the)",
+      "eUMember": false
+    },
+    "LV": {
+      "code": "LV",
+      "name": "Latvia",
+      "eUMember": true
+    },
+    "LB": {
+      "code": "LB",
+      "name": "Lebanon",
+      "eUMember": false
+    },
+    "LS": {
+      "code": "LS",
+      "name": "Lesotho",
+      "eUMember": false
+    },
+    "LR": {
+      "code": "LR",
+      "name": "Liberia",
+      "eUMember": false
+    },
+    "LY": {
+      "code": "LY",
+      "name": "Libya",
+      "eUMember": false
+    },
+    "LI": {
+      "code": "LI",
+      "name": "Liechtenstein",
+      "eUMember": false
+    },
+    "LT": {
+      "code": "LT",
+      "name": "Lithuania",
+      "eUMember": true
+    },
+    "LU": {
+      "code": "LU",
+      "name": "Luxembourg",
+      "eUMember": true
+    },
+    "MO": {
+      "code": "MO",
+      "name": "Macao",
+      "eUMember": false
+    },
+    "MG": {
+      "code": "MG",
+      "name": "Madagascar",
+      "eUMember": false
+    },
+    "MW": {
+      "code": "MW",
+      "name": "Malawi",
+      "eUMember": false
+    },
+    "MY": {
+      "code": "MY",
+      "name": "Malaysia",
+      "eUMember": false
+    },
+    "MV": {
+      "code": "MV",
+      "name": "Maldives",
+      "eUMember": false
+    },
+    "ML": {
+      "code": "ML",
+      "name": "Mali",
+      "eUMember": false
+    },
+    "MT": {
+      "code": "MT",
+      "name": "Malta",
+      "eUMember": true
+    },
+    "MH": {
+      "code": "MH",
+      "name": "Marshall Islands (the)",
+      "eUMember": false
+    },
+    "MQ": {
+      "code": "MQ",
+      "name": "Martinique",
+      "eUMember": false
+    },
+    "MR": {
+      "code": "MR",
+      "name": "Mauritania",
+      "eUMember": false
+    },
+    "MU": {
+      "code": "MU",
+      "name": "Mauritius",
+      "eUMember": false
+    },
+    "YT": {
+      "code": "YT",
+      "name": "Mayotte",
       "eUMember": false
     },
     "MX": {
@@ -72,9 +722,174 @@
       "name": "Mexico",
       "eUMember": false
     },
+    "FM": {
+      "code": "FM",
+      "name": "Micronesia (Federated States of)",
+      "eUMember": false
+    },
+    "MD": {
+      "code": "MD",
+      "name": "Moldova (the Republic of)",
+      "eUMember": false
+    },
+    "MC": {
+      "code": "MC",
+      "name": "Monaco",
+      "eUMember": false
+    },
+    "MN": {
+      "code": "MN",
+      "name": "Mongolia",
+      "eUMember": false
+    },
+    "ME": {
+      "code": "ME",
+      "name": "Montenegro",
+      "eUMember": false
+    },
+    "MS": {
+      "code": "MS",
+      "name": "Montserrat",
+      "eUMember": false
+    },
+    "MA": {
+      "code": "MA",
+      "name": "Morocco",
+      "eUMember": false
+    },
+    "MZ": {
+      "code": "MZ",
+      "name": "Mozambique",
+      "eUMember": false
+    },
+    "MM": {
+      "code": "MM",
+      "name": "Myanmar",
+      "eUMember": false
+    },
+    "NA": {
+      "code": "NA",
+      "name": "Namibia",
+      "eUMember": false
+    },
+    "NR": {
+      "code": "NR",
+      "name": "Naoero",
+      "eUMember": false
+    },
+    "NP": {
+      "code": "NP",
+      "name": "Nepal",
+      "eUMember": false
+    },
     "NL": {
       "code": "NL",
-      "name": "Netherlands",
+      "name": "Netherlands (Kingdom of the)",
+      "eUMember": true
+    },
+    "NC": {
+      "code": "NC",
+      "name": "New Caledonia",
+      "eUMember": false
+    },
+    "NZ": {
+      "code": "NZ",
+      "name": "New Zealand",
+      "eUMember": false
+    },
+    "NI": {
+      "code": "NI",
+      "name": "Nicaragua",
+      "eUMember": false
+    },
+    "NE": {
+      "code": "NE",
+      "name": "Niger (the)",
+      "eUMember": false
+    },
+    "NG": {
+      "code": "NG",
+      "name": "Nigeria",
+      "eUMember": false
+    },
+    "NU": {
+      "code": "NU",
+      "name": "Niue",
+      "eUMember": false
+    },
+    "NF": {
+      "code": "NF",
+      "name": "Norfolk Island",
+      "eUMember": false
+    },
+    "MK": {
+      "code": "MK",
+      "name": "North Macedonia",
+      "eUMember": false
+    },
+    "MP": {
+      "code": "MP",
+      "name": "Northern Mariana Islands (the)",
+      "eUMember": false
+    },
+    "NO": {
+      "code": "NO",
+      "name": "Norway",
+      "eUMember": false
+    },
+    "OM": {
+      "code": "OM",
+      "name": "Oman",
+      "eUMember": false
+    },
+    "PK": {
+      "code": "PK",
+      "name": "Pakistan",
+      "eUMember": false
+    },
+    "PW": {
+      "code": "PW",
+      "name": "Palau",
+      "eUMember": false
+    },
+    "PS": {
+      "code": "PS",
+      "name": "Palestine, State of",
+      "eUMember": false
+    },
+    "PA": {
+      "code": "PA",
+      "name": "Panama",
+      "eUMember": false
+    },
+    "PG": {
+      "code": "PG",
+      "name": "Papua New Guinea",
+      "eUMember": false
+    },
+    "PY": {
+      "code": "PY",
+      "name": "Paraguay",
+      "eUMember": false
+    },
+    "PE": {
+      "code": "PE",
+      "name": "Peru",
+      "eUMember": false
+    },
+    "PH": {
+      "code": "PH",
+      "name": "Philippines (the)",
+      "eUMember": false
+    },
+    "PN": {
+      "code": "PN",
+      "name": "Pitcairn",
+      "eUMember": false
+    },
+    "PL": {
+      "code": "PL",
+      "name": "Poland",
       "eUMember": true
     },
     "PT": {
@@ -82,9 +897,109 @@
       "name": "Portugal",
       "eUMember": true
     },
+    "PR": {
+      "code": "PR",
+      "name": "Puerto Rico",
+      "eUMember": false
+    },
+    "QA": {
+      "code": "QA",
+      "name": "Qatar",
+      "eUMember": false
+    },
+    "RE": {
+      "code": "RE",
+      "name": "Réunion",
+      "eUMember": false
+    },
+    "RO": {
+      "code": "RO",
+      "name": "Romania",
+      "eUMember": true
+    },
+    "RU": {
+      "code": "RU",
+      "name": "Russian Federation (the)",
+      "eUMember": false
+    },
+    "RW": {
+      "code": "RW",
+      "name": "Rwanda",
+      "eUMember": false
+    },
+    "BL": {
+      "code": "BL",
+      "name": "Saint Barthélemy",
+      "eUMember": false
+    },
+    "SH": {
+      "code": "SH",
+      "name": "Saint Helena",
+      "eUMember": false
+    },
+    "KN": {
+      "code": "KN",
+      "name": "Saint Kitts and Nevis",
+      "eUMember": false
+    },
+    "LC": {
+      "code": "LC",
+      "name": "Saint Lucia",
+      "eUMember": false
+    },
+    "MF": {
+      "code": "MF",
+      "name": "Saint Martin (French part)",
+      "eUMember": false
+    },
+    "PM": {
+      "code": "PM",
+      "name": "Saint Pierre and Miquelon",
+      "eUMember": false
+    },
+    "VC": {
+      "code": "VC",
+      "name": "Saint Vincent and the Grenadines",
+      "eUMember": false
+    },
+    "WS": {
+      "code": "WS",
+      "name": "Samoa",
+      "eUMember": false
+    },
+    "SM": {
+      "code": "SM",
+      "name": "San Marino",
+      "eUMember": false
+    },
+    "ST": {
+      "code": "ST",
+      "name": "Sao Tome and Principe",
+      "eUMember": false
+    },
     "SA": {
       "code": "SA",
       "name": "Saudi Arabia",
+      "eUMember": false
+    },
+    "SN": {
+      "code": "SN",
+      "name": "Senegal",
+      "eUMember": false
+    },
+    "RS": {
+      "code": "RS",
+      "name": "Serbia",
+      "eUMember": false
+    },
+    "SC": {
+      "code": "SC",
+      "name": "Seychelles",
+      "eUMember": false
+    },
+    "SL": {
+      "code": "SL",
+      "name": "Sierra Leone",
       "eUMember": false
     },
     "SG": {
@@ -92,14 +1007,244 @@
       "name": "Singapore",
       "eUMember": false
     },
+    "SX": {
+      "code": "SX",
+      "name": "Sint Maarten (Dutch part)",
+      "eUMember": false
+    },
+    "SK": {
+      "code": "SK",
+      "name": "Slovakia",
+      "eUMember": true
+    },
+    "SI": {
+      "code": "SI",
+      "name": "Slovenia",
+      "eUMember": true
+    },
+    "SB": {
+      "code": "SB",
+      "name": "Solomon Islands",
+      "eUMember": false
+    },
+    "SO": {
+      "code": "SO",
+      "name": "Somalia",
+      "eUMember": false
+    },
     "ZA": {
       "code": "ZA",
       "name": "South Africa",
       "eUMember": false
     },
+    "GS": {
+      "code": "GS",
+      "name": "South Georgia and the South Sandwich Islands",
+      "eUMember": false
+    },
+    "SS": {
+      "code": "SS",
+      "name": "South Sudan",
+      "eUMember": false
+    },
+    "ES": {
+      "code": "ES",
+      "name": "Spain",
+      "eUMember": true
+    },
+    "LK": {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "eUMember": false
+    },
+    "SD": {
+      "code": "SD",
+      "name": "Sudan (the)",
+      "eUMember": false
+    },
+    "SR": {
+      "code": "SR",
+      "name": "Suriname",
+      "eUMember": false
+    },
+    "SJ": {
+      "code": "SJ",
+      "name": "Svalbard",
+      "eUMember": false
+    },
+    "SE": {
+      "code": "SE",
+      "name": "Sweden",
+      "eUMember": true
+    },
+    "CH": {
+      "code": "CH",
+      "name": "Switzerland",
+      "eUMember": false
+    },
+    "SY": {
+      "code": "SY",
+      "name": "Syrian Arab Republic (the)",
+      "eUMember": false
+    },
+    "TW": {
+      "code": "TW",
+      "name": "Taiwan Taiwan (Province of China)",
+      "eUMember": false
+    },
+    "TJ": {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "eUMember": false
+    },
+    "TZ": {
+      "code": "TZ",
+      "name": "Tanzania, the United Republic of",
+      "eUMember": false
+    },
+    "TH": {
+      "code": "TH",
+      "name": "Thailand",
+      "eUMember": false
+    },
+    "TL": {
+      "code": "TL",
+      "name": "Timor-Leste",
+      "eUMember": false
+    },
+    "TG": {
+      "code": "TG",
+      "name": "Togo",
+      "eUMember": false
+    },
+    "TK": {
+      "code": "TK",
+      "name": "Tokelau",
+      "eUMember": false
+    },
+    "TO": {
+      "code": "TO",
+      "name": "Tonga",
+      "eUMember": false
+    },
+    "TT": {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "eUMember": false
+    },
+    "TN": {
+      "code": "TN",
+      "name": "Tunisia",
+      "eUMember": false
+    },
+    "TR": {
+      "code": "TR",
+      "name": "Türkiye",
+      "eUMember": false
+    },
+    "TM": {
+      "code": "TM",
+      "name": "Turkmenistan",
+      "eUMember": false
+    },
+    "TC": {
+      "code": "TC",
+      "name": "Turks and Caicos Islands (the)",
+      "eUMember": false
+    },
+    "TV": {
+      "code": "TV",
+      "name": "Tuvalu",
+      "eUMember": false
+    },
+    "UG": {
+      "code": "UG",
+      "name": "Uganda",
+      "eUMember": false
+    },
+    "UA": {
+      "code": "UA",
+      "name": "Ukraine",
+      "eUMember": false
+    },
+    "AE": {
+      "code": "AE",
+      "name": "United Arab Emirates (the)",
+      "eUMember": false
+    },
+    "GB": {
+      "code": "GB",
+      "name": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "eUMember": false
+    },
+    "UM": {
+      "code": "UM",
+      "name": "United States Minor Outlying Islands (the)",
+      "eUMember": false
+    },
     "US": {
       "code": "US",
-      "name": "United States",
+      "name": "United States of America (the)",
+      "eUMember": false
+    },
+    "UY": {
+      "code": "UY",
+      "name": "Uruguay",
+      "eUMember": false
+    },
+    "UZ": {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "eUMember": false
+    },
+    "VU": {
+      "code": "VU",
+      "name": "Vanuatu",
+      "eUMember": false
+    },
+    "VE": {
+      "code": "VE",
+      "name": "Venezuela (Bolivarian Republic of)",
+      "eUMember": false
+    },
+    "VN": {
+      "code": "VN",
+      "name": "Viet Nam",
+      "eUMember": false
+    },
+    "VG": {
+      "code": "VG",
+      "name": "Virgin Islands (British)",
+      "eUMember": false
+    },
+    "VI": {
+      "code": "VI",
+      "name": "Virgin Islands (U.S.)",
+      "eUMember": false
+    },
+    "WF": {
+      "code": "WF",
+      "name": "Wallis and Futuna",
+      "eUMember": false
+    },
+    "EH": {
+      "code": "EH",
+      "name": "Western Sahara",
+      "eUMember": false
+    },
+    "YE": {
+      "code": "YE",
+      "name": "Yemen",
+      "eUMember": false
+    },
+    "ZM": {
+      "code": "ZM",
+      "name": "Zambia",
+      "eUMember": false
+    },
+    "ZW": {
+      "code": "ZW",
+      "name": "Zimbabwe",
       "eUMember": false
     }
   }
