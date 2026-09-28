@@ -58,6 +58,7 @@ let sellingEntitiesData = null;
 let vatRulesData = null;
 let taxTerritoriesData = null;
 let countriesData = null;
+let charterValue = 0;
 
 // ═══════════════════════════════════════════════════════════
 //  2. DATA LOADING
@@ -109,6 +110,7 @@ async function loadData() {
     initialiseCustomerTypeSelector();
     initialiseVatRegisteredSelector();
     syncVatRegisteredState();
+    initialiseCharterValueInput();
 
     const vatSelect =
     document.getElementById(
@@ -672,6 +674,54 @@ function renderVatSectorResults(
                         distancePercentage.toFixed(2) + "%"
                     )}
 
+                    ${createVatResultRow(
+                        "Allocated Value",
+                        allocatedNetValue
+                        .toLocaleString(
+                        undefined,
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                    )
+                    )}
+
+                    ${createVatResultRow(
+                    "Taxable Amount",
+                    taxableValue
+                    .toLocaleString(
+                    undefined,
+                      {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                      }
+                    )
+                    )}
+
+                    ${createVatResultRow(
+                    "VAT Amount",
+                    vatAmount
+                      .toLocaleString(
+                      undefined,
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                      )
+                      )}
+
+                     ${createVatResultRow(
+                      "Gross Amount",
+                      grossValue
+                      .toLocaleString(
+                      undefined,
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                        )
+                      )} 
+
                 </div>
 
             </div>
@@ -751,6 +801,27 @@ function populateSellingEntityDropdown() {
 
             selectedEntity =
                 event.target.value;
+
+            runVatTest();
+        }
+    );
+}
+
+function initialiseCharterValueInput() {
+
+    const input =
+        document.getElementById(
+            "charterValueInput"
+        );
+
+    input.addEventListener(
+        "input",
+        event => {
+
+            charterValue =
+                Number(
+                    event.target.value
+                ) || 0;
 
             runVatTest();
         }
@@ -1282,6 +1353,33 @@ function runVatTests() {
         distancePercentages.push(distancePercentage);
     });
 
+    const allocatedNetValue =
+    charterValue *
+    (
+        distancePercentages[index] /
+        100
+    );
+
+    const taxablePercent =
+    matchedRule
+        ? matchedRule.taxablePercent
+        : 0;
+
+    const taxableValue =
+    allocatedNetValue *
+    taxablePercent;
+
+    const vatAmount =
+    matchedRule
+        ? taxableValue *
+          matchedRule.rate
+        : 0;
+
+    const grossValue =
+    allocatedNetValue +
+    vatAmount;
+
+
     const results = itinerary.map((sector, index) => {
         const {
             transaction,
@@ -1297,7 +1395,11 @@ function runVatTests() {
             matchedRule,
             distanceNm: sectorDistances[index],
             distancePercentage: distancePercentages[index],
-            totalDistanceNm
+            totalDistanceNm,
+            allocatedNetValue,
+            taxableValue,
+            vatAmount,
+            grossValue
         };
     });
 
