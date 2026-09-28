@@ -1156,3 +1156,31 @@ header::after {
         display: none;
     }
 }
+
+/* ==========================================================
+   CUSTOMER COUNTRY TYPE-AHEAD
+   ========================================================== */
+
+.country-typeahead {
+    cursor: text;
+}
+
+.country-typeahead::placeholder {
+    color: var(--text-muted);
+    opacity: 0.65;
+}
+
+.country-typeahead-status {
+    min-height: 16px;
+    margin-top: 5px;
+
+    font-family: 'Barlow', sans-serif;
+    font-size: 11px;
+
+    color: var(--text-muted);
+}
+
+.country-typeahead-error {
+    color: #b42318;
+    font-weight: 600;
+}
