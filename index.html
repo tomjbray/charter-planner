@@ -75,7 +75,7 @@
       <div id="vatInputsPanel" class="vat-panel">
         <h3>VAT Inputs</h3>
            
-        <div class="vat-input-block">
+            <div class="vat-input-block">
               <label
                   class="vat-input-label"
                   for="sellingEntitySelect">
@@ -91,7 +91,7 @@
                 for="charterTypeSelect">
                 Charter Type
               </label>
-                <select id="charterTypeSelect"
+                  <select id="charterTypeSelect"
                   class="vat-select">
                   <option value="PASSENGER">Passenger</option>
                   <option value="CARGO">Cargo</option>
@@ -109,37 +109,37 @@
               </label>
 
     
+                <select
+                  id="customerTypeSelect"
+                  class="vat-select">
+
+                  <option value="PRIVATE">Private</option>
+                  <option value="BUSINESS">Business</option>
+
+                </select>
+
+              </div>
+
+              <div class="vat-input-block">
+
+                <label
+                  class="vat-input-label"
+                  for="vatRegisteredSelect">
+
+                  VAT Registered
+
+                </label>
+
               <select
-                id="customerTypeSelect"
+                id="vatRegisteredSelect"
                 class="vat-select">
 
-                <option value="PRIVATE">Private</option>
-                <option value="BUSINESS">Business</option>
+                <option value="YES">Yes</option>
+                <option value="NO">No</option>
 
               </select>
 
-            </div>
-
-            <div class="vat-input-block">
-
-              <label
-                class="vat-input-label"
-                for="vatRegisteredSelect">
-
-                VAT Registered
-
-              </label>
-
-            <select
-              id="vatRegisteredSelect"
-              class="vat-select">
-
-              <option value="YES">Yes</option>
-              <option value="NO">No</option>
-
-            </select>
-
-          </div>        
+              </div>        
 
             <div class="vat-input-block">
 
@@ -169,7 +169,25 @@
 
         </div>
             
+        <div class="vat-input-block">
 
+            <label
+                class="vat-input-label"
+                for="charterValueInput">
+
+                Charter Value
+
+            </label>
+
+            <input
+                id="charterValueInput"
+                class="vat-select"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="100000">
+
+          </div>
             
       </div>
     </section>
