@@ -54,6 +54,20 @@
         <input class="iata-input dest" id="destInput" maxlength="3" placeholder="JFK" autocomplete="off" spellcheck="false">
         <div class="airport-detail" id="destInfo"></div>
       </div>
+      <!-- Additional itinerary sectors -->
+      <div
+        id="additionalSectors"
+        class="additional-sectors">
+      </div>
+
+      <button
+        id="addSectorBtn"
+        class="add-sector-btn"
+        type="button">
+
+        + Add Sector
+
+      </button>
     </section>
 
     <!--VAT input panel -->
@@ -215,120 +229,13 @@
       </div>
     </div>
 
-    <!--VAT results panel -->
-
-    <div class="vat-results-row">
-
-    <section class="panel">
-
-  <div id="vatDerivedPanel" class="vat-panel">
-
-    <h3>Derived Rule Inputs</h3>
-
-    <div class="vat-result-row">
-      <span class="vat-result-label">
-        Home Country
-      </span>
-
-      <strong
-        id="derivedHomeCountry"
-        class="vat-result-value">
-      </strong>
-    </div>
-
-    <div class="vat-result-row">
-      <span class="vat-result-label">
-        Customer Region
-      </span>
-
-      <strong
-        id="derivedCustomerRegion"
-        class="vat-result-value">
-      </strong>
-    </div>
-
-    <div class="vat-result-row">
-      <span class="vat-result-label">
-        Origin Territory
-      </span>
-
-      <strong
-        id="derivedOriginTerritory"
-        class="vat-result-value">
-      </strong>
-    </div>
-
-    <div class="vat-result-row">
-      <span class="vat-result-label">
-        Destination Territory
-      </span>
-
-      <strong
-        id="derivedDestinationTerritory"
-        class="vat-result-value">
-      </strong>
-    </div>
-
-    <div class="vat-result-row">
-      <span class="vat-result-label">
-        VAT Registered
-      </span>
-
-      <strong
-        id="derivedVatRegistered"
-        class="vat-result-value">
-      </strong>
-    </div>
-
-  </div>
-
-</section>
-
-<section class='panel'>
-      <div id="vatResultsPanel" class="vat-panel">
-        <h3>VAT Rule Match</h3>
-
-       
-        
-        <div class="vat-result-row">
-            <span class="vat-result-label">Rule ID</span>
-            <strong id="vatRuleId" 
-              class="vat-result-value">-</strong>
-        </div>
-
-        <div class="vat-result-row">
-            <span class="vat-result-label">Treatment</span>
-            <strong id="vatTreatment"
-              class="vat-result-value">-</strong>
-        </div>
-
-        <div class="vat-result-row">
-            <span class="vat-result-label">Rate</span>
-            <strong id="vatRate"
-              class="vat-result-value">-</strong>
-        </div>
-
-        <div class="vat-result-row">
-            <span class="vat-result-label">Priority</span>
-            <strong id="vatPriority"
-              class="vat-result-value">-</strong>
-        </div>
-
-        <div class="vat-result-row">
-          <span class="vat-result-label">Explanation</span>
-          <strong id="vatExplanation"
-            class="vat-result-value"> </strong>   
-        </div>
-
-        <div class="vat-result-row">
-          <span class="vat-result-label">Legal Reference</span>
-          <strong id="vatLegalReference"
-            class="vat-result-value"> </strong>   
-        </div>
-
+  
+    <!-- Per sector VAT results -->
+      <div
+        id="vatSectorResults"
+        class="vat-sector-results">
       </div>
-    </section>
-    </div>
+    
     <!-- Aircraft results -->
     <div class="results-area" id="resultsArea" style="display:none">
       <div class="results-header">
