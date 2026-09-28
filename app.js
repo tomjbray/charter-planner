@@ -810,45 +810,16 @@ function initialiseCharterTypeSelector() {
 }
 
 function initialiseCustomerTypeSelector() {
+    const selector = document.getElementById("customerTypeSelect");
 
-    const selector =
-        document.getElementById(
-            "customerTypeSelect"
-        );
+    selector.value = selectedCustomerType;
 
-    selector.value =
-        selectedCustomerType;
-
-    selector.addEventListener(
-        "change",
-        event => {
-
-            selectedCustomerType =
-                event.target.value;
-
-      syncVatRegisteredState();
-
-
-if (selectedCustomerType === "PRIVATE") {
-
-    selectedVatRegistered = "NO";
-
-    vatSelect.value = "NO";
-    vatSelect.disabled = true;
-
-} else {
-
-    selectedVatRegistered = "YES";
-
-    vatSelect.value = "YES";
-    vatSelect.disabled = false;
+    selector.addEventListener("change", event => {
+        selectedCustomerType = event.target.value;
+        syncVatRegisteredState();
+        runVatTest();
+    });
 }
-          
-            runVatTest();
-        }
-    );
-}
-
 
 function initialiseVatRegisteredSelector() {
 
@@ -947,46 +918,26 @@ function syncVatRegisteredState() {
 //  return matchedRule;
 //}
 
-function buildVatTransaction(
-    sector
-) {
-
-    const homeCountry =
-        getEntityCountry(
-            selectedEntity
-        );
+function buildVatTransaction(sector) {
+    const homeCountry = getEntityCountry(selectedEntity);
 
     const transaction = {
-
-        entity:
-            selectedEntity,
-
-        charterType:
-            selectedCharterType,
-
-        customerType:
-            selectedCustomerType,
-
-        customerLocation:
-            getRuleRegion(
-                selectedCustomerCountry,
-                homeCountry
-            ),
-
-        vatRegistered:
-            selectedVatRegistered,
-
-        originTerritory:
-            getRuleRegion(
-                sector.origin.country,
-                homeCountry
-            ),
-
-        destinationTerritory:
-            getRuleRegion(
-                sector.destination.country,
-                homeCountry
-            )
+        entity: selectedEntity,
+        charterType: selectedCharterType,
+        customerType: selectedCustomerType,
+        customerLocation: getRuleRegion(
+            selectedCustomerCountry,
+            homeCountry
+        ),
+        vatRegistered: selectedVatRegistered,
+        originTerritory: getRuleRegion(
+            sector.origin.country,
+            homeCountry
+        ),
+        destinationTerritory: getRuleRegion(
+            sector.destination.country,
+            homeCountry
+        )
     };
 
     return {
@@ -995,79 +946,51 @@ function buildVatTransaction(
     };
 }
 
-
 function runVatTests() {
-
-    if (
-        itinerary.length === 0 ||
-        !vatRulesData
-    ) {
+    if (itinerary.length === 0 || !vatRulesData) {
         clearVatSectorResults();
         return [];
     }
 
-    const results =
-        itinerary.map(
-            sector => {
+    const results = itinerary.map(sector => {
+        const {
+            transaction,
+            homeCountry
+        } = buildVatTransaction(sector);
 
-                const {
-                    transaction,
-                    homeCountry
-                } =
-                    buildVatTransaction(
-                        sector
-                    );
+        const matchedRule = findMatchingRule(transaction);
 
-                const matchedRule =
-                    findMatchingRule(
-                        transaction
-                    );
+        return {
+            sector,
+            transaction,
+            homeCountry,
+            matchedRule
+        };
+    });
 
-                return {
-                    sector,
-                    transaction,
-                    homeCountry,
-                    matchedRule
-                };
-            }
-        );
-
-    renderVatSectorResults(
-        results
-    );
-
+    renderVatSectorResults(results);
     return results;
 }
 
-
 /*
  * Compatibility wrapper.
- *
- * Existing input event handlers already call
- * runVatTest(), so keep this function for now.
+ * Existing VAT input handlers call runVatTest().
  */
 function runVatTest() {
-
-    ret*rn runVatTests();
+    return runVatTests();
 }
-
 
 // ═══════════════════════════════════════════════════════════
 //  5. MULTI-SECTOR ITINERARY CONTROLS
 // ═══════════════════════════════════════════════════════════
-
 function addSector() {
-
-    const previousDestination =
-        getPreviousSectorDestination();
+    const previousDestination = getPreviousSectorDestination();
 
     const sector = {
         id: nextSectorId,
-        originCode:
-            previousDestination?.iata || "",
+        originCode: previousDestination?.iata || "",
         destinationCode: "",
-        origin:
-            previousDestination || null,
+        origin: previousDestination || null,
         destination: null
     };
 
@@ -1075,178 +998,78 @@ function addSector() {
     nextSectorId++;
 
     renderAdditionalSectors();
-function buildItinerary() {
-
-    itinerary = [];
-
-    /*
-     * Sector 1 comes from the existing main
-     * Origin and Destination controls.
-     */
-    if (
-        origAirport &&
-        destAirport
-    ) {
-        itinerary.push({
-            sectorNumber: 1,
-            origin: origAirport,
-            destination: destAirport
-        });
-    }
-
-    /*
-     * Sector 2 onwards come from
-     * additionalSectors.
-     *
-     * Only complete, valid sectors are added
-     * to the working itinerary.
-     */
-    additionalSectors.forEach(
-        sector => {
-
-            if (
-                sector.origin &&
-                sector.destination
-            ) {
-                itinerary.push({
-                    sectorNumber:
-                        itinerary.length + 1,
-
-                    origin:
-                        sector.origin,
-
-                    destination:
-                        sector.destination
-                });
-            }
-        }
-    );
-
-    if (itinerary.length === 0) {
-
-        clearVatSectorResults();
-        displayVatRule(null);
-
-        return itinerary;
-    }
-
-    plotItinerary();
-
-    runVatTests();
-
-    return itinerary;
+    buildItinerary();
 }
 
+function removeSector(sectorId) {
+    additionalSectors = additionalSectors.filter(
+        sector => sector.id !== sectorId
+    );
+
+    renderAdditionalSectors();
+    buildItinerary();
+}
 
 function getPreviousSectorDestination() {
-
     if (additionalSectors.length > 0) {
-
-        return additionalSectors[
-            additionalSectors.length - 1
-        ].destination;
+        return additionalSectors[additionalSectors.length - 1].destination;
     }
 
     return destAirport;
 }
 
-
-function updateAdditionalSectorAirport(
-    sectorId,
-    field,
-    value
-) {
-
-    const sector =
-        additionalSectors.find(
-            item =>
-                item.id === sectorId
-        );
-
-    if (!sector) {
-        return;
-    }
-
-    const cleanCode =
-        value
-            .trim()
-            .toUpperCase();
-
-    const airport =
-        cleanCode.length === 3
-            ? getAirport(cleanCode)
-            : null;
-
-    if (field === "origin") {
-
-        sector.originCode =
-            cleanCode;
-
-        sector.origin =
-            airport;
-
-    } else {
-
-        sector.destinationCode =
-            cleanCode;
-
-        sector.destination =
-            airport;
-    }
-
-    renderAdditionalSectorStatus(
-        sector,
-        field
+function updateAdditionalSectorAirport(sectorId, field, value) {
+    const sector = additionalSectors.find(
+        item => item.id === sectorId
     );
 
+    if (!sector) return;
+
+    const cleanCode = value.trim().toUpperCase();
+    const airport = cleanCode.length === 3
+        ? getAirport(cleanCode)
+        : null;
+
+    if (field === "origin") {
+        sector.originCode = cleanCode;
+        sector.origin = airport;
+    } else {
+        sector.destinationCode = cleanCode;
+        sector.destination = airport;
+    }
+
+    renderAdditionalSectorStatus(sector, field);
     buildItinerary();
 }
 
+function renderAdditionalSectorStatus(sector, field) {
+    const infoElement = document.getElementById(
+        `sector-${sector.id}-${field}-info`
+    );
 
-function renderAdditionalSectorStatus(
-    sector,
-    field
-) {
+    if (!infoElement) return;
 
-    const infoElement =
-        document.getElementById(
-            `sector-${sector.id}-${field}-info`
-        );
+    const airport = field === "origin"
+        ? sector.origin
+        : sector.destination;
 
-    if (!infoElement) {
-        return;
-    }
-
-    const airport =
-        field === "origin"
-            ? sector.origin
-            : sector.destination;
-
-    const code =
-        field === "origin"
-            ? sector.originCode
-            : sector.destinationCode;
+    const code = field === "origin"
+        ? sector.originCode
+        : sector.destinationCode;
 
     if (code.length < 3) {
-
         infoElement.textContent = "";
         return;
     }
 
     if (!airport) {
-
         infoElement.innerHTML =
-            '<div class="apt-error">' +
-            'Code not found' +
-            '</div>';
-
+            '<div class="apt-error">Code not found</div>';
         return;
     }
 
     infoElement.innerHTML =
-        '<div class="apt-name">' +
-        airport.name +
-        '</div>' +
+        '<div class="apt-name">' + airport.name + '</div>' +
         '<div class="apt-meta">' +
         (airport.city || '') +
         (airport.city ? ' · ' : '') +
@@ -1254,206 +1077,149 @@ function renderAdditionalSectorStatus(
         '</div>';
 }
 
-
 function renderAdditionalSectors() {
-
-    const container =
-        document.getElementById(
-            "additionalSectors"
-        );
+    const container = document.getElementById("additionalSectors");
+    if (!container) return;
 
     container.innerHTML = "";
 
-    additionalSectors.forEach(
-        (sector, index) => {
+    additionalSectors.forEach((sector, index) => {
+        const sectorNumber = index + 2;
+        const element = document.createElement("div");
 
-            const sectorNumber =
-                index + 2;
+        element.className = "additional-sector-card";
+        element.innerHTML = `
+            <div class="additional-sector-header">
+                <span>Sector ${sectorNumber}</span>
 
-            const element =
-                document.createElement(
-                    "div"
-                );
+                <button
+                    type="button"
+                    class="remove-sector-btn"
+                    data-sector-id="${sector.id}"
+                    aria-label="Remove Sector ${sectorNumber}">
+                    Remove
+                </button>
+            </div>
 
-            element.className =
-                "additional-sector-card";
+            <div class="additional-sector-fields">
+                <div class="additional-sector-field">
+                    <label for="sector-${sector.id}-origin">
+                        Origin
+                    </label>
 
-            element.innerHTML = `
-                <div class="additional-sector-header">
+                    <input
+                        id="sector-${sector.id}-origin"
+                        class="sector-iata-input"
+                        maxlength="3"
+                        autocomplete="off"
+                        spellcheck="false"
+                        value="${escapeHtml(sector.originCode)}"
+                        placeholder="LBG">
 
-                    <span>
-                        Sector ${sectorNumber}
-                    </span>
-
-                    <button
-                        type="button"
-                        class="remove-sector-btn"
-                        data-sector-id="${sector.id}"
-                        aria-label="Remove Sector ${sectorNumber}">
-
-                        Remove
-
-                    </button>
-
+                    <div
+                        id="sector-${sector.id}-origin-info"
+                        class="airport-detail">
+                    </div>
                 </div>
 
-                <div class="additional-sector-fields">
+                <div class="sector-arrow">→</div>
 
-                    <div class="additional-sector-field">
+                <div class="additional-sector-field">
+                    <label for="sector-${sector.id}-destination">
+                        Destination
+                    </label>
 
-                        <label
-                            for="sector-${sector.id}-origin">
+                    <input
+                        id="sector-${sector.id}-destination"
+                        class="sector-iata-input"
+                        maxlength="3"
+                        autocomplete="off"
+                        spellcheck="false"
+                        value="${escapeHtml(sector.destinationCode)}"
+                        placeholder="FRA">
 
-                            Origin
-
-                        </label>
-
-                        <input
-                            id="sector-${sector.id}-origin"
-                            class="sector-iata-input"
-                            maxlength="3"
-                            autocomplete="off"
-                            spellcheck="false"
-                            value="${sector.originCode}"
-                            placeholder="LBG">
-
-                        <div
-                            id="sector-${sector.id}-origin-info"
-                            class="airport-detail">
-                        </div>
-
+                    <div
+                        id="sector-${sector.id}-destination-info"
+                        class="airport-detail">
                     </div>
-
-                    <div class="sector-arrow">
-                        →
-                    </div>
-
-                    <div class="additional-sector-field">
-
-                        <label
-                            for="sector-${sector.id}-destination">
-
-                            Destination
-
-                        </label>
-
-                        <input
-                            id="sector-${sector.id}-destination"
-                            class="sector-iata-input"
-                            maxlength="3"
-                            autocomplete="off"
-                            spellcheck="false"
-                            value="${sector.destinationCode}"
-                            placeholder="FRA">
-
-                        <div
-                            id="sector-${sector.id}-destination-info"
-                            class="airport-detail">
-                        </div>
-
-                    </div>
-
                 </div>
-            `;
+            </div>
+        `;
 
-            container.appendChild(
-                element
+        container.appendChild(element);
+
+        const originInput = element.querySelector(
+            `#sector-${sector.id}-origin`
+        );
+
+        const destinationInput = element.querySelector(
+            `#sector-${sector.id}-destination`
+        );
+
+        const removeButton = element.querySelector(
+            ".remove-sector-btn"
+        );
+
+        originInput.addEventListener("input", event => {
+            updateAdditionalSectorAirport(
+                sector.id,
+                "origin",
+                event.target.value
             );
+        });
 
-            const originInput =
-                element.querySelector(
-                    `#sector-${sector.id}-origin`
-                );
-
-            const destinationInput =
-                element.querySelector(
-                    `#sector-${sector.id}-destination`
-                );
-
-            const removeButton =
-                element.querySelector(
-                    ".remove-sector-btn"
-                );
-
-            originInput.addEventListener(
-                "input",
-                event => {
-
-                    updateAdditionalSectorAirport(
-                        sector.id,
-                        "origin",
-                        event.target.value
-                    );
-                }
+        destinationInput.addEventListener("input", event => {
+            updateAdditionalSectorAirport(
+                sector.id,
+                "destination",
+                event.target.value
             );
+        });
 
-            destinationInput.addEventListener(
-                "input",
-                event => {
+        removeButton.addEventListener("click", () => {
+            removeSector(sector.id);
+        });
 
-                    updateAdditionalSectorAirport(
-                        sector.id,
-                        "destination",
-                        event.target.value
-                    );
-                }
-            );
-
-            removeButton.addEventListener(
-                "click",
-                () => {
-
-                    removeSector(
-                        sector.id
-                    );
-                }
-            );
-
-            renderAdditionalSectorStatus(
-                sector,
-                "origin"
-            );
-
-            renderAdditionalSectorStatus(
-                sector,
-                "destination"
-            );
-        }
-    );
+        renderAdditionalSectorStatus(sector, "origin");
+        renderAdditionalSectorStatus(sector, "destination");
+    });
 }
+
 // ═══════════════════════════════════════════════════════════
 //  6. ITINERARY BUILDING
 // ═══════════════════════════════════════════════════════════
-
 function buildItinerary() {
-  if (!origAirport || !destAirport) {
     itinerary = [];
-    displayVatRule(null);
+
+    if (origAirport && destAirport) {
+        itinerary.push({
+            sectorNumber: 1,
+            origin: origAirport,
+            destination: destAirport
+        });
+    }
+
+    additionalSectors.forEach(sector => {
+        if (sector.origin && sector.destination) {
+            itinerary.push({
+                sectorNumber: itinerary.length + 1,
+                origin: sector.origin,
+                destination: sector.destination
+            });
+        }
+    });
+
+    if (itinerary.length === 0) {
+        clearRoute();
+        clearVatSectorResults();
+        return itinerary;
+    }
+
+    plotItinerary();
+    runVatTests();
+
     return itinerary;
-  }
-
-  // The current UI supplies one sector. Future additional sectors will be
-  // appended to this array without changing the VAT engine's sector model.
-  itinerary = [
-    {
-      sectorNumber: 1,
-      origin: origAirport,
-      destination: destAirport,
-    },
-  ];
-
-  console.table(
-    itinerary.map(sector => ({
-      Sector: sector.sectorNumber,
-      Origin: sector.origin.iata,
-      Destination: sector.destination.iata,
-    }))
-  );
-
-  runVatTest();
-  return itinerary;
 }
-
 // ═══════════════════════════════════════════════════════════
 //  7. AIRPORT LOOKUP
 // ═══════════════════════════════════════════════════════════
@@ -2426,7 +2192,6 @@ function updateUI() {
     document.getElementById('summaryKm').textContent   = Math.round(distKm).toLocaleString();
     document.getElementById('summaryPax').textContent  = paxCount;
     document.getElementById('summaryRwy').textContent  = '—';  // updated after matching
-    document.getElementById('addSectorBtn').addEventListener("click",addSector);
 
 //    plotRoute(origAirport, destAirport);
   } 
@@ -2455,6 +2220,8 @@ document.getElementById('origInput').addEventListener('input', function() {
 document.getElementById('destInput').addEventListener('input', function() {
   lookupAirport(this.value, document.getElementById('destInfo'), false);
 });
+
+document.getElementById('addSectorBtn').addEventListener('click', addSector);
 
 // Passenger buttons
 document.getElementById('paxDown').addEventListener('click', () => {
