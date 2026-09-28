@@ -511,7 +511,10 @@ function renderVatSectorResults(
             sector,
             transaction,
             homeCountry,
-            matchedRule
+            matchedRule,
+            distanceNm,
+            distancePercentage,
+            totalDistanceNm
         } = result;
 
         const card =
@@ -652,6 +655,21 @@ function renderVatSectorResults(
                     ${createVatResultRow(
                         "Legal Reference",
                         legalReference
+                    )}
+
+                    ${createVatResultRow(
+                        "Sector Distance",
+                        Math.round(distanceNm).toLocaleString() + " nm"
+                    )}
+
+                    ${createVatResultRow(
+                        "Itinerary Distance",
+                        Math.round(totalDistanceNm).toLocaleString() + " nm"
+                    )}
+
+                    ${createVatResultRow(
+                        "Distance Allocation",
+                        distancePercentage.toFixed(2) + "%"
                     )}
 
                 </div>
@@ -952,7 +970,61 @@ function runVatTests() {
         return [];
     }
 
-    const results = itinerary.map(sector => {
+    /*
+     * Calculate each sector's great-circle distance using the
+     * existing distance function used elsewhere in the planner.
+     */
+    const sectorDistances = itinerary.map(sector => {
+        return haversineNm(
+            sector.origin.lat,
+            sector.origin.lon,
+            sector.destination.lat,
+            sector.destination.lon
+        );
+    });
+
+    const totalDistanceNm = sectorDistances.reduce(
+        (total, distance) => total + distance,
+        0
+    );
+
+    /*
+     * Round displayed allocations to two decimal places.
+     * Give the final sector the balance so displayed percentages
+     * always add up to exactly 100.00%.
+     */
+    const distancePercentages = [];
+    let allocatedPercentage = 0;
+
+    sectorDistances.forEach((distanceNm, index) => {
+        const isFinalSector =
+            index === sectorDistances.length - 1;
+
+        let distancePercentage;
+
+        if (isFinalSector) {
+            distancePercentage = Math.max(
+                0,
+                Number((100 - allocatedPercentage).toFixed(2))
+            );
+        } else {
+            distancePercentage = totalDistanceNm > 0
+                ? Number(
+                    (
+                        distanceNm /
+                        totalDistanceNm *
+                        100
+                    ).toFixed(2)
+                )
+                : 0;
+
+            allocatedPercentage += distancePercentage;
+        }
+
+        distancePercentages.push(distancePercentage);
+    });
+
+    const results = itinerary.map((sector, index) => {
         const {
             transaction,
             homeCountry
@@ -964,7 +1036,10 @@ function runVatTests() {
             sector,
             transaction,
             homeCountry,
-            matchedRule
+            matchedRule,
+            distanceNm: sectorDistances[index],
+            distancePercentage: distancePercentages[index],
+            totalDistanceNm
         };
     });
 
