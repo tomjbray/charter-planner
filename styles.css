@@ -978,3 +978,181 @@ header::after {
 
 }
 
+/* ==========================================================
+   MULTI-SECTOR ITINERARY
+   ========================================================== */
+
+.additional-sectors {
+    margin-top: 14px;
+}
+
+.additional-sector-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.additional-sector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+.additional-sector-fields {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: start;
+}
+
+.additional-sector-field label {
+    display: block;
+    margin-bottom: 4px;
+
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.sector-iata-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--border-lt);
+    background: transparent;
+    outline: none;
+
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+.sector-iata-input:focus {
+    border-color: var(--gold);
+}
+
+.sector-arrow {
+    padding-top: 23px;
+    color: var(--gold);
+}
+
+.add-sector-btn,
+.remove-sector-btn {
+    border: 1px solid var(--gold-dim);
+    background: transparent;
+    border-radius: 4px;
+    color: var(--gold);
+    cursor: pointer;
+
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.add-sector-btn {
+    width: 100%;
+    padding: 9px 12px;
+    margin-top: 4px;
+}
+
+.remove-sector-btn {
+    padding: 3px 7px;
+    font-size: 9px;
+}
+
+.add-sector-btn:hover,
+.remove-sector-btn:hover {
+    background: rgba(154, 114, 53, 0.08);
+}
+
+
+/* ==========================================================
+   PER-SECTOR VAT RESULTS
+   ========================================================== */
+
+.vat-sector-results {
+    padding: 16px;
+    background: var(--bg);
+}
+
+.vat-sector-card {
+    margin-bottom: 16px;
+}
+
+.vat-sector-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.vat-sector-heading strong {
+    color: var(--gold);
+    font-size: 16px;
+}
+
+.vat-sector-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    padding: 16px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 0 0 6px 6px;
+}
+
+.vat-sector-columns .vat-panel {
+    margin-top: 0;
+}
+
+.route-airport-marker {
+    background: var(--gold);
+    color: #ffffff;
+    border-radius: 3px;
+    padding: 3px 7px;
+
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+
+    .additional-sector-fields,
+    .vat-sector-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .sector-arrow {
+        display: none;
+    }
+}
