@@ -516,7 +516,12 @@ function renderVatSectorResults(
             matchedRule,
             distanceNm,
             distancePercentage,
-            totalDistanceNm
+            totalDistanceNm,
+            allocatedNetValue,
+            taxablePercent,
+            taxableValue,
+            vatAmount,
+            grossValue
         } = result;
 
         const card =
@@ -684,6 +689,11 @@ function renderVatSectorResults(
                         maximumFractionDigits: 2
                     }
                     )
+                    )}
+
+                    ${createVatResultRow(
+                    "Taxable Percentage",
+                    (taxablePercent * 100).toFixed(2) + "%"
                     )}
 
                     ${createVatResultRow(
@@ -1299,10 +1309,6 @@ function runVatTests() {
         return [];
     }
 
-    /*
-     * Calculate each sector's great-circle distance using the
-     * existing distance function used elsewhere in the planner.
-     */
     const sectorDistances = itinerary.map(sector => {
         return haversineNm(
             sector.origin.lat,
@@ -1317,11 +1323,6 @@ function runVatTests() {
         0
     );
 
-    /*
-     * Round displayed allocations to two decimal places.
-     * Give the final sector the balance so displayed percentages
-     * always add up to exactly 100.00%.
-     */
     const distancePercentages = [];
     let allocatedPercentage = 0;
 
@@ -1353,33 +1354,6 @@ function runVatTests() {
         distancePercentages.push(distancePercentage);
     });
 
-    const allocatedNetValue =
-    charterValue *
-    (
-        distancePercentages[index] /
-        100
-    );
-
-    const taxablePercent =
-    matchedRule
-        ? matchedRule.taxablePercent
-        : 0;
-
-    const taxableValue =
-    allocatedNetValue *
-    taxablePercent;
-
-    const vatAmount =
-    matchedRule
-        ? taxableValue *
-          matchedRule.rate
-        : 0;
-
-    const grossValue =
-    allocatedNetValue +
-    vatAmount;
-
-
     const results = itinerary.map((sector, index) => {
         const {
             transaction,
@@ -1387,6 +1361,27 @@ function runVatTests() {
         } = buildVatTransaction(sector);
 
         const matchedRule = findMatchingRule(transaction);
+        const distancePercentage = distancePercentages[index];
+
+        const allocatedNetValue =
+            charterValue *
+            (distancePercentage / 100);
+
+        const taxablePercent = matchedRule
+            ? Number(matchedRule.taxablePercent || 0)
+            : 0;
+
+        const taxableValue =
+            allocatedNetValue *
+            taxablePercent;
+
+        const vatAmount = matchedRule
+            ? taxableValue * Number(matchedRule.rate || 0)
+            : 0;
+
+        const grossValue =
+            allocatedNetValue +
+            vatAmount;
 
         return {
             sector,
@@ -1394,9 +1389,10 @@ function runVatTests() {
             homeCountry,
             matchedRule,
             distanceNm: sectorDistances[index],
-            distancePercentage: distancePercentages[index],
+            distancePercentage,
             totalDistanceNm,
             allocatedNetValue,
+            taxablePercent,
             taxableValue,
             vatAmount,
             grossValue
