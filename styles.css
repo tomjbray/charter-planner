@@ -954,10 +954,27 @@ header::after {
     margin-top: 16px;
 }
 
-#vatResultsPanel {
 
+/* ==========================================================
+   VAT RESULTS LAYOUT
+   ========================================================== */
+
+.vat-results-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-
     gap: 16px;
+    padding: 16px;
 }
+
+.vat-results-row .panel {
+    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+
+    .vat-results-row {
+        grid-template-columns: 1fr;
+    }
+
+}
+
