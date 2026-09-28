@@ -104,7 +104,7 @@ async function loadData() {
     ]);
 
     populateSellingEntityDropdown();
-    populateCustomerCountryDropdown();
+    initialiseCustomerCountryTypeahead();
     initialiseCharterTypeSelector();
     initialiseCustomerTypeSelector();
     initialiseVatRegisteredSelector();
@@ -757,51 +757,304 @@ function populateSellingEntityDropdown() {
     );
 }
 
-function populateCustomerCountryDropdown() {
+function initialiseCustomerCountryTypeahead() {
 
-    const select =
+    const input =
         document.getElementById(
-            "customerCountrySelect"
+            "customerCountryInput"
         );
 
-    select.innerHTML = "";
+    const datalist =
+        document.getElementById(
+            "customerCountryList"
+        );
 
-    Object.entries(
-        countriesData.data
-    )
-    .sort(
-        (a, b) =>
-            a[1].name.localeCompare(
-                b[1].name
-            )
-    )
-    .forEach(([code, country]) => {
+    if (
+        !input ||
+        !datalist ||
+        !countriesData?.data
+    ) {
+        return;
+    }
+
+    datalist.innerHTML = "";
+
+    const countries =
+        Object.entries(
+            countriesData.data
+        )
+        .map(
+            ([code, country]) => ({
+                code:
+                    code.toUpperCase(),
+
+                name:
+                    country.name
+            })
+        )
+        .sort(
+            (firstCountry, secondCountry) =>
+                firstCountry.name.localeCompare(
+                    secondCountry.name
+                )
+        );
+
+    countries.forEach(country => {
 
         const option =
-            document.createElement("option");
+            document.createElement(
+                "option"
+            );
 
-        option.value = code;
-        option.textContent =
+        option.value =
             country.name;
 
-        if (
-            code === selectedCustomerCountry
-        ) {
-            option.selected = true;
-        }
+        option.label =
+            country.code;
 
-        select.appendChild(option);
+        option.dataset.code =
+            country.code;
+
+        datalist.appendChild(
+            option
+        );
     });
 
-    select.addEventListener(
+    /*
+     * Show the name matching the initial ISO code.
+     */
+    const initialCountry =
+        countries.find(
+            country =>
+                country.code ===
+                selectedCustomerCountry
+        );
+
+    if (initialCountry) {
+        input.value =
+            initialCountry.name;
+    }
+
+    /*
+     * Update the selected country whenever the user
+     * selects or enters a recognised country.
+     */
+    input.addEventListener(
         "change",
-        event => {
+        () => {
 
-            selectedCustomerCountry =
-                event.target.value;
-
-            runVatTest();
+            applyCustomerCountrySelection(
+                input.value
+            );
         }
+    );
+
+    /*
+     * Also respond immediately when a recognised
+     * country name or ISO code has been entered.
+     */
+    input.addEventListener(
+        "input",
+        () => {
+
+            const match =
+                findCountryFromInput(
+                    input.value
+                );
+
+            if (match) {
+
+                selectedCustomerCountry =
+                    match.code;
+
+                setCustomerCountryStatus(
+                    `${match.name} (${match.code})`,
+                    false
+                );
+
+                runVatTest();
+
+            } else {
+
+                setCustomerCountryStatus(
+                    "",
+                    false
+                );
+            }
+        }
+    );
+
+    /*
+     * Reject unrecognised text when the user leaves
+     * the input.
+     */
+    input.addEventListener(
+        "blur",
+        () => {
+
+            applyCustomerCountrySelection(
+                input.value
+            );
+        }
+    );
+
+    if (initialCountry) {
+        setCustomerCountryStatus(
+            `${initialCountry.name} ` +
+            `(${initialCountry.code})`,
+            false
+        );
+    }
+}
+
+
+function findCountryFromInput(
+    inputValue
+) {
+
+    if (
+        !inputValue ||
+        !countriesData?.data
+    ) {
+        return null;
+    }
+
+    const searchValue =
+        inputValue
+            .trim()
+            .toLowerCase();
+
+    /*
+     * First allow an exact ISO-code match.
+     *
+     * Example:
+     * FR → France
+     */
+    const codeMatch =
+        Object.entries(
+            countriesData.data
+        )
+        .find(
+            ([code]) =>
+                code.toLowerCase() ===
+                searchValue
+        );
+
+    if (codeMatch) {
+
+        return {
+            code:
+                codeMatch[0].toUpperCase(),
+
+            name:
+                codeMatch[1].name
+        };
+    }
+
+    /*
+     * Then look for an exact country-name match.
+     *
+     * Example:
+     * France → FR
+     */
+    const nameMatch =
+        Object.entries(
+            countriesData.data
+        )
+        .find(
+            ([, country]) =>
+                country.name
+                    .trim()
+                    .toLowerCase() ===
+                searchValue
+        );
+
+    if (!nameMatch) {
+        return null;
+    }
+
+    return {
+        code:
+            nameMatch[0].toUpperCase(),
+
+        name:
+            nameMatch[1].name
+    };
+}
+
+
+function applyCustomerCountrySelection(
+    inputValue
+) {
+
+    const input =
+        document.getElementById(
+            "customerCountryInput"
+        );
+
+    const match =
+        findCountryFromInput(
+            inputValue
+        );
+
+    if (!match) {
+
+        selectedCustomerCountry =
+            null;
+
+        setCustomerCountryStatus(
+            "Please select a recognised country.",
+            true
+        );
+
+        /*
+         * Refresh the VAT panels so an old result
+         * is not left on screen.
+         */
+        runVatTest();
+
+        return;
+    }
+
+    selectedCustomerCountry =
+        match.code;
+
+    /*
+     * Standardise the displayed value to the
+     * official country name from countries.json.
+     */
+    input.value =
+        match.name;
+
+    setCustomerCountryStatus(
+        `${match.name} (${match.code})`,
+        false
+    );
+
+    runVatTest();
+}
+
+
+function setCustomerCountryStatus(
+    message,
+    isError
+) {
+
+    const status =
+        document.getElementById(
+            "customerCountryStatus"
+        );
+
+    if (!status) {
+        return;
+    }
+
+    status.textContent =
+        message;
+
+    status.classList.toggle(
+        "country-typeahead-error",
+        isError
     );
 }
 
@@ -966,6 +1219,11 @@ function buildVatTransaction(sector) {
 
 function runVatTests() {
     if (itinerary.length === 0 || !vatRulesData) {
+        clearVatSectorResults();
+        return [];
+    }
+
+    if (!selectedCustomerCountry) {
         clearVatSectorResults();
         return [];
     }
