@@ -29,6 +29,15 @@ let origAirport = null;
 let destAirport = null;
 let itinerary = [];
 
+/*
+ * Additional sectors entered after the primary route.
+ *
+ * The existing Origin and Destination controls remain Sector 1.
+ * Each object below represents Sector 2 onwards.
+ */
+let additionalSectors = [];
+let nextSectorId = 2;
+
 // Aircraft search inputs
 let paxCount = 8;
 let includeSingleEngine = true;
@@ -457,6 +466,237 @@ ruleId.classList.add('no-match');
       rule.legalReference || '-';
 }
 
+function clearVatSectorResults() {
+
+    const container =
+        document.getElementById(
+            "vatSectorResults"
+        );
+
+    if (container) {
+        container.innerHTML = "";
+    }
+}
+
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+function renderVatSectorResults(
+    results
+) {
+
+    const container =
+        document.getElementById(
+            "vatSectorResults"
+        );
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    results.forEach(result => {
+
+        const {
+            sector,
+            transaction,
+            homeCountry,
+            matchedRule
+        } = result;
+
+        const card =
+            document.createElement(
+                "section"
+            );
+
+        card.className =
+            "vat-sector-card";
+
+        const routeLabel =
+            `${sector.origin.iata} → ` +
+            `${sector.destination.iata}`;
+
+        const ruleId =
+            matchedRule
+                ? matchedRule.ruleId
+                : "NO MATCH";
+
+        const treatment =
+            matchedRule
+                ? matchedRule.treatment
+                : "Review Required";
+
+        const rate =
+            matchedRule
+                ? (
+                    matchedRule.rate * 100
+                ).toFixed(2) + "%"
+                : "-";
+
+        const priority =
+            matchedRule
+                ? matchedRule.rulePriority
+                : "-";
+
+        const explanation =
+            matchedRule
+                ? (
+                    matchedRule.ruleExplanation ||
+                    "-"
+                )
+                : (
+                    "No VAT rule matches this " +
+                    "sector and the selected VAT inputs."
+                );
+
+        const legalReference =
+            matchedRule
+                ? (
+                    matchedRule.legalReference ||
+                    "-"
+                )
+                : "Review VAT matrix";
+
+        card.innerHTML = `
+            <div class="vat-sector-heading">
+
+                <div>
+                    Sector ${sector.sectorNumber}
+                </div>
+
+                <strong>
+                    ${escapeHtml(routeLabel)}
+                </strong>
+
+            </div>
+
+            <div class="vat-sector-columns">
+
+                <div class="vat-panel">
+
+                    <h3>
+                        Derived Rule Inputs
+                    </h3>
+
+                    ${createVatResultRow(
+                        "Home Country",
+                        homeCountry
+                    )}
+
+                    ${createVatResultRow(
+                        "Customer Region",
+                        transaction.customerLocation
+                    )}
+
+                    ${createVatResultRow(
+                        "Origin Territory",
+                        transaction.originTerritory
+                    )}
+
+                    ${createVatResultRow(
+                        "Destination Territory",
+                        transaction.destinationTerritory
+                    )}
+
+                    ${createVatResultRow(
+                        "VAT Registered",
+                        transaction.vatRegistered
+                    )}
+
+                </div>
+
+                <div class="vat-panel">
+
+                    <h3>
+                        VAT Rule Match
+                    </h3>
+
+                    ${createVatResultRow(
+                        "Rule ID",
+                        ruleId,
+                        matchedRule
+                            ? ""
+                            : "no-match"
+                    )}
+
+                    ${createVatResultRow(
+                        "Treatment",
+                        treatment
+                    )}
+
+                    ${createVatResultRow(
+                        "Rate",
+                        rate
+                    )}
+
+                    ${createVatResultRow(
+                        "Priority",
+                        priority
+                    )}
+
+                    ${createVatResultRow(
+                        "Explanation",
+                        explanation
+                    )}
+
+                    ${createVatResultRow(
+                        "Legal Reference",
+                        legalReference
+                    )}
+
+                </div>
+
+            </div>
+        `;
+
+        container.appendChild(
+            card
+        );
+    });
+}
+
+
+function createVatResultRow(
+    label,
+    value,
+    extraClass = ""
+) {
+
+    const displayedValue =
+        value === null ||
+        value === undefined ||
+        value === ""
+            ? "-"
+            : value;
+
+    return `
+        <div class="vat-result-row">
+
+            <span class="vat-result-label">
+                ${escapeHtml(label)}
+            </span>
+
+            <strong
+                class="vat-result-value ${escapeHtml(extraClass)}">
+
+                ${escapeHtml(displayedValue)}
+
+            </strong>
+
+        </div>
+    `;
+}
+
 function populateSellingEntityDropdown() {
 
     const select =
@@ -662,53 +902,527 @@ function syncVatRegisteredState() {
     }
 }
 
-function runVatTest() {
-  if (!itinerary.length || !vatRulesData) return null;
+//function runVatTest() {
+//  if (!itinerary.length || !vatRulesData) return null;
+//
+//  const sector = itinerary[0];
+// 
+//  const homeCountry = getEntityCountry(selectedEntity);
+//  
+//
+//    
+//  const transaction = {
+//    entity: selectedEntity,
+//    charterType: selectedCharterType,
+//    customerType: selectedCustomerType,
+//    customerLocation:
+//      getRuleRegion(
+//        selectedCustomerCountry,
+//        homeCountry
+//      ),
+//    vatRegistered:
+//      selectedVatRegistered,
+//    originTerritory:
+//      getRuleRegion(
+//        sector.origin.country,
+//        homeCountry
+//      ),
+//    destinationTerritory:
+//      getRuleRegion(
+//        sector.destination.country,
+//        homeCountry
+//    ),
+//    
+//  };
+//
+//  displayDerivedInputs(
+//    transaction,
+//    homeCountry
+//);
+//  
+//  const matchedRule = findMatchingRule(transaction);
+//  displayVatRule(matchedRule);
+//
+//  
+//  return matchedRule;
+//}
 
-  const sector = itinerary[0];
-  
-  const homeCountry = getEntityCountry(selectedEntity);
-  
+function buildVatTransaction(
+    sector
+) {
 
-    
-  const transaction = {
-    entity: selectedEntity,
-    charterType: selectedCharterType,
-    customerType: selectedCustomerType,
-    customerLocation:
-      getRuleRegion(
-        selectedCustomerCountry,
+    const homeCountry =
+        getEntityCountry(
+            selectedEntity
+        );
+
+    const transaction = {
+
+        entity:
+            selectedEntity,
+
+        charterType:
+            selectedCharterType,
+
+        customerType:
+            selectedCustomerType,
+
+        customerLocation:
+            getRuleRegion(
+                selectedCustomerCountry,
+                homeCountry
+            ),
+
+        vatRegistered:
+            selectedVatRegistered,
+
+        originTerritory:
+            getRuleRegion(
+                sector.origin.country,
+                homeCountry
+            ),
+
+        destinationTerritory:
+            getRuleRegion(
+                sector.destination.country,
+                homeCountry
+            )
+    };
+
+    return {
+        transaction,
         homeCountry
-      ),
-    vatRegistered:
-      selectedVatRegistered,
-    originTerritory:
-      getRuleRegion(
-        sector.origin.country,
-        homeCountry
-      ),
-    destinationTerritory:
-      getRuleRegion(
-        sector.destination.country,
-        homeCountry
-    ),
-    
-  };
-
-  displayDerivedInputs(
-    transaction,
-    homeCountry
-);
-  
-  const matchedRule = findMatchingRule(transaction);
-  displayVatRule(matchedRule);
-
-  
-  return matchedRule;
+    };
 }
 
+
+function runVatTests() {
+
+    if (
+        itinerary.length === 0 ||
+        !vatRulesData
+    ) {
+        clearVatSectorResults();
+        return [];
+    }
+
+    const results =
+        itinerary.map(
+            sector => {
+
+                const {
+                    transaction,
+                    homeCountry
+                } =
+                    buildVatTransaction(
+                        sector
+                    );
+
+                const matchedRule =
+                    findMatchingRule(
+                        transaction
+                    );
+
+                return {
+                    sector,
+                    transaction,
+                    homeCountry,
+                    matchedRule
+                };
+            }
+        );
+
+    renderVatSectorResults(
+        results
+    );
+
+    return results;
+}
+
+
+/*
+ * Compatibility wrapper.
+ *
+ * Existing input event handlers already call
+ * runVatTest(), so keep this function for now.
+ */
+function runVatTest() {
+
+    ret*rn runVatTests();
+}
+
+
 // ═══════════════════════════════════════════════════════════
-//  5. ITINERARY
+//  5. MULTI-SECTOR ITINERARY CONTROLS
+// ═══════════════════════════════════════════════════════════
+
+function addSector() {
+
+    const previousDestination =
+        getPreviousSectorDestination();
+
+    const sector = {
+        id: nextSectorId,
+        originCode:
+            previousDestination?.iata || "",
+        destinationCode: "",
+        origin:
+            previousDestination || null,
+        destination: null
+    };
+
+    additionalSectors.push(sector);
+    nextSectorId++;
+
+    renderAdditionalSectors();
+function buildItinerary() {
+
+    itinerary = [];
+
+    /*
+     * Sector 1 comes from the existing main
+     * Origin and Destination controls.
+     */
+    if (
+        origAirport &&
+        destAirport
+    ) {
+        itinerary.push({
+            sectorNumber: 1,
+            origin: origAirport,
+            destination: destAirport
+        });
+    }
+
+    /*
+     * Sector 2 onwards come from
+     * additionalSectors.
+     *
+     * Only complete, valid sectors are added
+     * to the working itinerary.
+     */
+    additionalSectors.forEach(
+        sector => {
+
+            if (
+                sector.origin &&
+                sector.destination
+            ) {
+                itinerary.push({
+                    sectorNumber:
+                        itinerary.length + 1,
+
+                    origin:
+                        sector.origin,
+
+                    destination:
+                        sector.destination
+                });
+            }
+        }
+    );
+
+    if (itinerary.length === 0) {
+
+        clearVatSectorResults();
+        displayVatRule(null);
+
+        return itinerary;
+    }
+
+    plotItinerary();
+
+    runVatTests();
+
+    return itinerary;
+}
+
+
+function getPreviousSectorDestination() {
+
+    if (additionalSectors.length > 0) {
+
+        return additionalSectors[
+            additionalSectors.length - 1
+        ].destination;
+    }
+
+    return destAirport;
+}
+
+
+function updateAdditionalSectorAirport(
+    sectorId,
+    field,
+    value
+) {
+
+    const sector =
+        additionalSectors.find(
+            item =>
+                item.id === sectorId
+        );
+
+    if (!sector) {
+        return;
+    }
+
+    const cleanCode =
+        value
+            .trim()
+            .toUpperCase();
+
+    const airport =
+        cleanCode.length === 3
+            ? getAirport(cleanCode)
+            : null;
+
+    if (field === "origin") {
+
+        sector.originCode =
+            cleanCode;
+
+        sector.origin =
+            airport;
+
+    } else {
+
+        sector.destinationCode =
+            cleanCode;
+
+        sector.destination =
+            airport;
+    }
+
+    renderAdditionalSectorStatus(
+        sector,
+        field
+    );
+
+    buildItinerary();
+}
+
+
+function renderAdditionalSectorStatus(
+    sector,
+    field
+) {
+
+    const infoElement =
+        document.getElementById(
+            `sector-${sector.id}-${field}-info`
+        );
+
+    if (!infoElement) {
+        return;
+    }
+
+    const airport =
+        field === "origin"
+            ? sector.origin
+            : sector.destination;
+
+    const code =
+        field === "origin"
+            ? sector.originCode
+            : sector.destinationCode;
+
+    if (code.length < 3) {
+
+        infoElement.textContent = "";
+        return;
+    }
+
+    if (!airport) {
+
+        infoElement.innerHTML =
+            '<div class="apt-error">' +
+            'Code not found' +
+            '</div>';
+
+        return;
+    }
+
+    infoElement.innerHTML =
+        '<div class="apt-name">' +
+        airport.name +
+        '</div>' +
+        '<div class="apt-meta">' +
+        (airport.city || '') +
+        (airport.city ? ' · ' : '') +
+        airport.country +
+        '</div>';
+}
+
+
+function renderAdditionalSectors() {
+
+    const container =
+        document.getElementById(
+            "additionalSectors"
+        );
+
+    container.innerHTML = "";
+
+    additionalSectors.forEach(
+        (sector, index) => {
+
+            const sectorNumber =
+                index + 2;
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+            element.className =
+                "additional-sector-card";
+
+            element.innerHTML = `
+                <div class="additional-sector-header">
+
+                    <span>
+                        Sector ${sectorNumber}
+                    </span>
+
+                    <button
+                        type="button"
+                        class="remove-sector-btn"
+                        data-sector-id="${sector.id}"
+                        aria-label="Remove Sector ${sectorNumber}">
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+                <div class="additional-sector-fields">
+
+                    <div class="additional-sector-field">
+
+                        <label
+                            for="sector-${sector.id}-origin">
+
+                            Origin
+
+                        </label>
+
+                        <input
+                            id="sector-${sector.id}-origin"
+                            class="sector-iata-input"
+                            maxlength="3"
+                            autocomplete="off"
+                            spellcheck="false"
+                            value="${sector.originCode}"
+                            placeholder="LBG">
+
+                        <div
+                            id="sector-${sector.id}-origin-info"
+                            class="airport-detail">
+                        </div>
+
+                    </div>
+
+                    <div class="sector-arrow">
+                        →
+                    </div>
+
+                    <div class="additional-sector-field">
+
+                        <label
+                            for="sector-${sector.id}-destination">
+
+                            Destination
+
+                        </label>
+
+                        <input
+                            id="sector-${sector.id}-destination"
+                            class="sector-iata-input"
+                            maxlength="3"
+                            autocomplete="off"
+                            spellcheck="false"
+                            value="${sector.destinationCode}"
+                            placeholder="FRA">
+
+                        <div
+                            id="sector-${sector.id}-destination-info"
+                            class="airport-detail">
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+
+            container.appendChild(
+                element
+            );
+
+            const originInput =
+                element.querySelector(
+                    `#sector-${sector.id}-origin`
+                );
+
+            const destinationInput =
+                element.querySelector(
+                    `#sector-${sector.id}-destination`
+                );
+
+            const removeButton =
+                element.querySelector(
+                    ".remove-sector-btn"
+                );
+
+            originInput.addEventListener(
+                "input",
+                event => {
+
+                    updateAdditionalSectorAirport(
+                        sector.id,
+                        "origin",
+                        event.target.value
+                    );
+                }
+            );
+
+            destinationInput.addEventListener(
+                "input",
+                event => {
+
+                    updateAdditionalSectorAirport(
+                        sector.id,
+                        "destination",
+                        event.target.value
+                    );
+                }
+            );
+
+            removeButton.addEventListener(
+                "click",
+                () => {
+
+                    removeSector(
+                        sector.id
+                    );
+                }
+            );
+
+            renderAdditionalSectorStatus(
+                sector,
+                "origin"
+            );
+
+            renderAdditionalSectorStatus(
+                sector,
+                "destination"
+            );
+        }
+    );
+}
+// ═══════════════════════════════════════════════════════════
+//  6. ITINERARY BUILDING
 // ═══════════════════════════════════════════════════════════
 
 function buildItinerary() {
@@ -741,7 +1455,7 @@ function buildItinerary() {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  6. AIRPORT LOOKUP
+//  7. AIRPORT LOOKUP
 // ═══════════════════════════════════════════════════════════
 
 function getAirport(iata) {
@@ -805,7 +1519,7 @@ function lookupAirport(iata, infoEl, isOrigin) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  7. MAP SETUP AND ROUTE DRAWING
+//  8. MAP SETUP AND ROUTE DRAWING
 // ═══════════════════════════════════════════════════════════
 
 const map = L.map('map', {
@@ -877,6 +1591,166 @@ function plotRoute(orig, dest) {
   document.getElementById('mapEmpty').classList.add('hidden');
 }
 
+ function plotItinerary() {
+
+    clearRoute();
+
+    if (itinerary.length === 0) {
+        return;
+    }
+
+    const allCoordinates = [];
+
+    itinerary.forEach(
+        (sector, index) => {
+
+            const points = [];
+
+            for (
+                let step = 0;
+                step <= 120;
+                step++
+            ) {
+                const fraction =
+                    step / 120;
+
+                points.push(
+                    interpolateGreatCircle(
+                        sector.origin.lat,
+                        sector.origin.lon,
+                        sector.destination.lat,
+                        sector.destination.lon,
+                        fraction
+                    )
+                );
+            }
+
+            const segments =
+                splitAtAntimeridian(
+                    points
+                );
+
+            const colours = [
+                "#9a7235",
+                "#2a6fd4",
+                "#2e8f60",
+                "#c47a10",
+                "#6030b0"
+            ];
+
+            const colour =
+                colours[
+                    index %
+                    colours.length
+                ];
+
+            segments.forEach(
+                segment => {
+
+                    const line =
+                        L.polyline(
+                            segment,
+                            {
+                                color:
+                                    colour,
+
+                                weight: 3,
+                                opacity: 0.85
+                            }
+                        )
+                        .addTo(map);
+
+                    routeLayers.push(
+                        line
+                    );
+                }
+            );
+
+            allCoordinates.push([
+                sector.origin.lat,
+                sector.origin.lon
+            ]);
+
+            allCoordinates.push([
+                sector.destination.lat,
+                sector.destination.lon
+            ]);
+        }
+    );
+
+    /*
+     * Create one marker for every unique airport.
+     */
+    const airportsByCode = {};
+
+    itinerary.forEach(
+        sector => {
+
+            airportsByCode[
+                sector.origin.iata
+            ] = sector.origin;
+
+            airportsByCode[
+                sector.destination.iata
+            ] = sector.destination;
+        }
+    );
+
+    Object.values(
+        airportsByCode
+    )
+    .forEach(airport => {
+
+        const marker =
+            L.marker(
+                [
+                    airport.lat,
+                    airport.lon
+                ],
+                {
+                    icon:
+                        L.divIcon({
+                            className: "",
+
+                            html:
+                                '<div class="route-airport-marker">' +
+                                airport.iata +
+                                '</div>',
+
+                            iconAnchor:
+                                [20, 10]
+                        })
+                }
+            )
+            .addTo(map);
+
+        routeLayers.push(
+            marker
+        );
+    });
+
+    if (allCoordinates.length > 0) {
+
+        map.fitBounds(
+            L.latLngBounds(
+                allCoordinates
+            ),
+            {
+                padding: [40, 40]
+            }
+        );
+    }
+
+    document
+        .getElementById(
+            "mapEmpty"
+        )
+        .classList
+        .add(
+            "hidden"
+        );
+} 
+
 function interpolateGreatCircle(lat1, lon1, lat2, lon2, f) {
   const toRad = d => d * Math.PI / 180;
   const toDeg = r => r * 180 / Math.PI;
@@ -910,7 +1784,7 @@ function splitAtAntimeridian(points) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  8. DISTANCE CALCULATION
+//  9. DISTANCE CALCULATION
 // ═══════════════════════════════════════════════════════════
 
 function haversineNm(lat1, lon1, lat2, lon2) {
@@ -924,7 +1798,7 @@ function haversineNm(lat1, lon1, lat2, lon2) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  9. AIRCRAFT MATCHING AND SCORING
+//  10. AIRCRAFT MATCHING AND SCORING
 // ═══════════════════════════════════════════════════════════
 
 function getLongestRunway(airport) {
@@ -1063,7 +1937,7 @@ function matchAircraft(orig, dest, pax) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  10. AIRCRAFT RESULTS UI
+//  11. AIRCRAFT RESULTS UI
 // ═══════════════════════════════════════════════════════════
 
 function categoryLabel(cat) {
@@ -1296,7 +2170,7 @@ function renderCards(results) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  11. WIKIPEDIA AIRCRAFT INFORMATION
+//  12. WIKIPEDIA AIRCRAFT INFORMATION
 // ═══════════════════════════════════════════════════════════
 
 async function fetchWikiImage(wikiUrl, card) {
@@ -1353,7 +2227,7 @@ async function fetchWikiImage(wikiUrl, card) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  12. AIRCRAFT REGISTRY DISPLAY
+//  13. AIRCRAFT REGISTRY DISPLAY
 // ═══════════════════════════════════════════════════════════
 
 function populateRegistry(typeCode, card) {
@@ -1407,7 +2281,7 @@ function populateRegistry(typeCode, card) {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  13. LIVE AIRCRAFT TRACKING
+//  14. LIVE AIRCRAFT TRACKING
 // ═══════════════════════════════════════════════════════════
 
 function clearTracking() {
@@ -1530,7 +2404,7 @@ async function showGroundTracking() {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  14. GENERAL UI HELPERS
+//  15. GENERAL UI HELPERS
 // ═══════════════════════════════════════════════════════════
 
 function updateUI() {
@@ -1552,8 +2426,9 @@ function updateUI() {
     document.getElementById('summaryKm').textContent   = Math.round(distKm).toLocaleString();
     document.getElementById('summaryPax').textContent  = paxCount;
     document.getElementById('summaryRwy').textContent  = '—';  // updated after matching
+    document.getElementById('addSectorBtn').addEventListener("click",addSector);
 
-    plotRoute(origAirport, destAirport);
+//    plotRoute(origAirport, destAirport);
   } 
 }
 
@@ -1571,7 +2446,7 @@ function rerunIfResultsVisible() {
 }
 
 // ═══════════════════════════════════════════════════════════
-//  15. EVENT HANDLERS
+//  16. EVENT HANDLERS
 // ═══════════════════════════════════════════════════════════
 
 document.getElementById('origInput').addEventListener('input', function() {
@@ -1677,7 +2552,7 @@ document.getElementById('trackBtn').addEventListener('click', () => {
 });
 
 // ═══════════════════════════════════════════════════════════
-//  16. APPLICATION STARTUP
+//  17. APPLICATION STARTUP
 // ═══════════════════════════════════════════════════════════
 
 // Start loading data after all functions and event handlers are defined.
