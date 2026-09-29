@@ -1195,7 +1195,7 @@ header::after {
 
 .vat-summary-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
 }
 
@@ -1233,4 +1233,22 @@ header::after {
     .vat-summary-grid {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+
+/* ==========================================================
+   VAT CALCULATION STATUS
+   ========================================================== */
+.calculation-complete,
+.summary-status-complete {
+    color: var(--green);
+}
+
+.summary-status-review {
+    color: var(--red);
+}
+
+#summaryCalculationStatus,
+#summaryReviewSectors {
+    font-size: 16px;
 }

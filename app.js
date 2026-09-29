@@ -492,6 +492,65 @@ function escapeHtml(value) {
 }
 
 
+function evaluateVatCalculationStatus(matchedRule) {
+    const reasons = [];
+
+    if (!matchedRule) {
+        reasons.push("No matching VAT rule was found.");
+    } else {
+        const calculationMethod =
+            String(matchedRule.calculationMethod || "")
+                .trim()
+                .toUpperCase();
+
+        if (!calculationMethod) {
+            reasons.push("The rule has no calculation method.");
+        } else if (calculationMethod !== "STANDARD") {
+            reasons.push(
+                `Calculation method ${calculationMethod} is not yet supported.`
+            );
+        }
+
+        if (
+            matchedRule.rate === null ||
+            matchedRule.rate === undefined ||
+            matchedRule.rate === "" ||
+            !Number.isFinite(Number(matchedRule.rate))
+        ) {
+            reasons.push("The rule has no valid VAT rate.");
+        }
+
+        if (
+            matchedRule.taxablePercent === null ||
+            matchedRule.taxablePercent === undefined ||
+            matchedRule.taxablePercent === "" ||
+            !Number.isFinite(Number(matchedRule.taxablePercent))
+        ) {
+            reasons.push("The rule has no valid taxable percentage.");
+        }
+    }
+
+    return {
+        canCalculate: reasons.length === 0,
+        status: reasons.length === 0 ? "Complete" : "Review Required",
+        reasons
+    };
+}
+
+function formatMoneyValue(value) {
+    if (!Number.isFinite(value)) {
+        return "Review Required";
+    }
+
+    return value.toLocaleString(
+        undefined,
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+}
+
 function renderVatSectorResults(
     results
 ) {
@@ -521,7 +580,9 @@ function renderVatSectorResults(
             taxablePercent,
             taxableValue,
             vatAmount,
-            grossValue
+            grossValue,
+            calculationStatus,
+            reviewReasons
         } = result;
 
         const card =
@@ -632,6 +693,21 @@ function renderVatSectorResults(
                     </h3>
 
                     ${createVatResultRow(
+                        "Calculation Status",
+                        calculationStatus,
+                        calculationStatus === "Complete"
+                            ? "calculation-complete"
+                            : "no-match"
+                    )}
+
+                    ${createVatResultRow(
+                        "Review Reason",
+                        reviewReasons.length
+                            ? reviewReasons.join(" ")
+                            : "-"
+                    )}
+
+                    ${createVatResultRow(
                         "Rule ID",
                         ruleId,
                         matchedRule
@@ -681,55 +757,29 @@ function renderVatSectorResults(
 
                     ${createVatResultRow(
                         "Allocated Value",
-                        allocatedNetValue
-                        .toLocaleString(
-                        undefined,
-                    {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    }
-                    )
+                        formatMoneyValue(allocatedNetValue)
                     )}
 
                     ${createVatResultRow(
                     "Taxable Percentage",
-                    (taxablePercent * 100).toFixed(2) + "%"
+                    Number.isFinite(taxablePercent)
+                        ? (taxablePercent * 100).toFixed(2) + "%"
+                        : "Review Required"
                     )}
 
                     ${createVatResultRow(
                     "Taxable Amount",
-                    taxableValue
-                    .toLocaleString(
-                    undefined,
-                      {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2
-                      }
-                    )
+                    formatMoneyValue(taxableValue)
                     )}
 
                     ${createVatResultRow(
                     "VAT Amount",
-                    vatAmount
-                      .toLocaleString(
-                      undefined,
-                        {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        }
-                      )
+                    formatMoneyValue(vatAmount)
                       )}
 
                      ${createVatResultRow(
                       "Gross Amount",
-                      grossValue
-                      .toLocaleString(
-                      undefined,
-                        {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        }
-                        )
+                      formatMoneyValue(grossValue)
                       )} 
 
                 </div>
@@ -1298,85 +1348,54 @@ function buildVatTransaction(sector) {
     };
 }
 
-function renderVatSummary(
-    results
-) {
+function renderVatSummary(results) {
+    const reviewResults = results.filter(
+        result => result.calculationStatus !== "Complete"
+    );
 
-    const totalNetValue =
-        results.reduce(
-            (sum, result) =>
-                sum +
-                result.allocatedNetValue,
-            0
-        );
+    const isComplete = reviewResults.length === 0;
 
-    const totalTaxableValue =
-        results.reduce(
-            (sum, result) =>
-                sum +
-                result.taxableValue,
-            0
-        );
+    const totalNetValue = results.reduce(
+        (sum, result) => sum + result.allocatedNetValue,
+        0
+    );
 
-    const totalVatValue =
-        results.reduce(
-            (sum, result) =>
-                sum +
-                result.vatAmount,
-            0
-        );
+    const totalTaxableValue = isComplete
+        ? results.reduce((sum, result) => sum + result.taxableValue, 0)
+        : null;
 
-    const totalGrossValue =
-        results.reduce(
-            (sum, result) =>
-                sum +
-                result.grossValue,
-            0
-        );
+    const totalVatValue = isComplete
+        ? results.reduce((sum, result) => sum + result.vatAmount, 0)
+        : null;
 
-    document.getElementById(
-        "summaryNetValue"
-    ).textContent =
-        totalNetValue.toLocaleString(
-            undefined,
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
+    const totalGrossValue = isComplete
+        ? results.reduce((sum, result) => sum + result.grossValue, 0)
+        : null;
 
-    document.getElementById(
-        "summaryTaxableValue"
-    ).textContent =
-        totalTaxableValue.toLocaleString(
-            undefined,
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
+    document.getElementById("summaryNetValue").textContent =
+        formatMoneyValue(totalNetValue);
+    document.getElementById("summaryTaxableValue").textContent =
+        formatMoneyValue(totalTaxableValue);
+    document.getElementById("summaryVatValue").textContent =
+        formatMoneyValue(totalVatValue);
+    document.getElementById("summaryGrossValue").textContent =
+        formatMoneyValue(totalGrossValue);
 
-    document.getElementById(
-        "summaryVatValue"
-    ).textContent =
-        totalVatValue.toLocaleString(
-            undefined,
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
+    const statusElement =
+        document.getElementById("summaryCalculationStatus");
+    const reviewElement =
+        document.getElementById("summaryReviewSectors");
 
-    document.getElementById(
-        "summaryGrossValue"
-    ).textContent =
-        totalGrossValue.toLocaleString(
-            undefined,
-            {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }
-        );
+    statusElement.textContent =
+        isComplete ? "Complete" : "Review Required";
+    statusElement.classList.toggle("summary-status-complete", isComplete);
+    statusElement.classList.toggle("summary-status-review", !isComplete);
+
+    reviewElement.textContent = reviewResults.length
+        ? reviewResults
+            .map(result => `Sector ${result.sector.sectorNumber}`)
+            .join(", ")
+        : "None";
 }
 
 function runVatTests() {
@@ -1408,9 +1427,7 @@ function runVatTests() {
     let allocatedPercentage = 0;
 
     sectorDistances.forEach((distanceNm, index) => {
-        const isFinalSector =
-            index === sectorDistances.length - 1;
-
+        const isFinalSector = index === sectorDistances.length - 1;
         let distancePercentage;
 
         if (isFinalSector) {
@@ -1420,15 +1437,8 @@ function runVatTests() {
             );
         } else {
             distancePercentage = totalDistanceNm > 0
-                ? Number(
-                    (
-                        distanceNm /
-                        totalDistanceNm *
-                        100
-                    ).toFixed(2)
-                )
+                ? Number((distanceNm / totalDistanceNm * 100).toFixed(2))
                 : 0;
-
             allocatedPercentage += distancePercentage;
         }
 
@@ -1443,26 +1453,24 @@ function runVatTests() {
 
         const matchedRule = findMatchingRule(transaction);
         const distancePercentage = distancePercentages[index];
-
         const allocatedNetValue =
-            charterValue *
-            (distancePercentage / 100);
+            charterValue * (distancePercentage / 100);
 
-        const taxablePercent = matchedRule
-            ? Number(matchedRule.taxablePercent || 0)
-            : 0;
+        const calculationCheck =
+            evaluateVatCalculationStatus(matchedRule);
 
-        const taxableValue =
-            allocatedNetValue *
-            taxablePercent;
-
-        const vatAmount = matchedRule
-            ? taxableValue * Number(matchedRule.rate || 0)
-            : 0;
-
-        const grossValue =
-            allocatedNetValue +
-            vatAmount;
+        const taxablePercent = calculationCheck.canCalculate
+            ? Number(matchedRule.taxablePercent)
+            : null;
+        const taxableValue = calculationCheck.canCalculate
+            ? allocatedNetValue * taxablePercent
+            : null;
+        const vatAmount = calculationCheck.canCalculate
+            ? taxableValue * Number(matchedRule.rate)
+            : null;
+        const grossValue = calculationCheck.canCalculate
+            ? allocatedNetValue + vatAmount
+            : null;
 
         return {
             sector,
@@ -1476,7 +1484,9 @@ function runVatTests() {
             taxablePercent,
             taxableValue,
             vatAmount,
-            grossValue
+            grossValue,
+            calculationStatus: calculationCheck.status,
+            reviewReasons: calculationCheck.reasons
         };
     });
 
