@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "sourceTable": "tblInputRequirements",
+  "inputCount": 1,
+  "inputs": [
+    {
+      "ruleGroup": "DE_CARGO_EXPORT",
+      "inputKey": "DirectExporter",
+      "inputLabel": "Customer is Direct Exporter",
+      "inputType": "Checkbox",
+      "appliesToEntity": "FRA",
+      "appliesToCountry": "DE",
+      "appliesToCharterType": "Cargo",
+      "required": true,
+      "displayOrder": 1
+    }
+  ],
+  "inputsByKey": {
+    "DirectExporter": [
+      {
+        "ruleGroup": "DE_CARGO_EXPORT",
+        "inputKey": "DirectExporter",
+        "inputLabel": "Customer is Direct Exporter",
+        "inputType": "Checkbox",
+        "appliesToEntity": "FRA",
+        "appliesToCountry": "DE",
+        "appliesToCharterType": "Cargo",
+        "required": true,
+        "displayOrder": 1
+      }
+    ]
+  }
+}
