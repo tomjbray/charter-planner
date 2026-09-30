@@ -60,6 +60,9 @@ let taxTerritoriesData = null;
 let countriesData = null;
 let charterValue = 0;
 
+//Other files
+let inputRequirementsData = null;
+
 // ═══════════════════════════════════════════════════════════
 //  2. DATA LOADING
 // ═══════════════════════════════════════════════════════════
@@ -111,6 +114,7 @@ async function loadData() {
     initialiseVatRegisteredSelector();
     syncVatRegisteredState();
     initialiseCharterValueInput();
+    renderDynamicInputs();
 
     const vatSelect =
     document.getElementById(
@@ -160,6 +164,17 @@ async function loadCountries() {
   countriesData = await response.json();
   console.log(`Loaded ${countriesData.recordCount} countries`);
 }
+
+async function inputRequirmentsData() {
+    const response =
+        await fetch('./input_requirements.json');
+
+    if (!response.ok) {
+        throw new Error(
+            'input_requirmeents.json: HTTP ' +
+            response.status
+        );
+    }
 
 async function loadSellingEntities() {
     const response =
@@ -1565,6 +1580,31 @@ function updateAdditionalSectorAirport(sectorId, field, value) {
     buildItinerary();
 }
 
+function renderDynamicInputs() {
+
+    const container =
+        document.getElementById(
+            "dynamicVatInputs"
+        );
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="vat-section">
+            <h3>Additional VAT Inputs</h3>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="directExporter">
+                Customer is Direct Exporter
+            </label>
+        </div>
+    `;
+}
+  
 function renderAdditionalSectorStatus(sector, field) {
     const infoElement = document.getElementById(
         `sector-${sector.id}-${field}-info`
