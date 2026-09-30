@@ -104,10 +104,14 @@ async function loadData() {
       loadCountries(),
       loadTaxTerritories(),
       loadVatRules(),
-      loadSellingEntities(),
-      loadInputRequirements()
+      loadSellingEntities()
     ]);
 
+    /*
+     * Initialise the existing VAT inputs as soon as their core
+     * reference files are ready. A problem with the optional dynamic
+     * input file must not remove Selling Entity or Customer Country.
+     */
     populateSellingEntityDropdown();
     initialiseCustomerCountryTypeahead();
     initialiseCharterTypeSelector();
@@ -115,6 +119,12 @@ async function loadData() {
     initialiseVatRegisteredSelector();
     syncVatRegisteredState();
     initialiseCharterValueInput();
+
+    /*
+     * Load the new dynamic-input file separately. This keeps the rest
+     * of the application working while also reporting any file issue.
+     */
+    await loadInputRequirements();
     renderDynamicInputs();
 
     const vatSelect =
@@ -167,22 +177,21 @@ async function loadCountries() {
 }
 
 async function loadInputRequirements() {
-
-    const response =
-        await fetch(
-            './input_requirements.json'
-        );
+    const response = await fetch('./input_requirements.json');
 
     if (!response.ok) {
-
         throw new Error(
-            'input_requirements.json: HTTP ' +
-            response.status
+            'input_requirements.json: HTTP ' + response.status
         );
     }
 
-    inputRequirementsData =
-        await response.json();
+    inputRequirementsData = await response.json();
+
+    if (!Array.isArray(inputRequirementsData?.inputs)) {
+        throw new Error(
+            'input_requirements.json does not contain an inputs array.'
+        );
+    }
 
     console.log(
         `Loaded ${inputRequirementsData.inputCount} input requirements`
@@ -1594,25 +1603,26 @@ function updateAdditionalSectorAirport(sectorId, field, value) {
 }
 
 function renderDynamicInputs() {
-
     const container =
-        document.getElementById(
-            "dynamicVatInputs"
-        );
+        document.getElementById("dynamicVatInputs");
 
     if (!container) {
+        console.error(
+            'The dynamicVatInputs container was not found in index.html.'
+        );
         return;
     }
 
-  console.log(
-inputRequirementsData
-);
-  
+    console.log(
+        'Input requirements data:',
+        inputRequirementsData
+    );
+
     container.innerHTML = `
         <div class="vat-section">
             <h3>Additional VAT Inputs</h3>
 
-            <label>
+            <label for="directExporter">
                 <input
                     type="checkbox"
                     id="directExporter">
@@ -1621,7 +1631,7 @@ inputRequirementsData
         </div>
     `;
 }
-  
+
 function renderAdditionalSectorStatus(sector, field) {
     const infoElement = document.getElementById(
         `sector-${sector.id}-${field}-info`
