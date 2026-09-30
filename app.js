@@ -104,7 +104,8 @@ async function loadData() {
       loadCountries(),
       loadTaxTerritories(),
       loadVatRules(),
-      loadSellingEntities()
+      loadSellingEntities(),
+      loadInputRequirments()
     ]);
 
     populateSellingEntityDropdown();
@@ -165,16 +166,28 @@ async function loadCountries() {
   console.log(`Loaded ${countriesData.recordCount} countries`);
 }
 
-async function inputRequirmentsData() {
+async function loadInputRequirements() {
+
     const response =
-        await fetch('./input_requirements.json');
+        await fetch(
+            './input_requirements.json'
+        );
 
     if (!response.ok) {
+
         throw new Error(
-            'input_requirmeents.json: HTTP ' +
+            'input_requirements.json: HTTP ' +
             response.status
         );
     }
+
+    inputRequirementsData =
+        await response.json();
+
+    console.log(
+        `Loaded ${inputRequirementsData.inputCount} input requirements`
+    );
+}
 
 async function loadSellingEntities() {
     const response =
@@ -1591,6 +1604,10 @@ function renderDynamicInputs() {
         return;
     }
 
+  console.log(
+inputRequirementsData
+);
+  
     container.innerHTML = `
         <div class="vat-section">
             <h3>Additional VAT Inputs</h3>
