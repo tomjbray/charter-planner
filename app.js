@@ -1603,31 +1603,47 @@ function updateAdditionalSectorAirport(sectorId, field, value) {
 }
 
 function renderDynamicInputs() {
+
     const container =
-        document.getElementById("dynamicVatInputs");
+        document.getElementById(
+            "dynamicVatInputs"
+        );
 
     if (!container) {
+
         console.error(
-            'The dynamicVatInputs container was not found in index.html.'
+            "dynamicVatInputs container not found"
         );
+
         return;
     }
 
     console.log(
-        'Input requirements data:',
+        "Input requirements data:",
         inputRequirementsData
     );
 
     container.innerHTML = `
-        <div class="vat-section">
-            <h3>Additional VAT Inputs</h3>
+        <div class="vat-input-block">
 
-            <label for="directExporter">
+            <label
+                class="vat-input-label"
+                for="directExporter">
+
+                Additional VAT Inputs
+
+            </label>
+
+            <label>
+
                 <input
                     type="checkbox"
                     id="directExporter">
+
                 Customer is Direct Exporter
+
             </label>
+
         </div>
     `;
 }
