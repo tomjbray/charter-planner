@@ -105,7 +105,7 @@ async function loadData() {
       loadTaxTerritories(),
       loadVatRules(),
       loadSellingEntities(),
-      loadInputRequirments()
+      loadInputRequirements()
     ]);
 
     populateSellingEntityDropdown();
