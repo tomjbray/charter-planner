@@ -60,12 +60,19 @@ let taxTerritoriesData = null;
 let countriesData = null;
 let charterValue = 0;
 
-//Other files
+// Dynamic VAT-input configuration loaded from input_requirements.json.
+// The current renderer uses this file for validation/readiness; the next phase
+// will use its input definitions to generate controls conditionally.
 let inputRequirementsData = null;
 
 // ═══════════════════════════════════════════════════════════
 //  2. DATA LOADING
 // ═══════════════════════════════════════════════════════════
+
+/**
+ * Coordinates application start-up by loading core and VAT reference data, initialising controls, restoring any airport input entered during loading, and starting the optional registry load.
+ * @returns {Promise<void>}
+ */
 
 async function loadData() {
   const statusEl = document.getElementById('dbStatus');
@@ -127,26 +134,6 @@ async function loadData() {
     await loadInputRequirements();
     renderDynamicInputs();
 
-    const vatSelect =
-    document.getElementById(
-        "vatRegisteredSelect"
-    );
-
-    if (selectedCustomerType === "PRIVATE") {
-
-        selectedVatRegistered = "NO";
-
-        vatSelect.value = "NO";
-        vatSelect.disabled = true;
-
-    } else {
-
-        selectedVatRegistered = "YES";
-
-        vatSelect.value = "YES";
-        vatSelect.disabled = false;
-    }
-
     // Re-run airport lookups if the user typed while data was loading.
     const originValue = document.getElementById('origInput').value;
     const destinationValue = document.getElementById('destInput').value;
@@ -168,6 +155,11 @@ async function loadData() {
   }
 }
 
+/**
+ * Loads the country reference dataset used by customer-country typeahead and VAT region classification.
+ * @returns {Promise<void>}
+ */
+
 async function loadCountries() {
   const response = await fetch('./countries.json');
   if (!response.ok) throw new Error('countries.json: HTTP ' + response.status);
@@ -175,6 +167,11 @@ async function loadCountries() {
   countriesData = await response.json();
   console.log(`Loaded ${countriesData.recordCount} countries`);
 }
+
+/**
+ * Loads and validates the configuration that will drive conditional VAT inputs.
+ * @returns {Promise<void>}
+ */
 
 async function loadInputRequirements() {
     const response = await fetch('./input_requirements.json');
@@ -198,6 +195,11 @@ async function loadInputRequirements() {
     );
 }
 
+/**
+ * Loads selling-entity reference data, including each entity’s home country.
+ * @returns {Promise<void>}
+ */
+
 async function loadSellingEntities() {
     const response =
         await fetch('./selling_entities.json');
@@ -217,6 +219,11 @@ async function loadSellingEntities() {
     );
 }
 
+/**
+ * Loads country-to-tax-territory mappings used where a country may contain distinct VAT territories.
+ * @returns {Promise<void>}
+ */
+
 async function loadTaxTerritories() {
   const response = await fetch('./tax_territories.json');
   if (!response.ok) throw new Error('tax_territories.json: HTTP ' + response.status);
@@ -225,6 +232,11 @@ async function loadTaxTerritories() {
   console.log(`Loaded ${taxTerritoriesData.recordCount} tax territories`);
 }
 
+/**
+ * Loads the VAT rule matrix used for sector-by-sector rule matching.
+ * @returns {Promise<void>}
+ */
+
 async function loadVatRules() {
   const response = await fetch('./vat_rules.json');
   if (!response.ok) throw new Error('vat_rules.json: HTTP ' + response.status);
@@ -232,6 +244,14 @@ async function loadVatRules() {
   vatRulesData = await response.json();
   console.log(`Loaded ${vatRulesData.ruleCount} VAT rules`);
 }
+
+/**
+ * Loads aircraft registry data without blocking route entry, then indexes records by aircraft type for fast lookup.
+ *
+ * @param {number} aptCount - Loaded airport count for the status message.
+ * @param {number} acCount - Loaded aircraft-type count for the status message.
+ * @returns {Promise<void>}
+ */
 
 async function loadRegistry(aptCount, acCount) {
   try {
@@ -280,6 +300,16 @@ async function loadRegistry(aptCount, acCount) {
 
 
 
+/**
+ * Converts an ISO country code into the rule-region value expected by the VAT matrix, preserving the selling entity’s home country as a distinct value.
+ *
+ * @param {string} countryCode - ISO country code to classify.
+ * @param {string} homeCountry - ISO country code of the selected selling entity.
+ * @returns {string|null}
+ */
+
+
+
 function getRuleRegion(
           countryCode,
           homeCountry
@@ -314,6 +344,13 @@ const isEuMember =
 
 }
 
+/**
+ * Returns a unique tax-territory code for a country when exactly one mapping exists; otherwise returns the country code to avoid an unsafe assumption.
+ *
+ * @param {string} countryCode - ISO country code to resolve.
+ * @returns {string}
+ */
+
 function getTaxTerritory(countryCode) {
   if (!countryCode || !taxTerritoriesData?.data) return countryCode;
 
@@ -327,6 +364,13 @@ function getTaxTerritory(countryCode) {
 
   return matchingTerritories[0][0];
 }
+
+/**
+ * Returns the home-country code for a selling entity.
+ *
+ * @param {string} entityCode - Selling-entity identifier.
+ * @returns {string|null}
+ */
 
 function getEntityCountry(entityCode) {
  
@@ -343,6 +387,14 @@ function getEntityCountry(entityCode) {
 //  4. VAT RULE MATCHING AND DISPLAY
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Tests one VAT rule field against a transaction field, treating blank and ANY rule values as wildcards.
+ *
+ * @param {string} ruleValue - Value stored in the VAT rule.
+ * @param {string} inputValue - Derived or selected transaction value.
+ * @returns {boolean}
+ */
+
 function valueMatches(
     ruleValue,
     inputValue
@@ -357,6 +409,13 @@ function valueMatches(
 
     return ruleValue === inputValue;
 }
+
+/**
+ * Filters the VAT rule matrix against all transaction dimensions and returns the first matching rule.
+ *
+ * @param {Object} transaction - Normalised VAT transaction for one itinerary sector.
+ * @returns {Object|null}
+ */
 
 function findMatchingRule(
     transaction
@@ -426,84 +485,19 @@ function findMatchingRule(
     return matches[0] || null;
 }
 
-function displayDerivedInputs(
-    transaction,
-    homeCountry
-) {
-
-    document.getElementById(
-        "derivedHomeCountry"
-    ).textContent =
-        homeCountry || "-";
-
-    document.getElementById(
-        "derivedCustomerRegion"
-    ).textContent =
-        transaction.customerLocation || "-";
-
-    document.getElementById(
-        "derivedOriginTerritory"
-    ).textContent =
-        transaction.originTerritory || "-";
-
-    document.getElementById(
-        "derivedDestinationTerritory"
-    ).textContent =
-        transaction.destinationTerritory || "-";
-
-    document.getElementById(
-        "derivedVatRegistered"
-    ).textContent =
-        transaction.vatRegistered || "-";
-}
 
 
-function displayVatRule(rule) {
 
-  if (!rule) {
 
-const ruleId =
-    document.getElementById('vatRuleId');
 
-ruleId.textContent = 'NO MATCH';
-ruleId.classList.add('no-match');
+/**
+ * Removes all rendered sector VAT cards from the results container.
+ */
 
-    document.getElementById('vatTreatment').textContent =
-        'Review Required';
 
-    document.getElementById('vatRate').textContent =
-        '-';
 
-    document.getElementById('vatPriority').textContent =
-        '-';
 
-    document.getElementById('vatExplanation').textContent =
-        'No VAT rule matches the selected combination of selling entity, customer details and route.';
 
-    document.getElementById('vatLegalReference').textContent =
-        'Review VAT matrix';
-
-    return;
-  }
-
-  document.getElementById('vatRuleId').textContent =
-      rule.ruleId;
-
-  document.getElementById('vatTreatment').textContent =
-      rule.treatment;
-
-  document.getElementById('vatRate').textContent =
-      (rule.rate * 100).toFixed(2) + '%';
-
-  document.getElementById('vatPriority').textContent =
-      rule.rulePriority;
-
-  document.getElementById('vatExplanation').textContent =
-      rule.ruleExplanation || '-';
-
-  document.getElementById('vatLegalReference').textContent =
-      rule.legalReference || '-';
-}
 
 function clearVatSectorResults() {
 
@@ -518,6 +512,14 @@ function clearVatSectorResults() {
 }
 
 
+/**
+ * Escapes text before inserting it into HTML templates to prevent markup injection.
+ *
+ * @param {*} value - Value to convert to safe display text.
+ * @returns {string}
+ */
+
+
 function escapeHtml(value) {
 
     return String(value ?? "")
@@ -527,6 +529,14 @@ function escapeHtml(value) {
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
 }
+
+
+/**
+ * Validates whether a matched rule has a supported calculation method, numeric rate, and numeric taxable percentage.
+ *
+ * @param {Object|null} matchedRule - Matched VAT rule, or null when no rule matched.
+ * @returns {{{canCalculate: boolean, status: string, reasons: string[]}}}
+ */
 
 
 function evaluateVatCalculationStatus(matchedRule) {
@@ -574,6 +584,13 @@ function evaluateVatCalculationStatus(matchedRule) {
     };
 }
 
+/**
+ * Formats a finite numeric amount to two decimal places, or returns a review message for unavailable values.
+ *
+ * @param {number|null} value - Amount to format.
+ * @returns {string}
+ */
+
 function formatMoneyValue(value) {
     if (!Number.isFinite(value)) {
         return "Review Required";
@@ -587,6 +604,12 @@ function formatMoneyValue(value) {
         }
     );
 }
+
+/**
+ * Builds and displays the detailed derived-input, rule-match, distance-allocation, and VAT-calculation card for every itinerary sector.
+ *
+ * @param {Object[]} results - Sector VAT calculation results.
+ */
 
 function renderVatSectorResults(
     results
@@ -831,6 +854,16 @@ function renderVatSectorResults(
 }
 
 
+/**
+ * Creates one escaped label/value row for a VAT result panel.
+ *
+ * @param {string} label - Row label.
+ * @param {*} value - Displayed value.
+ * @param {string} extraClass - Optional CSS class for the value.
+ * @returns {string}
+ */
+
+
 function createVatResultRow(
     label,
     value,
@@ -861,6 +894,10 @@ function createVatResultRow(
         </div>
     `;
 }
+
+/**
+ * Populates the selling-entity selector and reruns VAT evaluation when the selection changes.
+ */
 
 function populateSellingEntityDropdown() {
 
@@ -904,6 +941,10 @@ function populateSellingEntityDropdown() {
     );
 }
 
+/**
+ * Attaches charter-value input handling and reruns VAT allocation whenever the value changes.
+ */
+
 function initialiseCharterValueInput() {
 
     const input =
@@ -924,6 +965,10 @@ function initialiseCharterValueInput() {
         }
     );
 }
+
+/**
+ * Builds the customer-country datalist, displays the initial country, and wires validation for input, change, and blur events.
+ */
 
 function initialiseCustomerCountryTypeahead() {
 
@@ -1076,6 +1121,14 @@ function initialiseCustomerCountryTypeahead() {
 }
 
 
+/**
+ * Resolves an exact ISO country code or country name to the canonical country record.
+ *
+ * @param {string} inputValue - User-entered country code or name.
+ * @returns {{{code: string, name: string}|null}}
+ */
+
+
 function findCountryFromInput(
     inputValue
 ) {
@@ -1151,6 +1204,13 @@ function findCountryFromInput(
 }
 
 
+/**
+ * Validates and canonicalises the customer-country entry, updates application state, and refreshes VAT results.
+ *
+ * @param {string} inputValue - Country value entered by the user.
+ */
+
+
 function applyCustomerCountrySelection(
     inputValue
 ) {
@@ -1203,6 +1263,14 @@ function applyCustomerCountrySelection(
 }
 
 
+/**
+ * Updates the customer-country validation message and its error styling.
+ *
+ * @param {string} message - Status text to display.
+ * @param {boolean} isError - Whether to apply error styling.
+ */
+
+
 function setCustomerCountryStatus(
     message,
     isError
@@ -1226,6 +1294,10 @@ function setCustomerCountryStatus(
     );
 }
 
+/**
+ * Initialises the charter-type selector and refreshes VAT results after a change.
+ */
+
 function initialiseCharterTypeSelector() {
 
     const selector =
@@ -1248,6 +1320,10 @@ function initialiseCharterTypeSelector() {
     );
 }
 
+/**
+ * Initialises the customer-type selector, synchronises VAT-registration behaviour, and refreshes VAT results after a change.
+ */
+
 function initialiseCustomerTypeSelector() {
     const selector = document.getElementById("customerTypeSelect");
 
@@ -1259,6 +1335,10 @@ function initialiseCustomerTypeSelector() {
         runVatTest();
     });
 }
+
+/**
+ * Initialises the VAT-registration selector and refreshes VAT results after a change.
+ */
 
 function initialiseVatRegisteredSelector() {
 
@@ -1281,6 +1361,10 @@ function initialiseVatRegisteredSelector() {
         }
     );
 }
+
+/**
+ * Enforces NO and disables the VAT-registration selector for private customers; preserves a valid YES/NO choice for business customers.
+ */
 
 function syncVatRegisteredState() {
 
@@ -1312,50 +1396,12 @@ function syncVatRegisteredState() {
     }
 }
 
-//function runVatTest() {
-//  if (!itinerary.length || !vatRulesData) return null;
-//
-//  const sector = itinerary[0];
-// 
-//  const homeCountry = getEntityCountry(selectedEntity);
-//  
-//
-//    
-//  const transaction = {
-//    entity: selectedEntity,
-//    charterType: selectedCharterType,
-//    customerType: selectedCustomerType,
-//    customerLocation:
-//      getRuleRegion(
-//        selectedCustomerCountry,
-//        homeCountry
-//      ),
-//    vatRegistered:
-//      selectedVatRegistered,
-//    originTerritory:
-//      getRuleRegion(
-//        sector.origin.country,
-//        homeCountry
-//      ),
-//    destinationTerritory:
-//      getRuleRegion(
-//        sector.destination.country,
-//        homeCountry
-//    ),
-//    
-//  };
-//
-//  displayDerivedInputs(
-//    transaction,
-//    homeCountry
-//);
-//  
-//  const matchedRule = findMatchingRule(transaction);
-//  displayVatRule(matchedRule);
-//
-//  
-//  return matchedRule;
-//}
+/**
+ * Builds the normalised VAT matching transaction and selling-entity home country for one sector.
+ *
+ * @param {Object} sector - Itinerary sector containing origin and destination airports.
+ * @returns {{{transaction: Object, homeCountry: string|null}}}
+ */
 
 function buildVatTransaction(sector) {
     const homeCountry = getEntityCountry(selectedEntity);
@@ -1384,6 +1430,12 @@ function buildVatTransaction(sector) {
         homeCountry
     };
 }
+
+/**
+ * Aggregates sector calculations into itinerary totals and identifies any sectors requiring review.
+ *
+ * @param {Object[]} results - Sector VAT calculation results.
+ */
 
 function renderVatSummary(results) {
     const reviewResults = results.filter(
@@ -1434,6 +1486,11 @@ function renderVatSummary(results) {
             .join(", ")
         : "None";
 }
+
+/**
+ * Evaluates every complete itinerary sector, allocates value by rounded distance percentage, calculates VAT where supported, and renders summary and detail results.
+ * @returns {Object[]}
+ */
 
 function runVatTests() {
     if (itinerary.length === 0 || !vatRulesData) {
@@ -1536,6 +1593,10 @@ function runVatTests() {
  * Compatibility wrapper.
  * Existing VAT input handlers call runVatTest().
  */
+/**
+ * Provides backward-compatible singular naming for existing input handlers while delegating to the multi-sector VAT evaluator.
+ * @returns {Object[]}
+ */
 function runVatTest() {
     return runVatTests();
 }
@@ -1543,6 +1604,9 @@ function runVatTest() {
 // ═══════════════════════════════════════════════════════════
 //  5. MULTI-SECTOR ITINERARY CONTROLS
 // ═══════════════════════════════════════════════════════════
+/**
+ * Adds a new optional itinerary sector, defaulting its origin to the previous valid destination.
+ */
 function addSector() {
     const previousDestination = getPreviousSectorDestination();
 
@@ -1561,6 +1625,12 @@ function addSector() {
     buildItinerary();
 }
 
+/**
+ * Removes an additional sector and rebuilds the itinerary.
+ *
+ * @param {number} sectorId - Stable identifier of the sector to remove.
+ */
+
 function removeSector(sectorId) {
     additionalSectors = additionalSectors.filter(
         sector => sector.id !== sectorId
@@ -1570,6 +1640,11 @@ function removeSector(sectorId) {
     buildItinerary();
 }
 
+/**
+ * Returns the most recent additional-sector destination, or the primary destination when no additional sector exists.
+ * @returns {Object|null}
+ */
+
 function getPreviousSectorDestination() {
     if (additionalSectors.length > 0) {
         return additionalSectors[additionalSectors.length - 1].destination;
@@ -1577,6 +1652,14 @@ function getPreviousSectorDestination() {
 
     return destAirport;
 }
+
+/**
+ * Normalises an additional-sector IATA entry, resolves the airport, updates status, and rebuilds the itinerary.
+ *
+ * @param {number} sectorId - Stable sector identifier.
+ * @param {string} field - Either origin or destination.
+ * @param {string} value - User-entered IATA code.
+ */
 
 function updateAdditionalSectorAirport(sectorId, field, value) {
     const sector = additionalSectors.find(
@@ -1601,6 +1684,10 @@ function updateAdditionalSectorAirport(sectorId, field, value) {
     renderAdditionalSectorStatus(sector, field);
     buildItinerary();
 }
+
+/**
+ * Renders the current transitional “Direct Exporter” VAT checkbox. The loaded configuration is validated now and will drive conditional rendering in the next implementation phase.
+ */
 
 function renderDynamicInputs() {
 
@@ -1648,6 +1735,13 @@ function renderDynamicInputs() {
     `;
 }
 
+/**
+ * Displays the resolved airport details or an error for one additional-sector field.
+ *
+ * @param {Object} sector - Additional-sector state object.
+ * @param {string} field - Either origin or destination.
+ */
+
 function renderAdditionalSectorStatus(sector, field) {
     const infoElement = document.getElementById(
         `sector-${sector.id}-${field}-info`
@@ -1682,6 +1776,10 @@ function renderAdditionalSectorStatus(sector, field) {
         airport.country +
         '</div>';
 }
+
+/**
+ * Rebuilds all additional-sector controls and attaches their input and removal handlers.
+ */
 
 function renderAdditionalSectors() {
     const container = document.getElementById("additionalSectors");
@@ -1794,6 +1892,10 @@ function renderAdditionalSectors() {
 // ═══════════════════════════════════════════════════════════
 //  6. ITINERARY BUILDING
 // ═══════════════════════════════════════════════════════════
+/**
+ * Reconstructs the itinerary from valid primary and additional sectors, then replots the map and reruns VAT evaluation.
+ * @returns {Object[]}
+ */
 function buildItinerary() {
     itinerary = [];
 
@@ -1830,6 +1932,13 @@ function buildItinerary() {
 //  7. AIRPORT LOOKUP
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Returns a normalised airport object for an IATA code, supporting both legacy array data and the current object format.
+ *
+ * @param {string} iata - Three-letter IATA airport code.
+ * @returns {Object|null}
+ */
+
 function getAirport(iata) {
   const d = AIRPORTS[iata.toUpperCase().trim()];
   if (!d) return null;
@@ -1841,6 +1950,14 @@ function getAirport(iata) {
   }
   return { iata: iata.toUpperCase(), ...d };
 }
+
+/**
+ * Validates a primary airport input, renders airport details, updates origin/destination state, and refreshes dependent UI.
+ *
+ * @param {string} iata - User-entered IATA code.
+ * @param {HTMLElement} infoEl - Element used for airport status/details.
+ * @param {boolean} isOrigin - True for origin; false for destination.
+ */
 
 function lookupAirport(iata, infoEl, isOrigin) {
   iata = iata.toUpperCase().trim();
@@ -1894,6 +2011,7 @@ function lookupAirport(iata, infoEl, isOrigin) {
 //  8. MAP SETUP AND ROUTE DRAWING
 // ═══════════════════════════════════════════════════════════
 
+/** Leaflet map instance shared by route and live-tracking features. */
 const map = L.map('map', {
   center: [30, 10],
   zoom: 2,
@@ -1906,62 +2024,22 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
 }).addTo(map);
 
+/**
+ * Removes all itinerary route lines and airport markers from the map.
+ */
+
 function clearRoute() {
   routeLayers.forEach(l => map.removeLayer(l));
   routeLayers = [];
 }
 
-function plotRoute(orig, dest) {
-  clearRoute();
 
-  // Great circle arc — 120 intermediate points
-  const points = [];
-  for (let i = 0; i <= 120; i++) {
-    const f = i / 120;
-    const pt = interpolateGreatCircle(orig.lat, orig.lon, dest.lat, dest.lon, f);
-    points.push(pt);
-  }
 
-  // Split at antimeridian to avoid lines crossing the whole map
-  const segments = splitAtAntimeridian(points);
+ /**
+  * Draws every itinerary sector as a great-circle route, adds one marker per unique airport, and fits the map to the full itinerary.
+  */
 
-  segments.forEach(seg => {
-    const line = L.polyline(seg, {
-      color: '#1a3a6e',
-      weight: 2,
-      opacity: 0.8,
-      dashArray: '6,4',
-    }).addTo(map);
-    routeLayers.push(line);
-  });
 
-  // Origin marker
-  const origMarker = L.marker([orig.lat, orig.lon], {
-    icon: L.divIcon({
-      className: '',
-      html: '<div style="background:#9a7235;color:#ffffff;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;padding:3px 7px;border-radius:3px;white-space:nowrap;">' + orig.iata + '</div>',
-      iconAnchor: [20, 10],
-    })
-  }).addTo(map);
-  routeLayers.push(origMarker);
-
-  // Destination marker
-  const destMarker = L.marker([dest.lat, dest.lon], {
-    icon: L.divIcon({
-      className: '',
-      html: '<div style="background:#2a6fd4;color:#ffffff;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;padding:3px 7px;border-radius:3px;white-space:nowrap;">' + dest.iata + '</div>',
-      iconAnchor: [20, 10],
-    })
-  }).addTo(map);
-  routeLayers.push(destMarker);
-
-  // Fit map to route
-  const bounds = L.latLngBounds([[orig.lat, orig.lon], [dest.lat, dest.lon]]);
-  map.fitBounds(bounds, { padding: [40, 40] });
-
-  // Hide the empty state overlay
-  document.getElementById('mapEmpty').classList.add('hidden');
-}
 
  function plotItinerary() {
 
@@ -2123,6 +2201,17 @@ function plotRoute(orig, dest) {
         );
 } 
 
+/**
+ * Calculates a point at a fractional position along the great-circle path between two coordinates.
+ *
+ * @param {number} lat1 - Start latitude.
+ * @param {number} lon1 - Start longitude.
+ * @param {number} lat2 - End latitude.
+ * @param {number} lon2 - End longitude.
+ * @param {number} f - Fraction from 0 to 1 along the path.
+ * @returns {number[]}
+ */
+
 function interpolateGreatCircle(lat1, lon1, lat2, lon2, f) {
   const toRad = d => d * Math.PI / 180;
   const toDeg = r => r * 180 / Math.PI;
@@ -2139,6 +2228,13 @@ function interpolateGreatCircle(lat1, lon1, lat2, lon2, f) {
   const z = A*Math.sin(φ1)              + B*Math.sin(φ2);
   return [toDeg(Math.atan2(z, Math.sqrt(x*x+y*y))), toDeg(Math.atan2(y, x))];
 }
+
+/**
+ * Splits a coordinate sequence when longitude jumps across the antimeridian, preventing a line across the map.
+ *
+ * @param {number[][]} points - Latitude/longitude points in route order.
+ * @returns {number[][][]}
+ */
 
 function splitAtAntimeridian(points) {
   const segments = [];
@@ -2159,6 +2255,16 @@ function splitAtAntimeridian(points) {
 //  9. DISTANCE CALCULATION
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Calculates great-circle distance between coordinates in nautical miles using the haversine formula.
+ *
+ * @param {number} lat1 - Start latitude.
+ * @param {number} lon1 - Start longitude.
+ * @param {number} lat2 - End latitude.
+ * @param {number} lon2 - End longitude.
+ * @returns {number}
+ */
+
 function haversineNm(lat1, lon1, lat2, lon2) {
   const R = 3440.065;   // Earth radius in nautical miles
   const toRad = d => d * Math.PI / 180;
@@ -2173,6 +2279,13 @@ function haversineNm(lat1, lon1, lat2, lon2) {
 //  10. AIRCRAFT MATCHING AND SCORING
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Returns the longest known runway length for an airport, or null when runway data is unavailable.
+ *
+ * @param {Object} airport - Normalised airport record.
+ * @returns {number|null}
+ */
+
 function getLongestRunway(airport) {
   // If new format has runway data, use it
   if (airport.runways && airport.runways.length > 0) {
@@ -2181,6 +2294,15 @@ function getLongestRunway(airport) {
   // Otherwise return null — runway check will be skipped
   return null;
 }
+
+/**
+ * Applies hard suitability filters, records soft fit indicators, scores eligible aircraft, and returns results ranked by score.
+ *
+ * @param {Object} orig - Origin airport.
+ * @param {Object} dest - Destination airport.
+ * @param {number} pax - Required passenger count.
+ * @returns {Object}
+ */
 
 function matchAircraft(orig, dest, pax) {
   const distNm  = haversineNm(orig.lat, orig.lon, dest.lat, dest.lon);
@@ -2199,7 +2321,6 @@ function matchAircraft(orig, dest, pax) {
 
   for (const [code, ac] of Object.entries(AIRCRAFT)) {
 
-    const reasons = [];   // why this aircraft was eliminated
     const warnings = []; // soft warnings (not eliminated, just flagged)
     const goods = [];    // positive fit indicators
 
@@ -2312,6 +2433,13 @@ function matchAircraft(orig, dest, pax) {
 //  11. AIRCRAFT RESULTS UI
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Converts an aircraft category code into a user-facing label.
+ *
+ * @param {string} cat - Aircraft category code.
+ * @returns {string}
+ */
+
 function categoryLabel(cat) {
   const labels = {
     helicopter:           'Helicopter',
@@ -2327,11 +2455,16 @@ function categoryLabel(cat) {
   return labels[cat] || cat;
 }
 
+/**
+ * Displays route-level aircraft-match metadata, category filters, and ranked result cards.
+ *
+ * @param {Object} matchData - Output returned by matchAircraft.
+ */
+
 function renderResults(matchData) {
   const { results, distNm, distKm, limitingRwy } = matchData;
 
   const area = document.getElementById('resultsArea');
-  const grid = document.getElementById('aircraftGrid');
   const meta = document.getElementById('resultsMeta');
   const tabs = document.getElementById('filterTabs');
 
@@ -2364,6 +2497,12 @@ function renderResults(matchData) {
   renderCards(results);
 }
 
+/**
+ * Renders aircraft cards for the active category, including fit metrics, registry availability, and expandable information.
+ *
+ * @param {Object[]} results - Ranked aircraft match results.
+ */
+
 function renderCards(results) {
   const grid = document.getElementById('aircraftGrid');
   grid.innerHTML = '';
@@ -2378,7 +2517,7 @@ function renderCards(results) {
   }
 
   filtered.forEach((r, idx) => {
-    const { ac, code, score, goods, warnings, rangeRatio, paxRatio } = r;
+    const { ac, code, score, goods, warnings, rangeRatio } = r;
 
     const card = document.createElement('div');
     card.className = 'aircraft-card';
@@ -2545,8 +2684,15 @@ function renderCards(results) {
 //  12. WIKIPEDIA AIRCRAFT INFORMATION
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Loads an aircraft summary and thumbnail from the Wikipedia REST API when a result card is first expanded.
+ *
+ * @param {string} wikiUrl - Aircraft Wikipedia page URL.
+ * @param {HTMLElement} card - Aircraft card receiving the content.
+ * @returns {Promise<void>}
+ */
+
 async function fetchWikiImage(wikiUrl, card) {
-  const imgWrap   = card.querySelector('.card-img-wrap');
   const imgEl     = card.querySelector('.card-img');
   const loadingEl = card.querySelector('.card-img-loading');
   const descEl    = card.querySelector('.card-description');
@@ -2602,6 +2748,13 @@ async function fetchWikiImage(wikiUrl, card) {
 //  13. AIRCRAFT REGISTRY DISPLAY
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Filters registry entries for year and domestic-route eligibility, then lists the first five matching aircraft.
+ *
+ * @param {string} typeCode - Aircraft type code.
+ * @param {HTMLElement} card - Aircraft card receiving registry details.
+ */
+
 function populateRegistry(typeCode, card) {
   const section  = card.querySelector('.card-registry-section');
   const listEl   = card.querySelector('.card-registry-list');
@@ -2656,10 +2809,22 @@ function populateRegistry(typeCode, card) {
 //  14. LIVE AIRCRAFT TRACKING
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Removes all live-tracking markers from the map.
+ */
+
 function clearTracking() {
   trackingLayers.forEach(l => map.removeLayer(l));
   trackingLayers = [];
 }
+
+/**
+ * Fetches nearby OpenSky states, retains aircraft reported on the ground, and joins them to the local registry.
+ *
+ * @param {Object} airport - Airport around which to search.
+ * @param {boolean} isOrigin - Whether the airport is the itinerary origin.
+ * @returns {Promise<Object[]>}
+ */
 
 async function fetchGroundPositions(airport, isOrigin) {
   if (!airport || !airport.lat || !airport.lon) return [];
@@ -2711,6 +2876,11 @@ async function fetchGroundPositions(airport, isOrigin) {
     return [];
   }
 }
+
+/**
+ * Fetches origin and destination ground positions in parallel, deduplicates aircraft, and plots matched registry aircraft.
+ * @returns {Promise<void>}
+ */
 
 async function showGroundTracking() {
   clearTracking();
@@ -2779,6 +2949,10 @@ async function showGroundTracking() {
 //  15. GENERAL UI HELPERS
 // ═══════════════════════════════════════════════════════════
 
+/**
+ * Synchronises route-dependent controls and summary values after primary airport or passenger changes.
+ */
+
 function updateUI() {
   const ready = origAirport && destAirport;
   document.getElementById('findBtn').disabled  = !ready;
@@ -2803,6 +2977,10 @@ function updateUI() {
   } 
 }
 
+/**
+ * Recalculates and rerenders aircraft matches only when the results panel is already visible.
+ */
+
 function rerunIfResultsVisible() {
   const area = document.getElementById('resultsArea');
   if (area.style.display !== 'none' && origAirport && destAirport && acLoaded) {
@@ -2818,6 +2996,8 @@ function rerunIfResultsVisible() {
 
 // ═══════════════════════════════════════════════════════════
 //  16. EVENT HANDLERS
+//  DOM listeners below translate user actions into state changes and call the
+//  smallest relevant refresh function. They are registered before loadData().
 // ═══════════════════════════════════════════════════════════
 
 document.getElementById('origInput').addEventListener('input', function() {
